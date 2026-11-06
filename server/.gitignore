@@ -6,3 +6,5 @@ build/
 *.log
 !important.log
 .DS_Store
+.env.local
+dist
