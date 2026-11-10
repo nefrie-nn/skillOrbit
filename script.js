@@ -1,4 +1,12 @@
 // 1. Анимация свечения за курсором (ТОЛЬКО ДЛЯ УСТРОЙСТВ С МЫШЬЮ)
+import "dotenv/config";
+const apiKey = process.env.RESEND_API_KEY;
+
+const API_URL = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+  ? "http://localhost:3001" 
+  : "https://your-backend-url.onrender.com"; // <-- Сюда вручную вставляется URL задеплоенного бэкенда
+
+
 const glow = document.getElementById('cursor-glow');
 if (glow && window.matchMedia('(pointer: fine)').matches) {
   let isTicking = false;
