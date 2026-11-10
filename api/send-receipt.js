@@ -3,18 +3,12 @@ import { Resend } from "resend";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export default async function handler(req, res) {
-  // Настройка CORS
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-  if (req.method === "OPTIONS") {
-    return res.status(200).end();
-  }
-
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
-  }
+  if (req.method === "OPTIONS") return res.status(200).end();
+  if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
 
   try {
     const { email } = req.body || {};
@@ -24,13 +18,21 @@ export default async function handler(req, res) {
     }
 
     const cleanEmail = email.trim().toLowerCase();
+    
+    // Почта администратора берется из ENV
+    const adminEmail = process.env.ADMIN_EMAIL || "iakovan2329@gmail.com";
 
-    // Отправка письма
     const { data, error } = await resend.emails.send({
       from: "SkillOrbit Waitlist <onboarding@resend.dev>",
-      to: ["iakovakula2@gmail.com"], // Ваш аккаунт в Resend
-      subject: "Новая заявка в SkillOrbit Waitlist! 🚀",
-      html: `<p>Новый подписчик: <strong>${cleanEmail}</strong></p>`
+      to: [adminEmail],
+      subject: "🚀 Новый подписчик в SkillOrbit Waitlist!",
+      html: `
+        <div style="font-family: Arial, sans-serif; padding: 20px; line-height: 1.6;">
+          <h2>Новая заявка на сайте!</h2>
+          <p>Email пользователя: <strong>${cleanEmail}</strong></p>
+          <p>Дата заявки: ${new Date().toLocaleString()}</p>
+        </div>
+      `
     });
 
     if (error) {
