@@ -2,17 +2,35 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SkillOrbit</title>
-  <meta name="description" content="Первая P2P-платформа, где студенты помогают друг другу сдавать экзамены, разбираться в коде и математике без душных лекций.">
   
-  <!-- Основные стили -->
+  <!-- 1. Официальный CDN Tailwind CSS (мгновенно подгрузит все стили и классы) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- 2. Конфигурация кастомных цветов SkillOrbit -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'dark-main': '#0b0a14',
+            'dark-header': '#0f0e1c',
+            'dark-surface': '#131224',
+            'dark-border': '#211f3d',
+            'dark-muted': '#8e8ea8',
+            'accent': '#3DFF9C',
+          },
+          fontFamily: {
+            lilex: ['Lilex', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- 3. Ваши кастомные стили и анимации -->
   <link rel="stylesheet" href="style.css">
-  
-  <!-- Шрифты -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lilex:wght@800&display=swap" rel="stylesheet">
 </head>
 <body class="bg-dark-main min-h-[100dvh] text-white font-sans antialiased overflow-x-hidden">
   

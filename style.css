@@ -1,39 +1,32 @@
-header,main,section,footer{z-index:10;position:relative}
+@layer utilities {
+  /* Кастомные анимации орбит */
+  .orbit-ring-outer {
+    animation: spin 35s linear infinite;
+  }
+  .orbit-ring-inner {
+    animation: spin-reverse 25s linear infinite;
+  }
+  .micro-orbit-cw {
+    animation: spin 8s linear infinite;
+  }
+  .micro-orbit-ccw {
+    animation: spin-reverse 8s linear infinite;
+  }
 
-/* Аппаратное ускорение для вращения орбит */
-@keyframes orbit-spin{0%{transform:rotate(0)}to{transform:rotate(360deg)}}
-@keyframes orbit-spin-reverse{0%{transform:rotate(360deg)}to{transform:rotate(0)}}
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
 
-.orbit-ring-outer {
-  will-change: transform;
-  transform: translateZ(0);
-  animation: 35s linear infinite orbit-spin;
-}
+  @keyframes spin-reverse {
+    from { transform: rotate(360deg); }
+    to { transform: rotate(0deg); }
+  }
 
-.orbit-ring-inner {
-  will-change: transform;
-  transform: translateZ(0);
-  animation: 25s linear infinite orbit-spin-reverse;
-}
-
-@keyframes micro-spin-cw{0%{transform:rotate(0)}to{transform:rotate(360deg)}}
-@keyframes micro-spin-ccw{0%{transform:rotate(360deg)}to{transform:rotate(0)}}
-
-.micro-orbit-cw {
-  will-change: transform;
-  transform: translateZ(0);
-  animation: 20s linear infinite micro-spin-cw;
-}
-
-.micro-orbit-ccw {
-  will-change: transform;
-  transform: translateZ(0);
-  animation: 15s linear infinite micro-spin-ccw;
-}
-
-@keyframes flow-forward{0%{stroke-dashoffset:16px}to{stroke-dashoffset:0}}
-.flow-green,.flow-blue{stroke-dasharray:8 8;animation:1.2s linear infinite flow-forward}
-
-[data-anim].off, [data-anim].off * {
-  animation-play-state: paused !important;
+  /* Смена языков */
+  .lang-btn.active {
+    background-color: #3DFF9C;
+    color: #0b0a14;
+    font-weight: 700;
+  }
 }
