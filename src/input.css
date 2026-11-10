@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+@theme {
+  --font-lilex: 'Lilex', monospace;
+
+  --color-dark-main: #08080e;
+  --color-dark-header: #0d0d16;
+  --color-dark-surface: #131224;
+  --color-dark-border: #262447;
+  --color-dark-muted: #8e8ea8;
+
+  --color-accent: #3DFF9C;
+}
+
+/* Ваши кастомные стили и анимации */
+[data-i18n], [data-i18n-placeholder] {
+  transition: opacity 0.3s ease-in-out;
+}
+
+.star-effect {
+  position: fixed;
+  width: 3px;
+  height: 3px;
+  background-color: #f7f8f7;
+  border-radius: 50%;
+  box-shadow: 0 0 10px 2px rgba(168, 185, 176, 0.8);
+  pointer-events: none;
+  z-index: 0;
+  animation: twinkle 2.5s ease-in-out forwards;
+}
+
+@keyframes twinkle {
+  0% { opacity: 0; transform: scale(0.3); }
+  50% { opacity: 1; transform: scale(1.5); }
+  100% { opacity: 0; transform: scale(0.3); }
+}
+
+header, main, section, footer {
+  position: relative;
+  z-index: 10;
+}
+
+@keyframes orbit-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes orbit-spin-reverse { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
+
+.orbit-ring-outer { animation: orbit-spin 35s linear infinite; }
+.orbit-ring-inner { animation: orbit-spin-reverse 25s linear infinite; }
+
+@keyframes micro-spin-cw { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes micro-spin-ccw { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
+.micro-orbit-cw { animation: micro-spin-cw 20s linear infinite; }
+.micro-orbit-ccw { animation: micro-spin-ccw 15s linear infinite; }
+
+@keyframes flow-forward { from { stroke-dashoffset: 16; } to { stroke-dashoffset: 0; } }
+.flow-green, .flow-blue {
+  stroke-dasharray: 8 8;
+  animation: flow-forward 1.2s linear infinite;
+}

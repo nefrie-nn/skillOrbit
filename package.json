@@ -1,0 +1,19 @@
+{
+  "name": "skillorb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+  "dev": "npx @tailwindcss/cli -i ./src/input.css -o ./style.css --watch",
+  "build": "npx @tailwindcss/cli -i ./src/input.css -o ./style.css --minify"
+  },
+  "keywords": [],
+  "type": "commonjs",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.5",
+    "autoprefixer": "^10.6.2",
+    "postcss": "^8.5.32",
+    "tailwindcss": "^4.3.5"
+  }
+  
+}

@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO & Open Graph Meta Tags -->
+  <title>SkillOrbit | P2P-платформа для студентов</title>
+  <meta name="description" content="Первая P2P-платформа, где студенты помогают друг другу сдавать экзамены, разбираться в коде и математике без душных лекций.">
+  <meta property="og:title" content="SkillOrbit — скиллы двигают тебя вперед">
+  <meta property="og:description" content="Разбирайся в сложных темах вместе со студентами, которые сами только что сдали это. Займи место в waitlist!">
+  <meta property="og:type" content="website">
+
+  <!-- Предзагрузка скрипта Tailwind для скорости (В ПРОДАКШЕНЕ ЛУЧШЕ СОБИРАТЬ ЧЕРЕЗ NPM) -->
+  <link rel="preconnect" href="https://cdn.tailwindcss.com">
+  <script src="https://cdn.tailwindcss.com" defer></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              dark: {
+                main: '#08080e',
+                header: '#0d0d16',
+                surface: '#131224',
+                border: '#262447',
+                muted: '#8e8ea8',
+                btn: '#1f1d48',
+                'btn-hover': '#28265c',
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+</head>
+<body class="bg-dark-main min-h-[100dvh] text-white font-sans antialiased overflow-x-hidden">
+
+  <!-- ================= HEADER ================= -->
+  <header class="w-full bg-dark-header border-b border-white/5 flex justify-center items-center px-4">
+    <div class="w-full max-w-[1152px] h-20 flex items-center justify-between">
+      
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-2xl" aria-label="На главную SkillOrbit">
+        <div class="w-12 h-12 rounded-2xl bg-[#1c1b3b]/80 border border-[#2e2d5c] flex items-center justify-center shadow-lg shadow-indigo-950/30" aria-hidden="true">
+          <span class="text-white font-bold text-xl tracking-tight">S</span>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-white font-bold text-xl leading-tight tracking-tight">SkillOrbit</span>
+          <span class="text-dark-muted text-[9px] font-semibold tracking-wider uppercase leading-tight mt-0.5">
+            SKILLS MOVE YOU FORWARD
+          </span>
+        </div>
+      </a>
+
+      <!-- Navigation -->
+      <nav class="hidden md:flex items-center gap-10" aria-label="Главное меню">
+        <a href="#roles" class="text-[#c4c4d4] hover:text-white text-sm font-medium transition-colors">Две роли</a>
+        <a href="#process" class="text-[#c4c4d4] hover:text-white text-sm font-medium transition-colors">Как устроен P2P</a>
+        <a href="#faq" class="text-[#c4c4d4] hover:text-white text-sm font-medium transition-colors">FAQ</a>
+      </nav>
+
+      <!-- Actions -->
+      <div class="flex items-center gap-4">
+        <div class="flex items-center bg-dark-surface border border-dark-border rounded-full p-1 text-xs" role="group" aria-label="Выбор языка">
+          <button type="button" class="px-3 py-1.5 text-[#7f7e9c] hover:text-white transition-colors font-medium rounded-full" aria-label="O'zbek tili">UZ</button>
+          <button type="button" class="px-3 py-1.5 bg-[#252355] text-white font-semibold rounded-full shadow-inner" aria-current="true" aria-label="Русский язык">RU</button>
+          <button type="button" class="px-3 py-1.5 text-[#7f7e9c] hover:text-white transition-colors font-medium rounded-full" aria-label="English language">EN</button>
+        </div>
+
+        <a href="#waitlist" class="bg-dark-btn hover:bg-dark-btn-hover border border-[#3b3877] text-white text-xs tracking-wider uppercase font-semibold px-6 py-3.5 rounded-full transition-all duration-200">
+          НАЧАТЬ ОБМЕН
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ================= HERO ================= -->
+  <main class="w-full flex flex-col items-center justify-center px-4 pt-16 pb-20 text-center">
+    <div class="max-w-[960px] flex flex-col items-center">
+      
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-dark-surface border border-dark-border text-[11px] font-semibold tracking-wider text-[#9a99c4] uppercase mb-8" aria-hidden="true">
+        <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
+        SKILLS MOVE YOU FORWARD • P2P ПЛАТФОРМА
+      </div>
+
+      <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight leading-[1.12] mb-6 max-w-[900px] bg-gradient-to-r from-white via-[#e0e0ff] to-[#a5a3f0] bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(140,138,220,0.35)]">
+        Делись знаниями - получай знания
+      </h1>
+
+      <p class="text-sm md:text-base text-dark-muted max-w-[700px] leading-relaxed mb-10">
+        Первая P2P-платформа, где студенты и старшеклассники помогают друг другу сдавать экзамены, разбираться в коде, дизайне или высшей математике. Без занудства и строгих профессоров.
+      </p>
+
+      <form action="#" method="POST" class="flex flex-col sm:flex-row items-center gap-3 w-full max-w-[480px]">
+        <label for="hero-email" class="sr-only">Ваш email</label>
+        <input 
+          id="hero-email"
+          name="email"
+          type="email" 
+          autocomplete="email"
+          placeholder="you@email.com" 
+          class="w-full sm:flex-1 bg-[#100f21] border border-dark-border focus:border-indigo-500 text-white placeholder-[#545375] text-sm rounded-xl px-5 py-3.5 outline-none transition-colors"
+          required
+        >
+        <button 
+          type="submit" 
+          class="w-full sm:w-auto bg-dark-btn hover:bg-[#2a2761] border border-[#3b3877] text-white text-xs font-bold uppercase tracking-wider px-6 py-3.5 rounded-xl transition-all duration-200 cursor-pointer shadow-lg shadow-indigo-950/30"
+        >
+          JOIN THE WAITLIST
+        </button>
+      </form>
+
+    </div>
+  </main>
+
+  <!-- ================= ROLES ================= -->
+  <section id="roles" class="w-full flex justify-center px-[24px] py-12">
+    <div class="w-full max-w-[1024px] flex flex-col items-center gap-[64px]">
+      
+      <div class="text-center max-w-[600px] flex flex-col gap-3">
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight bg-gradient-to-r from-white via-[#e0e0ff] to-[#a5a3f0] bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(140,138,220,0.3)]">
+          Две роли — одна платформа 
+        </h2>
+        <p class="text-[#8e8ea8] text-sm md:text-base leading-relaxed">
+          На SkillOrbit каждый и учит, и учится. Выбирай свой путь или совмещай обе роли.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+        
+        <!-- Карточка 1 -->
+        <article class="bg-[#0e0d1c] border border-[#211f3d] rounded-3xl p-8 flex flex-col gap-6 hover:border-[#3b376d] transition-colors duration-300">
+          <div class="w-12 h-12 rounded-2xl bg-[#1b1936] border border-[#2e2a56] flex items-center justify-center text-[#8e8cd8]" aria-hidden="true">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+          </div>
+          <h3 class="text-xl font-bold text-white">Хочу научиться</h3>
+          <ul class="flex flex-col gap-5 text-sm">
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-[#8e8cd8] shrink-0 mt-0.5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg>
+              <span class="text-[#9e9dbd] leading-relaxed"><strong class="text-white font-semibold">Объяснение на пальцах:</strong> Сложные темы, высшая математика или код объясняются понятным языком ровесников.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-[#8e8cd8] shrink-0 mt-0.5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg>
+              <span class="text-[#9e9dbd] leading-relaxed"><strong class="text-white font-semibold">Честный рейтинг:</strong> Находи напарника по реальным отзывам и оценкам других студентов.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-[#8e8cd8] shrink-0 mt-0.5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg>
+              <span class="text-[#9e9dbd] leading-relaxed"><strong class="text-white font-semibold">Быстрый буст:</strong> Экстренная подготовка к контрольным, лабораторным и сессии за 1-2 созвона.</span>
+            </li>
+          </ul>
+        </article>
+
+        <!-- Карточка 2 -->
+        <article class="bg-[#0e0d1c] border border-[#211f3d] rounded-3xl p-8 flex flex-col gap-6 hover:border-[#3b376d] transition-colors duration-300">
+          <div class="w-12 h-12 rounded-2xl bg-[#1b1936] border border-[#2e2a56] flex items-center justify-center text-[#8e8cd8]" aria-hidden="true">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z"></path></svg>
+          </div>
+          <h3 class="text-xl font-bold text-white">Хочу делиться знаниями</h3>
+          <ul class="flex flex-col gap-5 text-sm">
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-[#8e8cd8] shrink-0 mt-0.5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg>
+              <span class="text-[#9e9dbd] leading-relaxed"><strong class="text-white font-semibold">Укрепление материала:</strong> Объясняя тему другим, ты сам усваиваешь материал на 100%.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-[#8e8cd8] shrink-0 mt-0.5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg>
+              <span class="text-[#9e9dbd] leading-relaxed"><strong class="text-white font-semibold">Софт-скиллы:</strong> Прокачивай навыки коммуникации и наставничества для будущей работы.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-[#8e8cd8] shrink-0 mt-0.5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg>
+              <span class="text-[#9e9dbd] leading-relaxed"><strong class="text-white font-semibold">Монетизация:</strong> Зарабатывай на своих знаниях или копи внутренний рейтинг платформы.</span>
+            </li>
+          </ul>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PROCESS ================= -->
+  <section id="process" class="w-full flex justify-center px-[24px] py-12">
+    <div class="w-full max-w-[1024px] flex flex-col items-center gap-[64px]">
+      
+      <div class="text-center max-w-[600px] flex flex-col gap-3">
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight bg-gradient-to-r from-white via-[#e0e0ff] to-[#a5a3f0] bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(140,138,220,0.3)]">
+          Как устроен P2P-процесс
+        </h2>
+        <p class="text-[#8e8ea8] text-sm md:text-base leading-relaxed">
+          4 простых и безопасных шага от вопроса к решению
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
+        
+        <!-- Шаг 1 -->
+        <article class="bg-[#0e0d1c] border border-[#211f3d] rounded-3xl p-6 flex flex-col gap-5 hover:border-[#3b376d] transition-colors duration-300">
+          <div class="flex items-center justify-between">
+            <div class="w-10 h-10 rounded-xl bg-[#1b1936] border border-[#2e2a56] flex items-center justify-center text-[#8e8cd8]" aria-hidden="true">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"></path></svg>
+            </div>
+            <span class="text-3xl font-extrabold text-[#2a2754]">01</span>
+          </div>
+          <div class="flex flex-col gap-2">
+            <h3 class="text-base font-bold text-white">Поиск темы</h3>
+            <p class="text-xs text-[#8e8ea8] leading-relaxed">Вбиваешь нужный предмет или задачу и выбираешь подходящего напарника.</p>
+          </div>
+        </article>
+
+        <!-- Шаг 2 -->
+        <article class="bg-[#0e0d1c] border border-[#211f3d] rounded-3xl p-6 flex flex-col gap-5 hover:border-[#3b376d] transition-colors duration-300">
+          <div class="flex items-center justify-between">
+            <div class="w-10 h-10 rounded-xl bg-[#1b1936] border border-[#2e2a56] flex items-center justify-center text-[#8e8cd8]" aria-hidden="true">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"></path></svg>
+            </div>
+            <span class="text-3xl font-extrabold text-[#2a2754]">02</span>
+          </div>
+          <div class="flex flex-col gap-2">
+            <h3 class="text-base font-bold text-white">Безопасная сделка</h3>
+            <p class="text-xs text-[#8e8ea8] leading-relaxed">Платформа замораживает средства на время сессии, защищая обе стороны.</p>
+          </div>
+        </article>
+
+        <!-- Шаг 3 -->
+        <article class="bg-[#0e0d1c] border border-[#211f3d] rounded-3xl p-6 flex flex-col gap-5 hover:border-[#3b376d] transition-colors duration-300">
+          <div class="flex items-center justify-between">
+            <div class="w-10 h-10 rounded-xl bg-[#1b1936] border border-[#2e2a56] flex items-center justify-center text-[#8e8cd8]" aria-hidden="true">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z"></path></svg>
+            </div>
+            <span class="text-3xl font-extrabold text-[#2a2754]">03</span>
+          </div>
+          <div class="flex flex-col gap-2">
+            <h3 class="text-base font-bold text-white">Созвон и практика</h3>
+            <p class="text-xs text-[#8e8ea8] leading-relaxed">Общение во встроенном пространстве с интерактивной доской и код-шерингом.</p>
+          </div>
+        </article>
+
+        <!-- Шаг 4 -->
+        <article class="bg-[#0e0d1c] border border-[#211f3d] rounded-3xl p-6 flex flex-col gap-5 hover:border-[#3b376d] transition-colors duration-300">
+          <div class="flex items-center justify-between">
+            <div class="w-10 h-10 rounded-xl bg-[#1b1936] border border-[#2e2a56] flex items-center justify-center text-[#8e8cd8]" aria-hidden="true">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385c.116.488-.42.88-.844.628l-4.725-2.81a.563.563 0 00-.58 0l-4.725 2.81c-.424.252-.96-.14-.844-.628l1.285-5.385a.563.563 0 00-.182-.557l-4.204-3.602c-.38-.325-.178-.948.32-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"></path></svg>
+            </div>
+            <span class="text-3xl font-extrabold text-[#2a2754]">04</span>
+          </div>
+          <div class="flex flex-col gap-2">
+            <h3 class="text-base font-bold text-white">Подтверждение</h3>
+            <p class="text-xs text-[#8e8ea8] leading-relaxed">После успешного занятия ментор получает оплату и балл к рейтингу.</p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FAQ ================= -->
+  <section id="faq" class="w-full flex justify-center px-[24px] py-12">
+    <div class="w-full max-w-[768px] flex flex-col items-center gap-[56px]">
+      
+      <div class="text-center max-w-[600px] flex flex-col gap-3">
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight bg-gradient-to-r from-white via-[#e0e0ff] to-[#a5a3f0] bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(140,138,220,0.3)]">
+          Часто задаваемые вопросы
+        </h2>
+        <p class="text-[#8e8ea8] text-sm md:text-base leading-relaxed">
+          Ответы на главные сомнения перед стартом
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-4 w-full">
+        
+        <details class="group bg-[#0e0d1c] border border-[#211f3d] rounded-2xl hover:border-[#3b376d] transition-colors duration-300">
+          <summary class="flex items-center justify-between p-6 cursor-pointer list-none font-medium text-white text-sm md:text-base select-none focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-2xl">
+            <span>Может ли школьник или первокурсник быть ментором?</span>
+            <svg class="w-5 h-5 text-[#8e8ea8] group-hover:text-white transition-transform duration-300 group-open:rotate-180 shrink-0 ml-4" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path></svg>
+          </summary>
+          <div class="px-6 pb-6 text-xs md:text-sm text-[#8e8ea8] leading-relaxed border-t border-[#1c1a36] pt-4">
+            Да! Если ты сдал предмет на отлично или разобрался в теме лучше других, ты имеешь полное право помогать другим и зарабатывать на своих знаниях.
+          </div>
+        </details>
+
+        <details class="group bg-[#0e0d1c] border border-[#211f3d] rounded-2xl hover:border-[#3b376d] transition-colors duration-300">
+          <summary class="flex items-center justify-between p-6 cursor-pointer list-none font-medium text-white text-sm md:text-base select-none focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-2xl">
+            <span>Что делать, если созвон не состоялся или ментор не помог?</span>
+            <svg class="w-5 h-5 text-[#8e8ea8] group-hover:text-white transition-transform duration-300 group-open:rotate-180 shrink-0 ml-4" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path></svg>
+          </summary>
+          <div class="px-6 pb-6 text-xs md:text-sm text-[#8e8ea8] leading-relaxed border-t border-[#1c1a36] pt-4">
+            Платформа удерживает средства на безопасном счете до вашего подтверждения. В случае отмены или некачественной сессии деньги возвращаются на ваш баланс.
+          </div>
+        </details>
+
+        <details class="group bg-[#0e0d1c] border border-[#211f3d] rounded-2xl hover:border-[#3b376d] transition-colors duration-300">
+          <summary class="flex items-center justify-between p-6 cursor-pointer list-none font-medium text-white text-sm md:text-base select-none focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-2xl">
+            <span>Как формируется стоимость занятий?</span>
+            <svg class="w-5 h-5 text-[#8e8ea8] group-hover:text-white transition-transform duration-300 group-open:rotate-180 shrink-0 ml-4" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path></svg>
+          </summary>
+          <div class="px-6 pb-6 text-xs md:text-sm text-[#8e8ea8] leading-relaxed border-t border-[#1c1a36] pt-4">
+            Каждый ментор устанавливает свою ставку за созвон в зависимости от уровня сложности темы и своего внутреннего рейтинга.
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= WAITLIST CTA ================= -->
+  <section id="waitlist" class="w-full flex justify-center px-[24px] pt-12 pb-20">
+    <div class="w-full max-w-[1024px] bg-[#0e0d1c] border border-[#211f3d] rounded-3xl p-8 sm:p-12 flex flex-col items-center text-center gap-[64px] relative overflow-hidden">
+      
+      <div class="absolute -bottom-16 -right-16 w-80 h-80 bg-gradient-to-tl from-indigo-900/30 via-purple-900/10 to-transparent rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+
+      <div class="flex flex-col gap-3 max-w-[650px] z-10">
+        <h2 class="text-2xl sm:text-4xl font-bold tracking-tight bg-gradient-to-r from-white via-[#e0e0ff] to-[#a5a3f0] bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(140,138,220,0.25)]">
+          Займи место в waitlist до официального запуска
+        </h2>
+        <p class="text-[#8e8ea8] text-xs sm:text-sm leading-relaxed">
+          Первые зарегистрированные пользователи получат бонусные баллы на бесплатные сессии с менторами.
+        </p>
+      </div>
+
+      <form action="#" method="POST" class="flex flex-col sm:flex-row items-center gap-3 w-full max-w-[460px] z-10">
+        <label for="cta-email" class="sr-only">Ваш email</label>
+        <input 
+          id="cta-email"
+          name="email"
+          type="email" 
+          autocomplete="email"
+          placeholder="you@email.com" 
+          class="w-full sm:flex-1 bg-[#131224] border border-[#262447] focus:border-indigo-500 text-white placeholder-[#545375] text-xs sm:text-sm rounded-xl px-5 py-3.5 outline-none transition-colors"
+          required
+        >
+        <button 
+          type="submit" 
+          class="w-full sm:w-auto bg-[#252355] hover:bg-[#312e6e] border border-[#3b3877] text-white text-xs font-bold uppercase tracking-wider px-6 py-3.5 rounded-xl transition-all duration-200 cursor-pointer shadow-lg"
+        >
+          JOIN THE WAITLIST
+        </button>
+      </form>
+
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="w-full border-t border-white/5 flex justify-center px-[24px] py-6">
+    <div class="w-full max-w-[1024px] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#545375]">
+      <div>
+        <span class="font-semibold text-[#8e8ea8]">SkillOrbit</span> © 2026. SKILLS MOVE YOU FORWARD
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+        <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+        <a href="#" class="hover:text-white transition-colors">Поддержка</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= CURSOR GLOW ================= -->
+  <div id="cursor-glow" class="pointer-events-none fixed top-0 left-0 w-64 h-64 rounded-full bg-indigo-500/10 blur-3xl transition-transform duration-75 ease-out z-50 hidden md:block" style="will-change: transform;"></div>
+
+  <script>
+    // Оптимизированный скрипт свечения (Performance Upgrade)
+    const glow = document.getElementById('cursor-glow');
+    let isTicking = false;
+
+    window.addEventListener('mousemove', (e) => {
+      if (!isTicking) {
+        window.requestAnimationFrame(() => {
+          // Использование 3d-трансформации активирует GPU-ускорение
+          glow.style.transform = `translate3d(${e.clientX - 128}px, ${e.clientY - 128}px, 0)`;
+          isTicking = false;
+        });
+        isTicking = true;
+      }
+    }, { passive: true }); // passive: true не блокирует прокрутку экрана
+  </script>
+</body>
+</html>

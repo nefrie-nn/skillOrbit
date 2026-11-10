@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>SkillOrbit</title>
+  <meta name="description" content="Первая P2P-платформа, где студенты помогают друг другу сдавать экзамены, разбираться в коде и математике без душных лекций.">
+  <meta name="theme-color" content="#08080e">
+  <meta name="color-scheme" content="dark">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="SkillOrbit — делись знаниями, получай знания">
+  <meta property="og:description" content="P2P-платформа, где студенты помогают друг другу сдавать экзамены и разбираться в сложных темах.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%233DFF9C'/%3E%3Ctext x='32' y='46' font-size='40' font-weight='800' text-anchor='middle' fill='%2308080e' font-family='Arial,sans-serif'%3ES%3C/text%3E%3C/svg%3E">
+
+  <!-- Шрифт грузится НЕ блокируя первую отрисовку. Lilex на Google Fonts: веса 100–700 (800 не существует) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lilex:wght@700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lilex:wght@700&display=swap"></noscript>
+
+  <!-- CSS встроен в страницу: ни одного блокирующего запроса. Собран Tailwind 4 из src/input.css -->
+  <style>/*! tailwindcss v4.3.5 | MIT License | https://tailwindcss.com */
+@layer properties{@supports (((-webkit-hyphens:none)) and (not (margin-trim:block))) or ((-moz-orient:inline) and (not (color:rgb(from red r g b)))){*,:before,:after,::backdrop{--tw-translate-x:0;--tw-translate-y:0;--tw-translate-z:0;--tw-rotate-x:initial;--tw-rotate-y:initial;--tw-rotate-z:initial;--tw-skew-x:initial;--tw-skew-y:initial;--tw-border-style:solid;--tw-gradient-position:initial;--tw-gradient-from:#0000;--tw-gradient-via:#0000;--tw-gradient-to:#0000;--tw-gradient-stops:initial;--tw-gradient-via-stops:initial;--tw-gradient-from-position:0%;--tw-gradient-via-position:50%;--tw-gradient-to-position:100%;--tw-leading:initial;--tw-font-weight:initial;--tw-tracking:initial;--tw-shadow:0 0 #0000;--tw-shadow-color:initial;--tw-shadow-alpha:100%;--tw-inset-shadow:0 0 #0000;--tw-inset-shadow-color:initial;--tw-inset-shadow-alpha:100%;--tw-ring-color:initial;--tw-ring-shadow:0 0 #0000;--tw-inset-ring-color:initial;--tw-inset-ring-shadow:0 0 #0000;--tw-ring-inset:initial;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-offset-shadow:0 0 #0000;--tw-blur:initial;--tw-brightness:initial;--tw-contrast:initial;--tw-grayscale:initial;--tw-hue-rotate:initial;--tw-invert:initial;--tw-opacity:initial;--tw-saturate:initial;--tw-sepia:initial;--tw-drop-shadow:initial;--tw-drop-shadow-color:initial;--tw-drop-shadow-alpha:100%;--tw-drop-shadow-size:initial;--tw-duration:initial}}}@layer theme{:root,:host{--font-sans:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";--font-mono:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;--color-indigo-300:oklch(78.5% .115 274.713);--color-indigo-400:oklch(67.3% .182 276.935);--color-indigo-500:oklch(58.5% .233 277.117);--color-white:#fff;--spacing:.25rem;--text-xs:.75rem;--text-xs--line-height:calc(1 / .75);--text-sm:.875rem;--text-sm--line-height:calc(1.25 / .875);--text-base:1rem;--text-base--line-height:calc(1.5 / 1);--text-lg:1.125rem;--text-lg--line-height:calc(1.75 / 1.125);--text-xl:1.25rem;--text-xl--line-height:calc(1.75 / 1.25);--text-2xl:1.5rem;--text-2xl--line-height:calc(2 / 1.5);--text-3xl:1.875rem;--text-3xl--line-height:calc(2.25 / 1.875);--text-4xl:2.25rem;--text-4xl--line-height:calc(2.5 / 2.25);--text-5xl:3rem;--text-5xl--line-height:1;--text-6xl:3.75rem;--text-6xl--line-height:1;--font-weight-normal:400;--font-weight-medium:500;--font-weight-semibold:600;--font-weight-bold:700;--font-weight-extrabold:800;--font-weight-black:900;--tracking-tight:-.025em;--tracking-wider:.05em;--tracking-widest:.1em;--leading-tight:1.25;--leading-relaxed:1.625;--radius-xl:.75rem;--radius-2xl:1rem;--radius-3xl:1.5rem;--default-transition-duration:.15s;--default-transition-timing-function:cubic-bezier(.4, 0, .2, 1);--default-font-family:var(--font-sans);--default-mono-font-family:var(--font-mono);--font-lilex:"Lilex", ui-monospace, "SF Mono", Menlo, Consolas, monospace;--color-dark-main:#08080e;--color-dark-header:#0d0d16;--color-dark-surface:#131224;--color-dark-border:#262447;--color-dark-muted:#8e8ea8;--color-accent:#3dff9c}}@layer base{*,:after,:before,::backdrop{box-sizing:border-box;border:0 solid;margin:0;padding:0}::file-selector-button{box-sizing:border-box;border:0 solid;margin:0;padding:0}html,:host{-webkit-text-size-adjust:100%;tab-size:4;line-height:1.5;font-family:var(--default-font-family,-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");font-feature-settings:var(--default-font-feature-settings,normal);font-variation-settings:var(--default-font-variation-settings,normal);-webkit-tap-highlight-color:transparent}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;-webkit-text-decoration:inherit;-webkit-text-decoration:inherit;-webkit-text-decoration:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,samp,pre{font-family:var(--default-mono-font-family,ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);font-feature-settings:var(--default-mono-font-feature-settings,normal);font-variation-settings:var(--default-mono-font-variation-settings,normal);font-size:1em}small{font-size:80%}sub,sup{vertical-align:baseline;font-size:75%;line-height:0;position:relative}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}:-moz-focusring:where(:not(iframe)){outline:auto}progress{vertical-align:baseline}summary{display:list-item}ol,ul,menu{list-style:none}img,svg,video,canvas,audio,iframe,embed,object{vertical-align:middle;display:block}img,video{max-width:100%;height:auto}button,input,select,optgroup,textarea{font:inherit;font-feature-settings:inherit;font-variation-settings:inherit;letter-spacing:inherit;color:inherit;opacity:1;background-color:#0000;border-radius:0}::file-selector-button{font:inherit;font-feature-settings:inherit;font-variation-settings:inherit;letter-spacing:inherit;color:inherit;opacity:1;background-color:#0000;border-radius:0}:where(select:is([multiple],[size])) optgroup{font-weight:bolder}:where(select:is([multiple],[size])) optgroup option{padding-inline-start:20px}::file-selector-button{margin-inline-end:4px}::placeholder{opacity:1}@supports (not ((-webkit-appearance:-apple-pay-button))) or (contain-intrinsic-size:1px){::placeholder{color:currentColor}@supports (color:color-mix(in lab, red, red)){::placeholder{color:color-mix(in oklab, currentcolor 50%, transparent)}}}textarea{resize:vertical}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-date-and-time-value{min-height:1lh;text-align:inherit}::-webkit-datetime-edit{display:inline-flex}::-webkit-datetime-edit-fields-wrapper{padding:0}::-webkit-datetime-edit{padding-block:0}::-webkit-datetime-edit-year-field{padding-block:0}::-webkit-datetime-edit-month-field{padding-block:0}::-webkit-datetime-edit-day-field{padding-block:0}::-webkit-datetime-edit-hour-field{padding-block:0}::-webkit-datetime-edit-minute-field{padding-block:0}::-webkit-datetime-edit-second-field{padding-block:0}::-webkit-datetime-edit-millisecond-field{padding-block:0}::-webkit-datetime-edit-meridiem-field{padding-block:0}::-webkit-calendar-picker-indicator{line-height:1}:-moz-ui-invalid{box-shadow:none}button,input:where([type=button],[type=reset],[type=submit]){appearance:button}::file-selector-button{appearance:button}::-webkit-inner-spin-button{height:auto}::-webkit-outer-spin-button{height:auto}[hidden]:where(:not([hidden=until-found])){display:none!important}}@layer components;@layer utilities{.pointer-events-none{pointer-events:none}.sr-only{clip-path:inset(50%);white-space:nowrap;border-width:0;width:1px;height:1px;margin:-1px;padding:0;position:absolute;overflow:hidden}.absolute{position:absolute}.relative{position:relative}.inset-0{inset:0}.inset-12{inset:calc(var(--spacing) * 12)}.top-0{top:0}.top-1\/2{top:50%}.top-\[14\.65\%\]{top:14.65%}.top-\[85\.35\%\]{top:85.35%}.-right-24{right:calc(var(--spacing) * -24)}.right-0{right:0}.-bottom-24{bottom:calc(var(--spacing) * -24)}.bottom-0{bottom:0}.left-0{left:0}.left-1\/2{left:50%}.left-\[14\.65\%\]{left:14.65%}.left-\[85\.35\%\]{left:85.35%}.left-full{left:100%}.z-10{z-index:10}.mt-0\.5{margin-top:calc(var(--spacing) * .5)}.mt-1{margin-top:var(--spacing)}.ml-4{margin-left:calc(var(--spacing) * 4)}.flex{display:flex}.grid{display:grid}.hidden{display:none}.aspect-square{aspect-ratio:1}.h-0\.5{height:calc(var(--spacing) * .5)}.h-3{height:calc(var(--spacing) * 3)}.h-3\.5{height:calc(var(--spacing) * 3.5)}.h-5{height:calc(var(--spacing) * 5)}.h-6{height:calc(var(--spacing) * 6)}.h-8{height:calc(var(--spacing) * 8)}.h-9{height:calc(var(--spacing) * 9)}.h-10{height:calc(var(--spacing) * 10)}.h-12{height:calc(var(--spacing) * 12)}.h-14{height:calc(var(--spacing) * 14)}.h-16{height:calc(var(--spacing) * 16)}.h-20{height:calc(var(--spacing) * 20)}.h-24{height:calc(var(--spacing) * 24)}.h-96{height:calc(var(--spacing) * 96)}.min-h-\[100dvh\]{min-height:100dvh}.w-3{width:calc(var(--spacing) * 3)}.w-3\.5{width:calc(var(--spacing) * 3.5)}.w-5{width:calc(var(--spacing) * 5)}.w-6{width:calc(var(--spacing) * 6)}.w-8{width:calc(var(--spacing) * 8)}.w-9{width:calc(var(--spacing) * 9)}.w-10{width:calc(var(--spacing) * 10)}.w-12{width:calc(var(--spacing) * 12)}.w-14{width:calc(var(--spacing) * 14)}.w-20{width:calc(var(--spacing) * 20)}.w-96{width:calc(var(--spacing) * 96)}.w-\[min\(72vw\,300px\)\]{width:min(72vw,300px)}.w-full{width:100%}.max-w-\[460px\]{max-width:460px}.max-w-\[480px\]{max-width:480px}.max-w-\[560px\]{max-width:560px}.max-w-\[600px\]{max-width:600px}.max-w-\[650px\]{max-width:650px}.max-w-\[768px\]{max-width:768px}.max-w-\[1024px\]{max-width:1024px}.max-w-\[1152px\]{max-width:1152px}.max-w-\[1200px\]{max-width:1200px}.shrink-0{flex-shrink:0}.-translate-x-1\/2{--tw-translate-x:calc(calc(1 / 2 * 100%) * -1);translate:var(--tw-translate-x) var(--tw-translate-y)}.translate-x-1\/2{--tw-translate-x:calc(1 / 2 * 100%);translate:var(--tw-translate-x) var(--tw-translate-y)}.-translate-y-1\/2{--tw-translate-y:calc(calc(1 / 2 * 100%) * -1);translate:var(--tw-translate-x) var(--tw-translate-y)}.translate-y-1\/2{--tw-translate-y:calc(1 / 2 * 100%);translate:var(--tw-translate-x) var(--tw-translate-y)}.transform{transform:var(--tw-rotate-x, ) var(--tw-rotate-y, ) var(--tw-rotate-z, ) var(--tw-skew-x, ) var(--tw-skew-y, )}.cursor-pointer{cursor:pointer}.list-none{list-style-type:none}.grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-center{align-items:center}.items-start{align-items:flex-start}.justify-between{justify-content:space-between}.justify-center{justify-content:center}.gap-2{gap:calc(var(--spacing) * 2)}.gap-2\.5{gap:calc(var(--spacing) * 2.5)}.gap-3{gap:calc(var(--spacing) * 3)}.gap-4{gap:calc(var(--spacing) * 4)}.gap-5{gap:calc(var(--spacing) * 5)}.gap-6{gap:calc(var(--spacing) * 6)}.gap-8{gap:calc(var(--spacing) * 8)}.gap-10{gap:calc(var(--spacing) * 10)}.gap-x-3{column-gap:calc(var(--spacing) * 3)}.gap-x-6{column-gap:calc(var(--spacing) * 6)}.gap-y-2{row-gap:calc(var(--spacing) * 2)}.overflow-hidden{overflow:hidden}.overflow-visible{overflow:visible}.overflow-x-hidden{overflow-x:hidden}.rounded-2xl{border-radius:var(--radius-2xl)}.rounded-3xl{border-radius:var(--radius-3xl)}.rounded-full{border-radius:2147483647px}.rounded-xl{border-radius:var(--radius-xl)}.border{border-style:var(--tw-border-style);border-width:1px}.border-2{border-style:var(--tw-border-style);border-width:2px}.border-t{border-top-style:var(--tw-border-style);border-top-width:1px}.border-b{border-bottom-style:var(--tw-border-style);border-bottom-width:1px}.border-dashed{--tw-border-style:dashed;border-style:dashed}.border-\[\#1c1a36\]{border-color:#1c1a36}.border-\[\#2e2a56\]{border-color:#2e2a56}.border-\[\#3DFF9C\]{border-color:#3dff9c}.border-\[\#3DFF9C\]\/30{border-color:oklab(88.4916% -.183931 .0853137/.3)}.border-\[\#3DFF9C\]\/40{border-color:oklab(88.4916% -.183931 .0853137/.4)}.border-\[\#3DFF9C\]\/60{border-color:oklab(88.4916% -.183931 .0853137/.6)}.border-\[\#211f3d\]{border-color:#211f3d}.border-\[\#262447\]{border-color:#262447}.border-dark-border{border-color:var(--color-dark-border)}.border-indigo-500\/30{border-color:#625fff4d}@supports (color:color-mix(in lab, red, red)){.border-indigo-500\/30{border-color:color-mix(in oklab, var(--color-indigo-500) 30%, transparent)}}.border-indigo-500\/60{border-color:#625fff99}@supports (color:color-mix(in lab, red, red)){.border-indigo-500\/60{border-color:color-mix(in oklab, var(--color-indigo-500) 60%, transparent)}}.border-white\/5{border-color:#ffffff0d}@supports (color:color-mix(in lab, red, red)){.border-white\/5{border-color:color-mix(in oklab, var(--color-white) 5%, transparent)}}.border-white\/15{border-color:#ffffff26}@supports (color:color-mix(in lab, red, red)){.border-white\/15{border-color:color-mix(in oklab, var(--color-white) 15%, transparent)}}.border-white\/20{border-color:#fff3}@supports (color:color-mix(in lab, red, red)){.border-white\/20{border-color:color-mix(in oklab, var(--color-white) 20%, transparent)}}.border-white\/30{border-color:#ffffff4d}@supports (color:color-mix(in lab, red, red)){.border-white\/30{border-color:color-mix(in oklab, var(--color-white) 30%, transparent)}}.border-white\/40{border-color:#fff6}@supports (color:color-mix(in lab, red, red)){.border-white\/40{border-color:color-mix(in oklab, var(--color-white) 40%, transparent)}}.border-white\/50{border-color:#ffffff80}@supports (color:color-mix(in lab, red, red)){.border-white\/50{border-color:color-mix(in oklab, var(--color-white) 50%, transparent)}}.bg-\[\#0e0d1c\]{background-color:#0e0d1c}.bg-\[\#1b1936\]{background-color:#1b1936}.bg-\[\#3DFF9C\]{background-color:#3dff9c}.bg-\[\#3DFF9C\]\/10{background-color:oklab(88.4916% -.183931 .0853137/.1)}.bg-\[\#100f21\]{background-color:#100f21}.bg-\[\#100f24\]{background-color:#100f24}.bg-\[\#131224\]{background-color:#131224}.bg-accent{background-color:var(--color-accent)}.bg-dark-header{background-color:var(--color-dark-header)}.bg-dark-main{background-color:var(--color-dark-main)}.bg-dark-surface{background-color:var(--color-dark-surface)}.bg-indigo-400{background-color:var(--color-indigo-400)}.bg-indigo-500\/10{background-color:#625fff1a}@supports (color:color-mix(in lab, red, red)){.bg-indigo-500\/10{background-color:color-mix(in oklab, var(--color-indigo-500) 10%, transparent)}}.bg-gradient-to-br{--tw-gradient-position:to bottom right in oklab;background-image:linear-gradient(var(--tw-gradient-stops))}.bg-gradient-to-l{--tw-gradient-position:to left in oklab;background-image:linear-gradient(var(--tw-gradient-stops))}.bg-gradient-to-r{--tw-gradient-position:to right in oklab;background-image:linear-gradient(var(--tw-gradient-stops))}.bg-gradient-to-tr{--tw-gradient-position:to top right in oklab;background-image:linear-gradient(var(--tw-gradient-stops))}.bg-\[radial-gradient\(circle\,rgba\(61\,255\,156\,0\.15\)\,rgba\(89\,22\,139\,0\.08\)_40\%\,transparent_70\%\)\]{background-image:radial-gradient(circle,#3dff9c26,#59168b14 40%,#0000 70%)}.from-\[\#8b5cf6\]{--tw-gradient-from:#8b5cf6;--tw-gradient-stops:var(--tw-gradient-via-stops,var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position))}.from-\[\#6366f1\]{--tw-gradient-from:#6366f1;--tw-gradient-stops:var(--tw-gradient-via-stops,var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position))}.from-\[\#e2e8f0\]{--tw-gradient-from:#e2e8f0;--tw-gradient-stops:var(--tw-gradient-via-stops,var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position))}.from-transparent{--tw-gradient-from:transparent;--tw-gradient-stops:var(--tw-gradient-via-stops,var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position))}.to-\[\#3DFF9C\]{--tw-gradient-to:#3dff9c;--tw-gradient-stops:var(--tw-gradient-via-stops,var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position))}.to-\[\#4338ca\]{--tw-gradient-to:#4338ca;--tw-gradient-stops:var(--tw-gradient-via-stops,var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position))}.to-\[\#c084fc\]{--tw-gradient-to:#c084fc;--tw-gradient-stops:var(--tw-gradient-via-stops,var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position))}.to-white{--tw-gradient-to:var(--color-white);--tw-gradient-stops:var(--tw-gradient-via-stops,var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position))}.p-0\.5{padding:calc(var(--spacing) * .5)}.p-5{padding:calc(var(--spacing) * 5)}.p-6{padding:calc(var(--spacing) * 6)}.px-2{padding-inline:calc(var(--spacing) * 2)}.px-2\.5{padding-inline:calc(var(--spacing) * 2.5)}.px-3{padding-inline:calc(var(--spacing) * 3)}.px-4{padding-inline:calc(var(--spacing) * 4)}.px-5{padding-inline:calc(var(--spacing) * 5)}.px-6{padding-inline:calc(var(--spacing) * 6)}.px-7{padding-inline:calc(var(--spacing) * 7)}.py-0\.5{padding-block:calc(var(--spacing) * .5)}.py-1{padding-block:var(--spacing)}.py-2{padding-block:calc(var(--spacing) * 2)}.py-3\.5{padding-block:calc(var(--spacing) * 3.5)}.py-4{padding-block:calc(var(--spacing) * 4)}.py-6{padding-block:calc(var(--spacing) * 6)}.py-10{padding-block:calc(var(--spacing) * 10)}.py-12{padding-block:calc(var(--spacing) * 12)}.pt-4{padding-top:calc(var(--spacing) * 4)}.pt-6{padding-top:calc(var(--spacing) * 6)}.pt-10{padding-top:calc(var(--spacing) * 10)}.pb-5{padding-bottom:calc(var(--spacing) * 5)}.pb-14{padding-bottom:calc(var(--spacing) * 14)}.pb-\[max\(1\.5rem\,env\(safe-area-inset-bottom\)\)\]{padding-bottom:max(1.5rem, env(safe-area-inset-bottom))}.text-center{text-align:center}.text-left{text-align:left}.font-lilex{font-family:var(--font-lilex)}.font-sans{font-family:var(--font-sans)}.text-2xl{font-size:var(--text-2xl);line-height:var(--tw-leading,var(--text-2xl--line-height))}.text-3xl{font-size:var(--text-3xl);line-height:var(--tw-leading,var(--text-3xl--line-height))}.text-base{font-size:var(--text-base);line-height:var(--tw-leading,var(--text-base--line-height))}.text-lg{font-size:var(--text-lg);line-height:var(--tw-leading,var(--text-lg--line-height))}.text-sm{font-size:var(--text-sm);line-height:var(--tw-leading,var(--text-sm--line-height))}.text-xl{font-size:var(--text-xl);line-height:var(--tw-leading,var(--text-xl--line-height))}.text-xs{font-size:var(--text-xs);line-height:var(--tw-leading,var(--text-xs--line-height))}.text-\[9px\]{font-size:9px}.text-\[10px\]{font-size:10px}.text-\[length\:clamp\(28px\,8\.4vw\,36px\)\]{font-size:clamp(28px,8.4vw,36px)}.leading-\[1\.1\]{--tw-leading:1.1;line-height:1.1}.leading-relaxed{--tw-leading:var(--leading-relaxed);line-height:var(--leading-relaxed)}.leading-tight{--tw-leading:var(--leading-tight);line-height:var(--leading-tight)}.font-black{--tw-font-weight:var(--font-weight-black);font-weight:var(--font-weight-black)}.font-bold{--tw-font-weight:var(--font-weight-bold);font-weight:var(--font-weight-bold)}.font-extrabold{--tw-font-weight:var(--font-weight-extrabold);font-weight:var(--font-weight-extrabold)}.font-medium{--tw-font-weight:var(--font-weight-medium);font-weight:var(--font-weight-medium)}.font-normal{--tw-font-weight:var(--font-weight-normal);font-weight:var(--font-weight-normal)}.font-semibold{--tw-font-weight:var(--font-weight-semibold);font-weight:var(--font-weight-semibold)}.tracking-tight{--tw-tracking:var(--tracking-tight);letter-spacing:var(--tracking-tight)}.tracking-wider{--tw-tracking:var(--tracking-wider);letter-spacing:var(--tracking-wider)}.tracking-widest{--tw-tracking:var(--tracking-widest);letter-spacing:var(--tracking-widest)}.break-words{overflow-wrap:break-word}.text-\[\#0d0c16\]{color:#0d0c16}.text-\[\#2a2754\]{color:#2a2754}.text-\[\#3DFF9C\]{color:#3dff9c}.text-\[\#8e8ea8\]{color:#8e8ea8}.text-\[\#9e9dbd\]{color:#9e9dbd}.text-\[\#545375\]{color:#545375}.text-\[\#c4c4d4\]{color:#c4c4d4}.text-accent{color:var(--color-accent)}.text-dark-main{color:var(--color-dark-main)}.text-dark-muted{color:var(--color-dark-muted)}.text-indigo-300{color:var(--color-indigo-300)}.text-white{color:var(--color-white)}.uppercase{text-transform:uppercase}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.placeholder-\[\#545375\]::placeholder{color:#545375}.shadow-\[0_0_8px_\#3DFF9C\]{--tw-shadow:0 0 8px var(--tw-shadow-color,#3dff9c);box-shadow:var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow)}.shadow-\[0_0_8px_\#6366f1\]{--tw-shadow:0 0 8px var(--tw-shadow-color,#6366f1);box-shadow:var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow)}.shadow-\[0_0_15px_rgba\(61\,255\,156\,0\.2\)\]{--tw-shadow:0 0 15px var(--tw-shadow-color,#3dff9c33);box-shadow:var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow)}.shadow-\[0_0_15px_rgba\(61\,255\,156\,0\.25\)\]{--tw-shadow:0 0 15px var(--tw-shadow-color,#3dff9c40);box-shadow:var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow)}.shadow-\[0_0_15px_rgba\(61\,255\,156\,0\.35\)\]{--tw-shadow:0 0 15px var(--tw-shadow-color,#3dff9c59);box-shadow:var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow)}.shadow-\[0_0_18px_rgba\(61\,255\,156\,0\.8\)\]{--tw-shadow:0 0 18px var(--tw-shadow-color,#3dff9ccc);box-shadow:var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow)}.shadow-\[0_0_20px_rgba\(61\,255\,156\,0\.3\)\]{--tw-shadow:0 0 20px var(--tw-shadow-color,#3dff9c4d);box-shadow:var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow)}.shadow-\[0_0_20px_rgba\(61\,255\,156\,0\.7\)\]{--tw-shadow:0 0 20px var(--tw-shadow-color,#3dff9cb3);box-shadow:var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow)}.shadow-\[0_0_20px_rgba\(139\,92\,246\,0\.6\)\]{--tw-shadow:0 0 20px var(--tw-shadow-color,#8b5cf699);box-shadow:var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow)}.shadow-\[0_0_25px_rgba\(99\,102\,241\,0\.6\)\]{--tw-shadow:0 0 25px var(--tw-shadow-color,#6366f199);box-shadow:var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow)}.shadow-\[0_0_25px_rgba\(255\,255\,255\,0\.7\)\]{--tw-shadow:0 0 25px var(--tw-shadow-color,#ffffffb3);box-shadow:var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow)}.shadow-\[0_0_45px_rgba\(61\,255\,156\,0\.65\)\]{--tw-shadow:0 0 45px var(--tw-shadow-color,#3dff9ca6);box-shadow:var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow)}.shadow-xl{--tw-shadow:0 20px 25px -5px var(--tw-shadow-color,#0000001a), 0 8px 10px -6px var(--tw-shadow-color,#0000001a);box-shadow:var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow)}.drop-shadow-\[0_0_15px_rgba\(61\,255\,156\,0\.9\)\]{--tw-drop-shadow-size:drop-shadow(0 0 15px var(--tw-drop-shadow-color,#3dff9ce6));--tw-drop-shadow:var(--tw-drop-shadow-size);filter:var(--tw-blur, ) var(--tw-brightness, ) var(--tw-contrast, ) var(--tw-grayscale, ) var(--tw-hue-rotate, ) var(--tw-invert, ) var(--tw-saturate, ) var(--tw-sepia, ) var(--tw-drop-shadow, )}.drop-shadow-\[0_0_25px_rgba\(140\,138\,220\,0\.3\)\]{--tw-drop-shadow-size:drop-shadow(0 0 25px var(--tw-drop-shadow-color,#8c8adc4d));--tw-drop-shadow:var(--tw-drop-shadow-size);filter:var(--tw-blur, ) var(--tw-brightness, ) var(--tw-contrast, ) var(--tw-grayscale, ) var(--tw-hue-rotate, ) var(--tw-invert, ) var(--tw-saturate, ) var(--tw-sepia, ) var(--tw-drop-shadow, )}.transition-colors{transition-property:color,background-color,border-color,outline-color,text-decoration-color,fill,stroke,--tw-gradient-from,--tw-gradient-via,--tw-gradient-to;transition-timing-function:var(--tw-ease,var(--default-transition-timing-function));transition-duration:var(--tw-duration,var(--default-transition-duration))}.transition-transform{transition-property:transform,translate,scale,rotate;transition-timing-function:var(--tw-ease,var(--default-transition-timing-function));transition-duration:var(--tw-duration,var(--default-transition-duration))}.duration-300{--tw-duration:.3s;transition-duration:.3s}.outline-none{--tw-outline-style:none;outline-style:none}.select-none{-webkit-user-select:none;user-select:none}:is(:where(.group):is([open],:popover-open,:open) .group-open\:rotate-180){rotate:180deg}@media (hover:hover){:is(:where(.group):hover .group-hover\:text-accent){color:var(--color-accent)}.hover\:border-\[\#3DFF9C\]\/50:hover{border-color:oklab(88.4916% -.183931 .0853137/.5)}.hover\:border-\[\#3b376d\]:hover{border-color:#3b376d}.hover\:border-indigo-500\/50:hover{border-color:#625fff80}@supports (color:color-mix(in lab, red, red)){.hover\:border-indigo-500\/50:hover{border-color:color-mix(in oklab, var(--color-indigo-500) 50%, transparent)}}.hover\:bg-\[\#2ce08a\]:hover{background-color:#2ce08a}.hover\:text-accent:hover{color:var(--color-accent)}}.focus\:border-accent:focus{border-color:var(--color-accent)}.focus\:shadow-\[0_0_10px_rgba\(61\,255\,156\,0\.15\)\]:focus{--tw-shadow:0 0 10px var(--tw-shadow-color,#3dff9c26);box-shadow:var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow)}.focus\:shadow-\[0_0_12px_rgba\(61\,255\,156\,0\.2\)\]:focus{--tw-shadow:0 0 12px var(--tw-shadow-color,#3dff9c33);box-shadow:var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow)}.focus\:ring-2:focus{--tw-ring-shadow:var(--tw-ring-inset, ) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color,currentcolor);box-shadow:var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow)}.focus\:ring-accent:focus{--tw-ring-color:var(--color-accent)}.focus\:outline-none:focus{--tw-outline-style:none;outline-style:none}@media (min-width:40rem){.sm\:inset-16{inset:calc(var(--spacing) * 16)}.sm\:mt-2{margin-top:calc(var(--spacing) * 2)}.sm\:inline{display:inline}.sm\:h-10{height:calc(var(--spacing) * 10)}.sm\:h-11{height:calc(var(--spacing) * 11)}.sm\:h-12{height:calc(var(--spacing) * 12)}.sm\:h-14{height:calc(var(--spacing) * 14)}.sm\:h-20{height:calc(var(--spacing) * 20)}.sm\:h-24{height:calc(var(--spacing) * 24)}.sm\:w-10{width:calc(var(--spacing) * 10)}.sm\:w-11{width:calc(var(--spacing) * 11)}.sm\:w-12{width:calc(var(--spacing) * 12)}.sm\:w-14{width:calc(var(--spacing) * 14)}.sm\:w-24{width:calc(var(--spacing) * 24)}.sm\:w-\[420px\]{width:420px}.sm\:w-auto{width:auto}.sm\:flex-1{flex:1}.sm\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.sm\:flex-row{flex-direction:row}.sm\:gap-3{gap:calc(var(--spacing) * 3)}.sm\:gap-4{gap:calc(var(--spacing) * 4)}.sm\:gap-6{gap:calc(var(--spacing) * 6)}.sm\:gap-12{gap:calc(var(--spacing) * 12)}.sm\:gap-14{gap:calc(var(--spacing) * 14)}.sm\:gap-16{gap:calc(var(--spacing) * 16)}.sm\:rounded-2xl{border-radius:var(--radius-2xl)}.sm\:p-1{padding:var(--spacing)}.sm\:p-6{padding:calc(var(--spacing) * 6)}.sm\:p-8{padding:calc(var(--spacing) * 8)}.sm\:p-12{padding:calc(var(--spacing) * 12)}.sm\:px-6{padding-inline:calc(var(--spacing) * 6)}.sm\:py-3\.5{padding-block:calc(var(--spacing) * 3.5)}.sm\:py-12{padding-block:calc(var(--spacing) * 12)}.sm\:py-16{padding-block:calc(var(--spacing) * 16)}.sm\:pt-12{padding-top:calc(var(--spacing) * 12)}.sm\:pb-6{padding-bottom:calc(var(--spacing) * 6)}.sm\:pb-20{padding-bottom:calc(var(--spacing) * 20)}.sm\:text-left{text-align:left}.sm\:text-2xl{font-size:var(--text-2xl);line-height:var(--tw-leading,var(--text-2xl--line-height))}.sm\:text-3xl{font-size:var(--text-3xl);line-height:var(--tw-leading,var(--text-3xl--line-height))}.sm\:text-4xl{font-size:var(--text-4xl);line-height:var(--tw-leading,var(--text-4xl--line-height))}.sm\:text-5xl{font-size:var(--text-5xl);line-height:var(--tw-leading,var(--text-5xl--line-height))}.sm\:text-base{font-size:var(--text-base);line-height:var(--tw-leading,var(--text-base--line-height))}.sm\:text-sm{font-size:var(--text-sm);line-height:var(--tw-leading,var(--text-sm--line-height))}.sm\:text-xl{font-size:var(--text-xl);line-height:var(--tw-leading,var(--text-xl--line-height))}}@media (min-width:48rem){.md\:inline-flex{display:inline-flex}.md\:px-8{padding-inline:calc(var(--spacing) * 8)}.md\:text-4xl{font-size:var(--text-4xl);line-height:var(--tw-leading,var(--text-4xl--line-height))}.md\:text-5xl{font-size:var(--text-5xl);line-height:var(--tw-leading,var(--text-5xl--line-height))}.md\:text-base{font-size:var(--text-base);line-height:var(--tw-leading,var(--text-base--line-height))}.md\:text-sm{font-size:var(--text-sm);line-height:var(--tw-leading,var(--text-sm--line-height))}}@media (min-width:64rem){.lg\:col-span-2{grid-column:span 2/span 2}.lg\:col-span-5{grid-column:span 5/span 5}.lg\:col-span-6{grid-column:span 6/span 6}.lg\:flex{display:flex}.lg\:hidden{display:none}.lg\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}.lg\:grid-cols-12{grid-template-columns:repeat(12,minmax(0,1fr))}.lg\:gap-8{gap:calc(var(--spacing) * 8)}.lg\:py-0{padding-block:0}.lg\:pl-4{padding-left:calc(var(--spacing) * 4)}.lg\:text-5xl{font-size:var(--text-5xl);line-height:var(--tw-leading,var(--text-5xl--line-height))}.lg\:text-6xl{font-size:var(--text-6xl);line-height:var(--tw-leading,var(--text-6xl--line-height))}}@media (min-width:80rem){.xl\:gap-10{gap:calc(var(--spacing) * 10)}}}html{color-scheme:dark;scroll-behavior:smooth;-webkit-text-size-adjust:100%;background:#08080e}body{padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}header,main,section,footer{z-index:10;position:relative}summary::-webkit-details-marker{display:none}.bg-glow{z-index:0;pointer-events:none;background:radial-gradient(460px at 140px 140px,#3dff9c16,#0000),radial-gradient(520px at calc(100% - 190px) calc(33% + 350px),#4f39f621,#0000),radial-gradient(430px at 147px calc(100% - 315px),#3dff9c14,#0000);position:fixed;inset:0}#stars{z-index:0;pointer-events:none;contain:layout paint style;position:fixed;inset:0;overflow:hidden}.star{opacity:0;background:#f7f8f7;border-radius:50%;animation:2.5s ease-in-out infinite twinkle;position:absolute;box-shadow:0 0 8px 1px #a8b9b0cc}@keyframes twinkle{0%{opacity:0;transform:scale(.3)}50%{opacity:1;transform:scale(1.5)}to{opacity:0;transform:scale(.3)}}#cursor-glow{display:none}@media (hover:hover) and (pointer:fine){#cursor-glow{pointer-events:none;z-index:50;opacity:0;will-change:transform;background:radial-gradient(circle,#3dff9c21,#0000 70%);border-radius:50%;width:256px;height:256px;transition:opacity .4s;display:block;position:fixed;top:0;left:0}#cursor-glow.on{opacity:1}}@keyframes orbit-spin{0%{transform:rotate(0)}to{transform:rotate(360deg)}}@keyframes orbit-spin-reverse{0%{transform:rotate(360deg)}to{transform:rotate(0)}}.orbit-ring-outer{animation:35s linear infinite orbit-spin}.orbit-ring-inner{animation:25s linear infinite orbit-spin-reverse}.micro-orbit-cw{animation:20s linear infinite orbit-spin}.micro-orbit-ccw{animation:15s linear infinite orbit-spin-reverse}@keyframes flow-forward{0%{stroke-dashoffset:16px}to{stroke-dashoffset:0}}.flow-green,.flow-blue{stroke-dasharray:8 8;animation:1.2s linear infinite flow-forward}[data-anim].off,[data-anim].off *{animation-play-state:paused!important}.grad-text{-webkit-text-fill-color:transparent;color:#0000;background-image:linear-gradient(90deg,#fff,#e0e0ff,#a5a3f0);-webkit-background-clip:text;background-clip:text}.lang-btn{color:#7f7e9c;cursor:pointer;border-radius:9999px;min-width:2.25rem;min-height:2.25rem;padding:0 .5rem;font-weight:500;transition:color .2s,background-color .2s,box-shadow .2s}@media (hover:hover){.lang-btn:hover{color:#fff}}.lang-btn[aria-pressed=true]{background:var(--color-accent);color:var(--color-dark-main);font-weight:700;box-shadow:0 0 10px #3dff9c4d}@media (min-width:640px){.lang-btn{min-height:2rem;padding:0 .75rem}}[data-i18n]{transition:opacity .2s ease-in-out}@media (prefers-reduced-motion:reduce){*,:before,:after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}#stars{display:none}}@property --tw-translate-x{syntax:"*";inherits:false;initial-value:0}@property --tw-translate-y{syntax:"*";inherits:false;initial-value:0}@property --tw-translate-z{syntax:"*";inherits:false;initial-value:0}@property --tw-rotate-x{syntax:"*";inherits:false}@property --tw-rotate-y{syntax:"*";inherits:false}@property --tw-rotate-z{syntax:"*";inherits:false}@property --tw-skew-x{syntax:"*";inherits:false}@property --tw-skew-y{syntax:"*";inherits:false}@property --tw-border-style{syntax:"*";inherits:false;initial-value:solid}@property --tw-gradient-position{syntax:"*";inherits:false}@property --tw-gradient-from{syntax:"<color>";inherits:false;initial-value:#0000}@property --tw-gradient-via{syntax:"<color>";inherits:false;initial-value:#0000}@property --tw-gradient-to{syntax:"<color>";inherits:false;initial-value:#0000}@property --tw-gradient-stops{syntax:"*";inherits:false}@property --tw-gradient-via-stops{syntax:"*";inherits:false}@property --tw-gradient-from-position{syntax:"<length-percentage>";inherits:false;initial-value:0%}@property --tw-gradient-via-position{syntax:"<length-percentage>";inherits:false;initial-value:50%}@property --tw-gradient-to-position{syntax:"<length-percentage>";inherits:false;initial-value:100%}@property --tw-leading{syntax:"*";inherits:false}@property --tw-font-weight{syntax:"*";inherits:false}@property --tw-tracking{syntax:"*";inherits:false}@property --tw-shadow{syntax:"*";inherits:false;initial-value:0 0 #0000}@property --tw-shadow-color{syntax:"*";inherits:false}@property --tw-shadow-alpha{syntax:"<percentage>";inherits:false;initial-value:100%}@property --tw-inset-shadow{syntax:"*";inherits:false;initial-value:0 0 #0000}@property --tw-inset-shadow-color{syntax:"*";inherits:false}@property --tw-inset-shadow-alpha{syntax:"<percentage>";inherits:false;initial-value:100%}@property --tw-ring-color{syntax:"*";inherits:false}@property --tw-ring-shadow{syntax:"*";inherits:false;initial-value:0 0 #0000}@property --tw-inset-ring-color{syntax:"*";inherits:false}@property --tw-inset-ring-shadow{syntax:"*";inherits:false;initial-value:0 0 #0000}@property --tw-ring-inset{syntax:"*";inherits:false}@property --tw-ring-offset-width{syntax:"<length>";inherits:false;initial-value:0}@property --tw-ring-offset-color{syntax:"*";inherits:false;initial-value:#fff}@property --tw-ring-offset-shadow{syntax:"*";inherits:false;initial-value:0 0 #0000}@property --tw-blur{syntax:"*";inherits:false}@property --tw-brightness{syntax:"*";inherits:false}@property --tw-contrast{syntax:"*";inherits:false}@property --tw-grayscale{syntax:"*";inherits:false}@property --tw-hue-rotate{syntax:"*";inherits:false}@property --tw-invert{syntax:"*";inherits:false}@property --tw-opacity{syntax:"*";inherits:false}@property --tw-saturate{syntax:"*";inherits:false}@property --tw-sepia{syntax:"*";inherits:false}@property --tw-drop-shadow{syntax:"*";inherits:false}@property --tw-drop-shadow-color{syntax:"*";inherits:false}@property --tw-drop-shadow-alpha{syntax:"<percentage>";inherits:false;initial-value:100%}@property --tw-drop-shadow-size{syntax:"*";inherits:false}@property --tw-duration{syntax:"*";inherits:false}</style>
+</head>
+<body class="bg-dark-main min-h-[100dvh] text-white font-sans antialiased overflow-x-hidden">
+
+  <!-- ================= ФОН ================= -->
+  <div class="bg-glow" aria-hidden="true"></div>
+  <div id="stars" aria-hidden="true"></div>
+
+  <!-- ================= HEADER ================= -->
+  <header class="w-full bg-dark-header border-b border-white/5 flex justify-center items-center px-4">
+    <div class="w-full max-w-[1152px] h-16 sm:h-20 flex items-center justify-between gap-3">
+
+      <!-- Logo -->
+      <a href="#" class="flex items-center gap-2.5 sm:gap-3 focus:outline-none focus:ring-2 focus:ring-accent rounded-2xl" aria-label="SkillOrbit">
+        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-accent flex items-center justify-center shadow-[0_0_15px_rgba(61,255,156,0.35)] shrink-0" aria-hidden="true">
+          <span class="text-dark-main font-extrabold text-xl sm:text-2xl tracking-tight">S</span>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-white font-bold text-lg sm:text-xl leading-tight tracking-tight">SkillOrbit</span>
+          <span class="text-dark-muted text-[9px] font-semibold tracking-wider uppercase leading-tight mt-0.5">SKILLS MOVE YOU FORWARD</span>
+        </div>
+      </a>
+
+      <!-- Navigation (только на широких экранах) -->
+      <nav class="hidden lg:flex items-center gap-6 xl:gap-10">
+        <a href="#roles" class="text-[#c4c4d4] hover:text-accent text-sm font-medium transition-colors" data-i18n="nav_roles">Две роли</a>
+        <a href="#process" class="text-[#c4c4d4] hover:text-accent text-sm font-medium transition-colors" data-i18n="nav_process">Как устроен P2P</a>
+        <a href="#faq" class="text-[#c4c4d4] hover:text-accent text-sm font-medium transition-colors">FAQ</a>
+      </nav>
+
+      <!-- Actions -->
+      <div class="flex items-center gap-2 sm:gap-4">
+        <!-- Языки -->
+        <div id="lang-switch" class="flex items-center bg-dark-surface border border-dark-border rounded-full p-0.5 sm:p-1 text-xs" role="group" aria-label="Language">
+          <button type="button" class="lang-btn" data-lang="uz" aria-pressed="false">UZ</button>
+          <button type="button" class="lang-btn" data-lang="ru" aria-pressed="true">RU</button>
+          <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+
+        <!-- На телефоне скрыта: форма подписки сразу под заголовком -->
+        <a href="#waitlist" class="hidden md:inline-flex bg-accent hover:bg-[#2ce08a] text-dark-main shadow-[0_0_15px_rgba(61,255,156,0.25)] text-xs tracking-wider uppercase font-extrabold px-6 py-3.5 rounded-full transition-colors duration-300" data-i18n="btn_start">НАЧАТЬ ОБМЕН</a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ================= MAIN HERO SECTION ================= -->
+  <main class="w-full flex justify-center px-4 md:px-8 pt-6 sm:pt-12 pb-14 sm:pb-20 overflow-hidden">
+    <div class="w-full max-w-[1200px] grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
+
+      <!-- ЛЕВАЯ КОЛОНКА: Орбиты с планетами -->
+      <div class="lg:col-span-6 flex justify-center items-center relative select-none" data-anim>
+        <div class="relative w-[min(72vw,300px)] aspect-square sm:w-[420px] flex items-center justify-center">
+
+          <!-- СОЛНЦЕ В ЦЕНТРЕ -->
+          <div class="absolute z-10 w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[#3DFF9C] border-2 border-[#3DFF9C] flex items-center justify-center shadow-[0_0_45px_rgba(61,255,156,0.65)]">
+            <span class="text-[#0d0c16] font-black text-3xl sm:text-4xl drop-shadow-[0_0_15px_rgba(61,255,156,0.9)] select-none">S</span>
+          </div>
+
+          <!-- Внешняя орбита -->
+          <div class="orbit-ring-outer absolute inset-0 border border-dashed border-white/20 rounded-full">
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#3DFF9C] shadow-[0_0_20px_rgba(61,255,156,0.7)] border-2 border-white/40"></div>
+            <div class="absolute top-1/2 left-full -translate-x-1/2 -translate-y-1/2 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-tr from-[#e2e8f0] to-white shadow-[0_0_25px_rgba(255,255,255,0.7)] border-2 border-white/50"></div>
+            <div class="absolute top-[85.35%] left-[14.65%] -translate-x-1/2 -translate-y-1/2 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-[#6366f1] to-[#4338ca] shadow-[0_0_25px_rgba(99,102,241,0.6)] border-2 border-white/30"></div>
+          </div>
+
+          <!-- Внутренняя орбита -->
+          <div class="orbit-ring-inner absolute inset-12 sm:inset-16 border border-dashed border-white/15 rounded-full">
+            <div class="absolute top-[14.65%] left-[85.35%] -translate-x-1/2 -translate-y-1/2 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-gradient-to-tr from-[#8b5cf6] to-[#c084fc] shadow-[0_0_20px_rgba(139,92,246,0.6)] border border-white/30"></div>
+            <div class="absolute top-[85.35%] left-[14.65%] -translate-x-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#3DFF9C] shadow-[0_0_18px_rgba(61,255,156,0.8)] border border-white/40"></div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ПРАВАЯ КОЛОНКА: Текст и Форма -->
+      <div class="lg:col-span-6 flex flex-col items-start text-left gap-5 sm:gap-6 lg:pl-4">
+
+        <h1 class="font-lilex font-extrabold text-[length:clamp(28px,8.4vw,36px)] sm:text-5xl lg:text-6xl tracking-tight leading-[1.1] text-white uppercase break-words" data-i18n="hero_title">Делись знаниями&nbsp;— <br class="hidden sm:inline"><span class="grad-text">получай знания</span></h1>
+
+        <p class="text-sm sm:text-base text-dark-muted max-w-[560px] leading-relaxed" data-i18n="hero_desc">Первая P2P-платформа, где студенты и старшеклассники помогают друг другу сдавать экзамены, разбираться в коде, дизайне или высшей математике. Без занудства и строгих профессоров.</p>
+
+        <form action="#" method="POST" class="flex flex-col sm:flex-row items-center gap-3 w-full max-w-[480px] mt-1 sm:mt-2">
+          <label for="hero-email-input" class="sr-only" data-i18n="lbl_email">Ваш email</label>
+          <!-- text-base (16px) на телефоне: иначе iPhone Safari приближает страницу при фокусе на поле -->
+          <input
+            id="hero-email-input"
+            type="email"
+            name="email"
+            autocomplete="email"
+            inputmode="email"
+            data-i18n-placeholder="ph_email"
+            placeholder="you@email.com"
+            class="w-full sm:flex-1 bg-[#100f21] border border-dark-border focus:border-accent focus:shadow-[0_0_12px_rgba(61,255,156,0.2)] text-white placeholder-[#545375] text-base sm:text-sm rounded-xl px-5 py-3.5 outline-none transition-colors"
+            required
+          >
+          <button
+            type="submit"
+            class="w-full sm:w-auto bg-accent hover:bg-[#2ce08a] text-dark-main shadow-[0_0_20px_rgba(61,255,156,0.3)] text-xs font-extrabold uppercase tracking-wider px-7 py-4 rounded-xl transition-colors duration-300 cursor-pointer"
+            data-i18n="btn_waitlist"
+          >JOIN THE WAITLIST</button>
+        </form>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- ================= ROLES ================= -->
+  <section id="roles" class="w-full flex justify-center px-4 sm:px-6 py-12 sm:py-16 relative overflow-hidden">
+    <div class="w-full max-w-[1152px] flex flex-col items-center gap-10 sm:gap-12 relative z-10">
+
+      <div class="text-center max-w-[600px] flex flex-col gap-3">
+        <h2 class="font-lilex font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-tight grad-text break-words" data-i18n="roles_title">Две роли — одна платформа</h2>
+        <p class="text-[#8e8ea8] text-sm md:text-base leading-relaxed" data-i18n="roles_desc">На SkillOrbit каждый и учит, и учится. Выбирай свой путь или совмещай обе роли.</p>
+      </div>
+
+      <div class="w-full relative grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+
+        <!-- Карточка 1: Хочу научиться -->
+        <article class="lg:col-span-5 bg-[#0e0d1c] border border-[#211f3d] rounded-3xl p-6 sm:p-8 flex flex-col gap-6 hover:border-[#3DFF9C]/50 transition-colors duration-300 relative shadow-xl">
+
+          <div class="flex items-center justify-between">
+            <div class="w-12 h-12 rounded-2xl bg-[#1b1936] border border-[#2e2a56] flex items-center justify-center text-accent" aria-hidden="true">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+            </div>
+
+            <!-- Микро-орбита (Ученик) -->
+            <div class="relative w-14 h-14 flex items-center justify-center select-none" aria-hidden="true" data-anim>
+              <div class="absolute inset-0 border border-dashed border-white/20 rounded-full micro-orbit-cw">
+                <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3.5 h-3.5 rounded-full bg-[#3DFF9C] shadow-[0_0_8px_#3DFF9C]"></div>
+                <div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-3 h-3 rounded-full bg-indigo-400"></div>
+              </div>
+              <div class="w-6 h-6 rounded-full bg-[#131224] border border-[#3DFF9C]/60 flex items-center justify-center">
+                <span class="text-[10px] font-bold text-[#3DFF9C]">S</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Заголовок и бейдж разделены: при смене языка бейдж больше не пропадает -->
+          <h3 class="font-lilex font-extrabold text-2xl sm:text-3xl text-white flex flex-wrap items-center gap-x-3 gap-y-2">
+            <span data-i18n="role1_title">Хочу научиться</span>
+            <span class="text-sm font-normal text-[#3DFF9C] bg-[#3DFF9C]/10 border border-[#3DFF9C]/30 px-2 py-0.5 rounded-full">Learner</span>
+          </h3>
+
+          <ul class="flex flex-col gap-4 text-sm">
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-accent shrink-0 mt-0.5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg>
+              <span class="text-[#9e9dbd] leading-relaxed"><strong class="text-white font-semibold" data-i18n="role1_i1_title">Объяснение на пальцах:</strong> <span data-i18n="role1_i1_desc">Сложные темы, высшая математика или код объясняются понятным языком ровесников.</span></span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-accent shrink-0 mt-0.5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg>
+              <span class="text-[#9e9dbd] leading-relaxed"><strong class="text-white font-semibold" data-i18n="role1_i2_title">Честный рейтинг:</strong> <span data-i18n="role1_i2_desc">Находи напарника по реальным отзывам и оценкам других студентов.</span></span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-accent shrink-0 mt-0.5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg>
+              <span class="text-[#9e9dbd] leading-relaxed"><strong class="text-white font-semibold" data-i18n="role1_i3_title">Быстрый буст:</strong> <span data-i18n="role1_i3_desc">Экстренная подготовка к контрольным, лабораторным и сессии за 1-2 созвона.</span></span>
+            </li>
+          </ul>
+        </article>
+
+        <!-- Центральный элемент: P2P-обмен -->
+        <div class="lg:col-span-2 flex flex-col items-center justify-center py-1 lg:py-0 select-none">
+
+          <!-- Desktop -->
+          <div class="hidden lg:flex flex-col items-center gap-3 w-full" data-anim>
+            <svg class="w-full h-24 overflow-visible" viewBox="0 0 160 80" fill="none" aria-hidden="true">
+              <path d="M 10 25 C 60 5, 100 5, 150 25" stroke="#3DFF9C" stroke-width="2.5" stroke-linecap="round" class="flow-green" />
+              <polygon points="148,18 158,27 146,31" fill="#3DFF9C" />
+              <path d="M 150 55 C 100 75, 60 75, 10 55" stroke="#6366f1" stroke-width="2.5" stroke-linecap="round" class="flow-blue" />
+              <polygon points="12,49 2,54 14,62" fill="#6366f1" />
+            </svg>
+
+            <div class="bg-[#100f24] border border-[#3DFF9C]/30 px-3 py-1 rounded-full shadow-[0_0_15px_rgba(61,255,156,0.2)]">
+              <span class="text-[10px] font-black tracking-widest text-[#3DFF9C] uppercase">P2P EXCHANGE</span>
+            </div>
+          </div>
+
+          <!-- Mobile -->
+          <div class="flex lg:hidden items-center justify-center gap-2 py-2">
+            <div class="w-8 h-0.5 bg-gradient-to-r from-transparent to-[#3DFF9C]"></div>
+            <span class="text-[10px] font-extrabold text-[#3DFF9C] border border-[#3DFF9C]/40 px-2.5 py-1 rounded-full bg-[#100f24]" data-i18n="p2p_mobile">🔄 100% ОБМЕН</span>
+            <div class="w-8 h-0.5 bg-gradient-to-l from-transparent to-[#3DFF9C]"></div>
+          </div>
+
+        </div>
+
+        <!-- Карточка 2: Хочу делиться знаниями -->
+        <article class="lg:col-span-5 bg-[#0e0d1c] border border-[#211f3d] rounded-3xl p-6 sm:p-8 flex flex-col gap-6 hover:border-indigo-500/50 transition-colors duration-300 relative shadow-xl">
+
+          <div class="flex items-center justify-between">
+            <div class="w-12 h-12 rounded-2xl bg-[#1b1936] border border-[#2e2a56] flex items-center justify-center text-accent" aria-hidden="true">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z"></path></svg>
+            </div>
+
+            <!-- Микро-орбита (Наставник) -->
+            <div class="relative w-14 h-14 flex items-center justify-center select-none" aria-hidden="true" data-anim>
+              <div class="absolute inset-0 border border-dashed border-white/20 rounded-full micro-orbit-ccw">
+                <div class="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-3.5 h-3.5 rounded-full bg-indigo-400 shadow-[0_0_8px_#6366f1]"></div>
+                <div class="absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-[#3DFF9C]"></div>
+              </div>
+              <div class="w-6 h-6 rounded-full bg-[#131224] border border-indigo-500/60 flex items-center justify-center">
+                <span class="text-[10px] font-bold text-indigo-300">S</span>
+              </div>
+            </div>
+          </div>
+
+          <h3 class="font-lilex font-extrabold text-2xl sm:text-3xl text-white flex flex-wrap items-center gap-x-3 gap-y-2">
+            <span data-i18n="role2_title">Хочу делиться знаниями</span>
+            <span class="text-sm font-normal text-indigo-300 bg-indigo-500/10 border border-indigo-500/30 px-2 py-0.5 rounded-full">Mentor</span>
+          </h3>
+
+          <ul class="flex flex-col gap-4 text-sm">
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-accent shrink-0 mt-0.5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg>
+              <span class="text-[#9e9dbd] leading-relaxed"><strong class="text-white font-semibold" data-i18n="role2_i1_title">Укрепление материала:</strong> <span data-i18n="role2_i1_desc">Объясняя тему другим, ты сам усваиваешь материал на 100%.</span></span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-accent shrink-0 mt-0.5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg>
+              <span class="text-[#9e9dbd] leading-relaxed"><strong class="text-white font-semibold" data-i18n="role2_i2_title">Софт-скиллы:</strong> <span data-i18n="role2_i2_desc">Прокачивай навыки коммуникации и наставничества для будущей работы.</span></span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-accent shrink-0 mt-0.5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg>
+              <span class="text-[#9e9dbd] leading-relaxed"><strong class="text-white font-semibold" data-i18n="role2_i3_title">Монетизация:</strong> <span data-i18n="role2_i3_desc">Зарабатывай на своих знаниях или копи внутренний рейтинг платформы.</span></span>
+            </li>
+          </ul>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PROCESS ================= -->
+  <section id="process" class="w-full flex justify-center px-4 sm:px-6 py-10 sm:py-12">
+    <div class="w-full max-w-[1024px] flex flex-col items-center gap-10 sm:gap-16">
+
+      <div class="text-center max-w-[600px] flex flex-col gap-3">
+        <h2 class="font-lilex font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-tight grad-text break-words drop-shadow-[0_0_25px_rgba(140,138,220,0.3)]" data-i18n="proc_title">Как устроен P2P-процесс</h2>
+        <p class="text-[#8e8ea8] text-sm md:text-base leading-relaxed" data-i18n="proc_desc">4 простых и безопасных шага от вопроса к решению</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
+        <!-- Шаг 1 -->
+        <article class="bg-[#0e0d1c] border border-[#211f3d] rounded-3xl p-6 flex flex-col gap-5 hover:border-[#3b376d] transition-colors duration-300">
+          <div class="flex items-center justify-between">
+            <div class="w-10 h-10 rounded-xl bg-[#1b1936] border border-[#2e2a56] flex items-center justify-center text-accent" aria-hidden="true">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"></path></svg>
+            </div>
+            <span class="text-3xl font-extrabold text-[#2a2754]">01</span>
+          </div>
+          <div class="flex flex-col gap-2">
+            <h3 class="text-base font-bold text-white" data-i18n="proc_s1_title">Поиск темы</h3>
+            <p class="text-xs text-[#8e8ea8] leading-relaxed" data-i18n="proc_s1_desc">Вбиваешь нужный предмет или задачу и выбираешь подходящего напарника.</p>
+          </div>
+        </article>
+
+        <!-- Шаг 2 -->
+        <article class="bg-[#0e0d1c] border border-[#211f3d] rounded-3xl p-6 flex flex-col gap-5 hover:border-[#3b376d] transition-colors duration-300">
+          <div class="flex items-center justify-between">
+            <div class="w-10 h-10 rounded-xl bg-[#1b1936] border border-[#2e2a56] flex items-center justify-center text-accent" aria-hidden="true">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"></path></svg>
+            </div>
+            <span class="text-3xl font-extrabold text-[#2a2754]">02</span>
+          </div>
+          <div class="flex flex-col gap-2">
+            <h3 class="text-base font-bold text-white" data-i18n="proc_s2_title">Безопасная сделка</h3>
+            <p class="text-xs text-[#8e8ea8] leading-relaxed" data-i18n="proc_s2_desc">Платформа замораживает средства на время сессии, защищая обе стороны.</p>
+          </div>
+        </article>
+
+        <!-- Шаг 3 -->
+        <article class="bg-[#0e0d1c] border border-[#211f3d] rounded-3xl p-6 flex flex-col gap-5 hover:border-[#3b376d] transition-colors duration-300">
+          <div class="flex items-center justify-between">
+            <div class="w-10 h-10 rounded-xl bg-[#1b1936] border border-[#2e2a56] flex items-center justify-center text-accent" aria-hidden="true">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z"></path></svg>
+            </div>
+            <span class="text-3xl font-extrabold text-[#2a2754]">03</span>
+          </div>
+          <div class="flex flex-col gap-2">
+            <h3 class="text-base font-bold text-white" data-i18n="proc_s3_title">Созвон и практика</h3>
+            <p class="text-xs text-[#8e8ea8] leading-relaxed" data-i18n="proc_s3_desc">Общение во встроенном пространстве с интерактивной доской и код-шерингом.</p>
+          </div>
+        </article>
+
+        <!-- Шаг 4 -->
+        <article class="bg-[#0e0d1c] border border-[#211f3d] rounded-3xl p-6 flex flex-col gap-5 hover:border-[#3b376d] transition-colors duration-300">
+          <div class="flex items-center justify-between">
+            <div class="w-10 h-10 rounded-xl bg-[#1b1936] border border-[#2e2a56] flex items-center justify-center text-accent" aria-hidden="true">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385c.116.488-.42.88-.844.628l-4.725-2.81a.563.563 0 00-.58 0l-4.725 2.81c-.424.252-.96-.14-.844-.628l1.285-5.385a.563.563 0 00-.182-.557l-4.204-3.602c-.38-.325-.178-.948.32-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"></path></svg>
+            </div>
+            <span class="text-3xl font-extrabold text-[#2a2754]">04</span>
+          </div>
+          <div class="flex flex-col gap-2">
+            <h3 class="text-base font-bold text-white" data-i18n="proc_s4_title">Подтверждение</h3>
+            <p class="text-xs text-[#8e8ea8] leading-relaxed" data-i18n="proc_s4_desc">После успешного занятия ментор получает оплату и балл к рейтингу.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FAQ ================= -->
+  <section id="faq" class="w-full flex justify-center px-4 sm:px-6 py-10 sm:py-12">
+    <div class="w-full max-w-[768px] flex flex-col items-center gap-10 sm:gap-14">
+
+      <div class="text-center max-w-[600px] flex flex-col gap-3">
+        <h2 class="font-lilex font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-tight grad-text break-words" data-i18n="faq_title">Часто задаваемые вопросы</h2>
+        <p class="text-[#8e8ea8] text-sm md:text-base leading-relaxed" data-i18n="faq_desc">Ответы на главные сомнения перед стартом</p>
+      </div>
+
+      <div class="flex flex-col gap-3 sm:gap-4 w-full">
+        <details class="group bg-[#0e0d1c] border border-[#211f3d] rounded-2xl hover:border-[#3b376d] transition-colors duration-300">
+          <summary class="flex items-center justify-between p-5 sm:p-6 cursor-pointer list-none font-medium text-white text-sm md:text-base select-none focus:outline-none focus:ring-2 focus:ring-accent rounded-2xl">
+            <span data-i18n="faq_q1">Может ли школьник или первокурсник быть ментором?</span>
+            <svg class="w-5 h-5 text-[#8e8ea8] group-hover:text-accent transition-transform duration-300 group-open:rotate-180 shrink-0 ml-4" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path></svg>
+          </summary>
+          <div class="px-5 sm:px-6 pb-5 sm:pb-6 text-xs md:text-sm text-[#8e8ea8] leading-relaxed border-t border-[#1c1a36] pt-4" data-i18n="faq_a1">Да! Если ты сдал предмет на отлично или разобрался в теме лучше других, ты имеешь полное право помогать другим и зарабатывать на своих знаниях.</div>
+        </details>
+
+        <details class="group bg-[#0e0d1c] border border-[#211f3d] rounded-2xl hover:border-[#3b376d] transition-colors duration-300">
+          <summary class="flex items-center justify-between p-5 sm:p-6 cursor-pointer list-none font-medium text-white text-sm md:text-base select-none focus:outline-none focus:ring-2 focus:ring-accent rounded-2xl">
+            <span data-i18n="faq_q2">Что делать, если созвон не состоялся или ментор не помог?</span>
+            <svg class="w-5 h-5 text-[#8e8ea8] group-hover:text-accent transition-transform duration-300 group-open:rotate-180 shrink-0 ml-4" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path></svg>
+          </summary>
+          <div class="px-5 sm:px-6 pb-5 sm:pb-6 text-xs md:text-sm text-[#8e8ea8] leading-relaxed border-t border-[#1c1a36] pt-4" data-i18n="faq_a2">Платформа удерживает средства на безопасном счете до вашего подтверждения. В случае отмены или некачественной сессии деньги возвращаются на ваш баланс.</div>
+        </details>
+
+        <details class="group bg-[#0e0d1c] border border-[#211f3d] rounded-2xl hover:border-[#3b376d] transition-colors duration-300">
+          <summary class="flex items-center justify-between p-5 sm:p-6 cursor-pointer list-none font-medium text-white text-sm md:text-base select-none focus:outline-none focus:ring-2 focus:ring-accent rounded-2xl">
+            <span data-i18n="faq_q3">Как формируется стоимость занятий?</span>
+            <svg class="w-5 h-5 text-[#8e8ea8] group-hover:text-accent transition-transform duration-300 group-open:rotate-180 shrink-0 ml-4" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path></svg>
+          </summary>
+          <div class="px-5 sm:px-6 pb-5 sm:pb-6 text-xs md:text-sm text-[#8e8ea8] leading-relaxed border-t border-[#1c1a36] pt-4" data-i18n="faq_a3">Каждый ментор устанавливает свою ставку за созвон в зависимости от уровня сложности темы и своего внутреннего рейтинга.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= WAITLIST CTA ================= -->
+  <section id="waitlist" class="w-full flex justify-center px-4 sm:px-6 pt-10 sm:pt-12 pb-14 sm:pb-20">
+    <div class="w-full max-w-[1024px] bg-[#0e0d1c] border border-[#211f3d] rounded-3xl p-6 sm:p-12 flex flex-col items-center text-center gap-8 sm:gap-16 relative overflow-hidden">
+
+      <!-- Блик (градиент вместо blur-фильтра) -->
+      <div class="absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-[radial-gradient(circle,rgba(61,255,156,0.15),rgba(89,22,139,0.08)_40%,transparent_70%)] pointer-events-none" aria-hidden="true"></div>
+
+      <div class="flex flex-col gap-3 max-w-[650px] z-10">
+        <h2 class="font-lilex font-extrabold text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-tight grad-text break-words" data-i18n="cta_title">Займи место в waitlist до официального запуска</h2>
+        <p class="text-[#8e8ea8] text-xs sm:text-sm leading-relaxed" data-i18n="cta_desc">Первые зарегистрированные пользователи получат бонусные баллы на бесплатные сессии с менторами.</p>
+      </div>
+
+      <form action="#" method="POST" class="flex flex-col sm:flex-row items-center gap-3 w-full max-w-[460px] z-10">
+        <input
+          type="email"
+          name="email"
+          aria-label="Email"
+          autocomplete="email"
+          inputmode="email"
+          data-i18n-placeholder="ph_email"
+          placeholder="you@email.com"
+          class="w-full sm:flex-1 bg-[#131224] border border-[#262447] focus:border-accent focus:shadow-[0_0_10px_rgba(61,255,156,0.15)] text-white placeholder-[#545375] text-base sm:text-sm rounded-xl px-5 py-3.5 outline-none transition-colors"
+          required
+        >
+        <button
+          type="submit"
+          class="w-full sm:w-auto bg-accent hover:bg-[#2ce08a] text-dark-main shadow-[0_0_15px_rgba(61,255,156,0.25)] text-xs font-extrabold uppercase tracking-wider px-6 py-4 sm:py-3.5 rounded-xl transition-colors duration-300 cursor-pointer"
+          data-i18n="btn_waitlist"
+        >JOIN THE WAITLIST</button>
+      </form>
+
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="w-full border-t border-white/5 flex justify-center px-4 sm:px-6 py-6 pb-[max(1.5rem,env(safe-area-inset-bottom))]">
+    <div class="w-full max-w-[1024px] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#545375]">
+      <div class="text-center sm:text-left">
+        <span class="font-semibold text-[#8e8ea8]">SkillOrbit</span> © 2026. SKILLS MOVE YOU FORWARD
+      </div>
+      <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+        <a href="#" class="hover:text-accent transition-colors" data-i18n="footer_l1">Privacy Policy</a>
+        <a href="#" class="hover:text-accent transition-colors" data-i18n="footer_l2">Terms of Service</a>
+        <a href="#" class="hover:text-accent transition-colors" data-i18n="footer_l3">Поддержка</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= CURSOR GLOW (только устройства с мышью) ================= -->
+  <div id="cursor-glow" aria-hidden="true"></div>
+
+  <!-- ================= JAVASCRIPT ================= -->
+  <script>
+  (() => {
+    'use strict';
+
+    const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isPhone = matchMedia('(max-width: 767px)').matches;
+
+    /* ---------- 1. Звёзды: фиксированный пул, без setInterval и создания/удаления DOM ---------- */
+    const starsBox = document.getElementById('stars');
+    if (starsBox && !reduceMotion) {
+      const rnd = (a, b) => a + Math.random() * (b - a);
+      const place = (el) => { el.style.left = rnd(0, 100) + '%'; el.style.top = rnd(0, 100) + '%'; };
+      const count = isPhone ? 12 : 24;
+      const frag = document.createDocumentFragment();
+      for (let i = 0; i < count; i++) {
+        const s = document.createElement('i');
+        s.className = 'star';
+        const size = 1 + Math.floor(Math.random() * 3);          // 1–3px
+        s.style.width = s.style.height = size + 'px';
+        s.style.animationDuration = rnd(2, 3.5).toFixed(2) + 's';
+        s.style.animationDelay = '-' + rnd(0, 3).toFixed(2) + 's';
+        place(s);
+        frag.appendChild(s);
+      }
+      starsBox.appendChild(frag);
+      // В конце каждого цикла звезда невидима (opacity 0) — тогда и переносим её в новое место
+      starsBox.addEventListener('animationiteration', (e) => place(e.target));
+    }
+
+    /* ---------- 2. Свечение за курсором: только мышь, не на тач-экранах ---------- */
+    const glow = document.getElementById('cursor-glow');
+    if (glow && matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      let x = 0, y = 0, ticking = false;
+      addEventListener('pointermove', (e) => {
+        if (e.pointerType === 'touch') return;
+        x = e.clientX; y = e.clientY;
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          glow.style.transform = 'translate3d(' + (x - 128) + 'px,' + (y - 128) + 'px,0)';
+          glow.classList.add('on');
+          ticking = false;
+        });
+      }, { passive: true });
+      document.documentElement.addEventListener('mouseleave', () => glow.classList.remove('on'));
+    }
+
+    /* ---------- 3. Анимации орбит и потоков — на паузу, когда блок вне экрана ---------- */
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((en) => en.target.classList.toggle('off', !en.isIntersecting));
+      }, { rootMargin: '80px' });
+      document.querySelectorAll('[data-anim]').forEach((el) => io.observe(el));
+    }
+
+    /* ---------- 4. Локализация ---------- */
+    const dict = {
+      ru: {
+        nav_roles: "Две роли",
+        nav_process: "Как устроен P2P",
+        btn_start: "НАЧАТЬ ОБМЕН",
+        hero_title: 'Делись знаниями&nbsp;— <br class="hidden sm:inline"><span class="grad-text">получай знания</span>',
+        hero_desc: "Первая P2P-платформа, где студенты и старшеклассники помогают друг другу сдавать экзамены, разбираться в коде, дизайне или высшей математике. Без занудства и строгих профессоров.",
+        lbl_email: "Ваш email",
+        ph_email: "you@email.com",
+        btn_waitlist: "JOIN THE WAITLIST",
+        roles_title: "Две роли — одна платформа",
+        roles_desc: "На SkillOrbit каждый и учит, и учится. Выбирай свой путь или совмещай обе роли.",
+        role1_title: "Хочу научиться",
+        role1_i1_title: "Объяснение на пальцах:",
+        role1_i1_desc: "Сложные темы, высшая математика или код объясняются понятным языком ровесников.",
+        role1_i2_title: "Честный рейтинг:",
+        role1_i2_desc: "Находи напарника по реальным отзывам и оценкам других студентов.",
+        role1_i3_title: "Быстрый буст:",
+        role1_i3_desc: "Экстренная подготовка к контрольным, лабораторным и сессии за 1-2 созвона.",
+        role2_title: "Хочу делиться знаниями",
+        role2_i1_title: "Укрепление материала:",
+        role2_i1_desc: "Объясняя тему другим, ты сам усваиваешь материал на 100%.",
+        role2_i2_title: "Софт-скиллы:",
+        role2_i2_desc: "Прокачивай навыки коммуникации и наставничества для будущей работы.",
+        role2_i3_title: "Монетизация:",
+        role2_i3_desc: "Зарабатывай на своих знаниях или копи внутренний рейтинг платформы.",
+        p2p_mobile: "🔄 100% ОБМЕН",
+        proc_title: "Как устроен P2P-процесс",
+        proc_desc: "4 простых и безопасных шага от вопроса к решению",
+        proc_s1_title: "Поиск темы",
+        proc_s1_desc: "Вбиваешь нужный предмет или задачу и выбираешь подходящего напарника.",
+        proc_s2_title: "Безопасная сделка",
+        proc_s2_desc: "Платформа замораживает средства на время сессии, защищая обе стороны.",
+        proc_s3_title: "Созвон и практика",
+        proc_s3_desc: "Общение во встроенном пространстве с интерактивной доской и код-шерингом.",
+        proc_s4_title: "Подтверждение",
+        proc_s4_desc: "После успешного занятия ментор получает оплату и балл к рейтингу.",
+        faq_title: "Часто задаваемые вопросы",
+        faq_desc: "Ответы на главные сомнения перед стартом",
+        faq_q1: "Может ли школьник или первокурсник быть ментором?",
+        faq_a1: "Да! Если ты сдал предмет на отлично или разобрался в теме лучше других, ты имеешь полное право помогать другим и зарабатывать на своих знаниях.",
+        faq_q2: "Что делать, если созвон не состоялся или ментор не помог?",
+        faq_a2: "Платформа удерживает средства на безопасном счете до вашего подтверждения. В случае отмены или некачественной сессии деньги возвращаются на ваш баланс.",
+        faq_q3: "Как формируется стоимость занятий?",
+        faq_a3: "Каждый ментор устанавливает свою ставку за созвон в зависимости от уровня сложности темы и своего внутреннего рейтинга.",
+        cta_title: "Займи место в waitlist до официального запуска",
+        cta_desc: "Первые зарегистрированные пользователи получат бонусные баллы на бесплатные сессии с менторами.",
+        footer_l1: "Privacy Policy",
+        footer_l2: "Terms of Service",
+        footer_l3: "Поддержка"
+      },
+      en: {
+        nav_roles: "Two roles",
+        nav_process: "How P2P works",
+        btn_start: "START EXCHANGE",
+        hero_title: 'Share knowledge&nbsp;— <br class="hidden sm:inline"><span class="grad-text">get knowledge</span>',
+        hero_desc: "The first P2P platform where students and high schoolers help each other pass exams, understand code, design, or higher math. No boring lectures or strict professors.",
+        lbl_email: "Your email",
+        ph_email: "you@email.com",
+        btn_waitlist: "JOIN THE WAITLIST",
+        roles_title: "Two roles — one platform",
+        roles_desc: "On SkillOrbit, everyone both teaches and learns. Choose your path or combine both roles.",
+        role1_title: "I want to learn",
+        role1_i1_title: "Simple explanation:",
+        role1_i1_desc: "Complex topics, higher math, or code explained in peer language.",
+        role1_i2_title: "Honest rating:",
+        role1_i2_desc: "Find a partner based on real reviews and ratings from other students.",
+        role1_i3_title: "Quick boost:",
+        role1_i3_desc: "Emergency prep for tests, labs, and finals in 1-2 sessions.",
+        role2_title: "I want to share knowledge",
+        role2_i1_title: "Strengthening material:",
+        role2_i1_desc: "By explaining to others, you absorb 100% of the material yourself.",
+        role2_i2_title: "Soft skills:",
+        role2_i2_desc: "Level up communication and mentoring skills for future jobs.",
+        role2_i3_title: "Monetization:",
+        role2_i3_desc: "Earn from your knowledge or accumulate internal platform ratings.",
+        p2p_mobile: "🔄 100% EXCHANGE",
+        proc_title: "How the P2P process works",
+        proc_desc: "4 simple and safe steps from question to solution",
+        proc_s1_title: "Search topic",
+        proc_s1_desc: "Type in the subject or task and choose a suitable partner.",
+        proc_s2_title: "Safe deal",
+        proc_s2_desc: "The platform holds funds during the session, protecting both sides.",
+        proc_s3_title: "Call and practice",
+        proc_s3_desc: "Communication in a built-in workspace with a whiteboard and code-sharing.",
+        proc_s4_title: "Confirmation",
+        proc_s4_desc: "After a successful session, the mentor receives payment and a rating point.",
+        faq_title: "Frequently Asked Questions",
+        faq_desc: "Answers to main doubts before starting",
+        faq_q1: "Can a school or first-year student be a mentor?",
+        faq_a1: "Yes! If you passed the subject perfectly or understand it better than others, you have every right to help others and earn from your knowledge.",
+        faq_q2: "What if the call didn't happen or the mentor didn't help?",
+        faq_a2: "The platform holds funds in a safe account until your confirmation. If canceled or low quality, money is refunded to your balance.",
+        faq_q3: "How is the cost of sessions determined?",
+        faq_a3: "Each mentor sets their own rate per call depending on the topic's difficulty and their internal rating.",
+        cta_title: "Secure your spot in the waitlist before official launch",
+        cta_desc: "First registered users will receive bonus points for free mentor sessions.",
+        footer_l1: "Privacy Policy",
+        footer_l2: "Terms of Service",
+        footer_l3: "Support"
+      },
+      uz: {
+        nav_roles: "Ikki rol",
+        nav_process: "P2P qanday ishlaydi",
+        btn_start: "ALMASHISHNI BOSHLASH",
+        hero_title: 'Bilim ulash&nbsp;— <br class="hidden sm:inline"><span class="grad-text">bilim ol</span>',
+        hero_desc: "Talabalar va o'quvchilar bir-biriga imtihonlarni topshirish, kod, dizayn yoki oliy matematikani tushunishga yordam beradigan birinchi P2P platformasi. Zerikarli ma'ruzalar va qattiqqo'l professorlarsiz.",
+        lbl_email: "Sizning email",
+        ph_email: "siz@email.com",
+        btn_waitlist: "KUTISH RO'YXATIGA QO'SHILISH",
+        roles_title: "Ikki rol — bitta platforma",
+        roles_desc: "SkillOrbit-da hamma o'rgatadi va o'rganadi. O'z yo'lingizni tanlang yoki ikkala rolni birlashtiring.",
+        role1_title: "O'rganmoqchiman",
+        role1_i1_title: "Oddiy tushuntirish:",
+        role1_i1_desc: "Murakkab mavzular, oliy matematika yoki kod tengdoshlar tilida tushuntiriladi.",
+        role1_i2_title: "Haqiqiy reyting:",
+        role1_i2_desc: "Boshqa talabalarning sharhlari va baholari asosida sherik toping.",
+        role1_i3_title: "Tezkor yordam:",
+        role1_i3_desc: "Nazorat, laboratoriya va sessiyalarga 1-2 suhbatda shoshilinch tayyorgarlik.",
+        role2_title: "Bilim ulashmoqchiman",
+        role2_i1_title: "Materialni mustahkamlash:",
+        role2_i1_desc: "Mavzuni boshqalarga tushuntirib, o'zingiz uni 100% o'zlashtirasiz.",
+        role2_i2_title: "Soft-skillar:",
+        role2_i2_desc: "Kelajakdagi ish uchun muloqot va ustozlik ko'nikmalarini oshiring.",
+        role2_i3_title: "Monetizatsiya:",
+        role2_i3_desc: "O'z bilimlaringizdan pul ishlang yoki ichki reytingini yig'ing.",
+        p2p_mobile: "🔄 100% ALMASHUV",
+        proc_title: "P2P jarayoni qanday ishlaydi",
+        proc_desc: "Savoldan yechimgacha 4 ta oddiy va xavfsiz qadam",
+        proc_s1_title: "Mavzuni qidirish",
+        proc_s1_desc: "Kerakli fan yoki vazifani kiriting va mos sherikni tanlang.",
+        proc_s2_title: "Xavfsiz kelishuv",
+        proc_s2_desc: "Platforma seans davomida mablag'larni saqlaydi va har ikki tomonni himoya qiladi.",
+        proc_s3_title: "Suhbat va amaliyot",
+        proc_s3_desc: "Interaktiv doska va kod almashish imkoniyati mavjud ichki muhitda muloqot.",
+        proc_s4_title: "Tasdiqlash",
+        proc_s4_desc: "Muvaffaqiyatli darsdan so'ng mentor to'lov va reyting baliga ega bo'ladi.",
+        faq_title: "Ko'p beriladigan savollar",
+        faq_desc: "Boshlashdan oldin asosiy shubhalarga javoblar",
+        faq_q1: "Maktab o'quvchisi yoki birinchi kurs talabasi mentor bo'la oladimi?",
+        faq_a1: "Ha! Agar fanni a'lo darajada topshirgan bo'lsangiz yoki mavzuni boshqalardan ko'ra yaxshiroq tushunsangiz, yordam berish va pul ishlashga to'liq haqlisiz.",
+        faq_q2: "Suhbat amalga oshmasa yoki mentor yordam bermasa nima bo'ladi?",
+        faq_a2: "Platforma mablag'larni xavfsiz hisobda saqlaydi. Bekor qilingan yoki sifatsiz seans holatida pul balansingizga qaytariladi.",
+        faq_q3: "Darslar narxi qanday belgilanadi?",
+        faq_a3: "Har bir mentor mavzuning qiyinligi va o'zining ichki reytingiga qarab o'z stavkasini belgilaydi.",
+        cta_title: "Rasmiy ishga tushirishdan oldin ro'yxatdan joy oling",
+        cta_desc: "Birinchi ro'yxatdan o'tgan foydalanuvchilar bepul seanslar uchun bonus ballarini oladilar.",
+        footer_l1: "Maxfiylik siyosati",
+        footer_l2: "Xizmat ko'rsatish shartlari",
+        footer_l3: "Qo'llab-quvvatlash"
+      }
+    };
+
+    const langButtons = document.querySelectorAll('.lang-btn');
+    let fadeTimer = 0;
+
+    function setLang(lang, instant) {
+      const t = dict[lang];
+      if (!t) return;
+
+      document.documentElement.lang = lang;
+      try { localStorage.setItem('lang', lang); } catch (e) {}
+      langButtons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
+
+      const textEls = document.querySelectorAll('[data-i18n]');
+
+      // placeholder меняем сразу, не скрывая само поле ввода
+      document.querySelectorAll('[data-i18n-placeholder]').forEach((el) => {
+        const v = t[el.dataset.i18nPlaceholder];
+        if (v !== undefined) el.placeholder = v;
+      });
+
+      const apply = () => {
+        textEls.forEach((el) => {
+          const v = t[el.dataset.i18n];
+          if (v !== undefined) el.innerHTML = v;
+          el.style.opacity = '';
+        });
+      };
+
+      clearTimeout(fadeTimer);                 // быстрые клики по кнопкам больше не накладываются
+      if (instant || reduceMotion) { apply(); return; }
+      textEls.forEach((el) => { el.style.opacity = '0'; });
+      fadeTimer = setTimeout(apply, 200);
+    }
+
+    document.getElementById('lang-switch').addEventListener('click', (e) => {
+      const btn = e.target.closest('.lang-btn');
+      if (btn) setLang(btn.dataset.lang);
+    });
+
+    // Запоминаем выбор языка между визитами
+    let saved = null;
+    try { saved = localStorage.getItem('lang'); } catch (e) {}
+    if (saved && saved !== 'ru' && dict[saved]) setLang(saved, true);
+  })();
+  </script>
+
+</body>
+</html>
