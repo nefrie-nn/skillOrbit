@@ -1,34 +1,140 @@
-/* Кастомные анимации орбит */
-.orbit-ring-outer {
-  animation: spin 35s linear infinite;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Lilex:wght@700;800&display=swap');
+
+/* ================= THEME VARIABLES ================= */
+:root {
+  --bg-main: #0b0a14;
+  --bg-header: rgba(15, 14, 28, 0.9);
+  --bg-surface: #151428;
+  --bg-card: #0e0d1c;
+  --bg-input: #100f21;
+  --border-color: #211f3d;
+  --text-primary: #ffffff;
+  --text-secondary: #b4b3cf;
+  --text-muted: #8e8ea8;
+  --accent-rgb: 61 255 156;
+  --accent-fg: #0b0a14;
+  --flow-green: #3DFF9C;
+  --orbit-outer-border: rgba(255, 255, 255, 0.2);
+  --orbit-inner-border: rgba(255, 255, 255, 0.15);
+  --step-num-color: #2a2754;
 }
 
-.orbit-ring-inner {
-  animation: spin-reverse 25s linear infinite;
+html.light {
+  --bg-main: #f4f6fb;
+  --bg-header: rgba(255, 255, 255, 0.88);
+  --bg-surface: #eef2f7;
+  --bg-card: #ffffff;
+  --bg-input: #f8fafc;
+  --border-color: #e2e8f0;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  --accent-rgb: 5 150 105;
+  --accent-fg: #ffffff;
+  --flow-green: #059669;
+  --orbit-outer-border: rgba(15, 23, 42, 0.18);
+  --orbit-inner-border: rgba(15, 23, 42, 0.13);
+  --step-num-color: #cbd5e1;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ================= AMBIENT BACKGROUND BLOBS ================= */
+.bg-blob-green {
+  background-color: rgba(61, 255, 156, 0.1);
+}
+html.light .bg-blob-green {
+  background-color: rgba(16, 185, 129, 0.12);
+}
+
+.bg-blob-indigo {
+  background-color: rgba(79, 70, 229, 0.15);
+}
+html.light .bg-blob-indigo {
+  background-color: rgba(99, 102, 241, 0.1);
+}
+
+.cta-glow-orb {
+  background: radial-gradient(circle, rgba(61, 255, 156, 0.15), rgba(89, 22, 139, 0.08) 40%, transparent 70%);
+}
+html.light .cta-glow-orb {
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.16), rgba(99, 102, 241, 0.08) 45%, transparent 70%);
+}
+
+/* ================= ORBIT RINGS & STEP NUMBERS ================= */
+.orbit-dashed-outer {
+  border-color: var(--orbit-outer-border);
+}
+
+.orbit-dashed-inner {
+  border-color: var(--orbit-inner-border);
+}
+
+.step-num {
+  color: var(--step-num-color);
+}
+
+@keyframes orbitSpinCw {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes orbitSpinCcw {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+.orbit-ring-outer,
+.micro-orbit-cw {
+  animation: orbitSpinCw 32s linear infinite;
+}
+
+.orbit-ring-inner,
+.micro-orbit-ccw {
+  animation: orbitSpinCcw 22s linear infinite;
 }
 
 .micro-orbit-cw {
-  animation: spin 8s linear infinite;
+  animation-duration: 14s;
 }
 
 .micro-orbit-ccw {
-  animation: spin-reverse 8s linear infinite;
+  animation-duration: 14s;
 }
 
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* ================= P2P EXCHANGE FLOW ARROWS ================= */
+.flow-green {
+  stroke: var(--flow-green);
+  stroke-dasharray: 8 6;
+  animation: p2pFlow 1.1s linear infinite;
+  filter: drop-shadow(0 0 6px rgba(var(--accent-rgb), 0.5));
 }
 
-@keyframes spin-reverse {
+.flow-green-head {
+  fill: var(--flow-green);
+}
+
+.flow-blue {
+  stroke-dasharray: 8 6;
+  animation: p2pFlow 1.1s linear infinite;
+  filter: drop-shadow(0 0 6px rgba(99, 102, 241, 0.5));
+}
+
+@keyframes p2pFlow {
   from {
-    transform: rotate(360deg);
+    stroke-dashoffset: 28;
   }
   to {
-    transform: rotate(0deg);
+    stroke-dashoffset: 0;
   }
 }

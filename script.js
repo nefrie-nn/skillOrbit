@@ -194,6 +194,26 @@ const translations = {
   }
 };
 
+// ================= THEME SWITCHER LOGIC =================
+function applyTheme(theme) {
+  const isLight = theme === "light";
+  document.documentElement.classList.toggle("light", isLight);
+
+  const sunIcon = document.getElementById("theme-icon-sun");
+  const moonIcon = document.getElementById("theme-icon-moon");
+  if (sunIcon && moonIcon) {
+    sunIcon.classList.toggle("hidden", isLight);
+    moonIcon.classList.toggle("hidden", !isLight);
+  }
+
+  localStorage.setItem("so_theme", theme);
+}
+
+function toggleTheme() {
+  const isCurrentlyLight = document.documentElement.classList.contains("light");
+  applyTheme(isCurrentlyLight ? "dark" : "light");
+}
+
 // ================= LANGUAGE DROPDOWN LOGIC =================
 function setLang(lang) {
   const dict = translations[lang] || translations.ru;
@@ -219,11 +239,11 @@ function setLang(lang) {
   document.querySelectorAll(".lang-option").forEach((opt) => {
     const isSelected = opt.getAttribute("data-lang") === lang;
     if (isSelected) {
-      opt.classList.remove("font-medium", "text-[#c4c4d4]");
+      opt.classList.remove("font-medium", "text-text-secondary");
       opt.classList.add("font-bold", "text-accent", "bg-accent/10");
     } else {
       opt.classList.remove("font-bold", "text-accent", "bg-accent/10");
-      opt.classList.add("font-medium", "text-[#c4c4d4]");
+      opt.classList.add("font-medium", "text-text-secondary");
     }
   });
 
@@ -319,7 +339,7 @@ async function handleWaitlistSubmit(event) {
       submitBtn.innerText = "ADDED! ✨";
       submitBtn.style.opacity = "1";
       submitBtn.className =
-        "w-full sm:w-auto bg-[#3DFF9C] text-dark-main font-extrabold text-xs uppercase tracking-wider px-7 py-4 rounded-xl transition-all duration-300 shadow-[0_0_25px_rgba(61,255,156,0.7)] cursor-default whitespace-nowrap";
+        "w-full sm:w-auto bg-accent text-accent-fg font-extrabold text-xs uppercase tracking-wider px-7 py-4 rounded-xl transition-all duration-300 shadow-[0_0_25px_rgba(var(--accent-rgb),0.55)] cursor-default whitespace-nowrap";
 
       form.reset();
       resetButton();
@@ -349,6 +369,9 @@ async function handleWaitlistSubmit(event) {
 
 // ================= INIT =================
 document.addEventListener("DOMContentLoaded", () => {
+  const savedTheme = localStorage.getItem("so_theme") || "light";
+  applyTheme(savedTheme);
+
   const savedLang = localStorage.getItem("so_lang") || "ru";
   setLang(savedLang);
 
@@ -363,5 +386,20 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener("mousemove", (e) => {
       cursorGlow.style.transform = `translate(${e.clientX - 56}px, ${e.clientY - 56}px)`;
     });
+  }
+
+  const animBlocks = document.querySelectorAll("[data-anim]");
+  if (animBlocks.length) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in-view");
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+    animBlocks.forEach((el) => observer.observe(el));
   }
 });
