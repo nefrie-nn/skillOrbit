@@ -5,16 +5,55 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SkillOrbit</title>
 
-  <!-- Светлая тема по умолчанию (если пользователь не выбрал тёмную) -->
+  <!-- Светлая тема по умолчанию -->
   <script>
     if (localStorage.getItem("so_theme") === "dark") {
       document.documentElement.classList.remove("light");
     }
   </script>
-  
+
+  <!-- Переменные тем (вшиты в HTML для защиты от кэша CSS на Vercel) -->
+  <style>
+    :root {
+      --bg-main: #0b0a14;
+      --bg-header: rgba(15, 14, 28, 0.9);
+      --bg-surface: #151428;
+      --bg-card: #0e0d1c;
+      --bg-input: #100f21;
+      --border-color: #211f3d;
+      --text-primary: #ffffff;
+      --text-secondary: #b4b3cf;
+      --text-muted: #8e8ea8;
+      --accent-rgb: 61 255 156;
+      --accent-fg: #0b0a14;
+      --flow-green: #3DFF9C;
+      --orbit-outer-border: rgba(255, 255, 255, 0.2);
+      --orbit-inner-border: rgba(255, 255, 255, 0.15);
+      --step-num-color: #2a2754;
+    }
+
+    html.light {
+      --bg-main: #f4f6fb;
+      --bg-header: rgba(255, 255, 255, 0.88);
+      --bg-surface: #eef2f7;
+      --bg-card: #ffffff;
+      --bg-input: #f8fafc;
+      --border-color: #e2e8f0;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #64748b;
+      --accent-rgb: 5 150 105;
+      --accent-fg: #ffffff;
+      --flow-green: #059669;
+      --orbit-outer-border: rgba(15, 23, 42, 0.18);
+      --orbit-inner-border: rgba(15, 23, 42, 0.13);
+      --step-num-color: #cbd5e1;
+    }
+  </style>
+
   <!-- 1. Официальный CDN Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  
+
   <!-- 2. Конфигурация адаптивных цветов SkillOrbit -->
   <script>
     tailwind.config = {
@@ -43,7 +82,7 @@
   </script>
 
   <!-- 3. Ваши кастомные стили и анимации -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body class="bg-dark-main min-h-[100dvh] text-text-primary font-sans antialiased overflow-x-hidden transition-colors duration-300">
   
