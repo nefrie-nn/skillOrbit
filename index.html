@@ -1,17 +1,14 @@
 <!DOCTYPE html>
-<html lang="ru" class="scroll-smooth">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SkillOrbit — P2P-обмен знаниями</title>
-
-  <!-- Шрифт Lilex -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lilex:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <!-- Tailwind CSS CDN -->
+  <title>SkillOrbit</title>
+  
+  <!-- 1. Официальный CDN Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- 2. Конфигурация кастомных цветов SkillOrbit -->
   <script>
     tailwind.config = {
       theme: {
@@ -21,333 +18,468 @@
             'dark-header': '#0f0e1c',
             'dark-surface': '#131224',
             'dark-border': '#211f3d',
-            'dark-muted': '#b4b4cc',
+            'dark-muted': '#8e8ea8',
             'accent': '#3DFF9C',
           },
           fontFamily: {
             lilex: ['Lilex', 'monospace'],
-            sans: ['Inter', 'system-ui', 'sans-serif'],
           }
         }
       }
     }
   </script>
 
+  <!-- 3. Ваши кастомные стили и анимации -->
   <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-dark-main text-white font-sans antialiased selection:bg-accent selection:text-dark-main overflow-x-hidden">
+<body class="bg-dark-main min-h-[100dvh] text-white font-sans antialiased overflow-x-hidden">
+  
+  <!-- ================= BACKGROUND BLUR EFFECTS ================= -->
+  <div class="fixed inset-0 pointer-events-none overflow-hidden z-0" aria-hidden="true">
+    <div class="absolute -top-40 -left-40 w-[400px] sm:w-[600px] h-[400px] sm:h-[600px] bg-[#3DFF9C]/10 rounded-full blur-3xl transform-gpu"></div>
+    <div class="absolute top-1/3 -right-40 w-[450px] sm:w-[700px] h-[450px] sm:h-[700px] bg-indigo-600/15 rounded-full blur-3xl transform-gpu"></div>
+    <div class="absolute bottom-10 -left-32 w-[400px] sm:w-[550px] h-[400px] sm:h-[550px] bg-[#3DFF9C]/10 rounded-full blur-3xl transform-gpu"></div>
+  </div>
 
-  <!-- HEADER (без FAQ) -->
-  <header class="fixed top-0 left-0 right-0 z-50 bg-dark-header/90 backdrop-blur-md border-b border-dark-border">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-      <!-- Логотип -->
-      <a href="#" class="flex items-center gap-3 group">
-        <div class="w-10 h-10 rounded-xl bg-accent flex items-center justify-center text-dark-main font-lilex font-bold text-xl shadow-[0_0_20px_rgba(61,255,156,0.4)] group-hover:scale-105 transition-transform">
-          S
+  <!-- ================= HEADER ================= -->
+  <header class="w-full bg-dark-header border-b border-white/5 flex justify-center items-center px-4 relative z-20">
+    <div class="w-full max-w-[1152px] h-20 flex items-center justify-between">
+      
+      <!-- Logo -->
+      <a href="#" class="flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-accent rounded-2xl">
+        <div class="w-12 h-12 rounded-2xl bg-accent flex items-center justify-center shadow-[0_0_15px_rgba(61,255,156,0.35)]" aria-hidden="true">
+          <span class="text-dark-main font-extrabold text-2xl tracking-tight">S</span>
         </div>
-        <div>
-          <span class="font-bold text-lg tracking-tight block leading-none">SkillOrbit</span>
-          <span class="text-[10px] font-lilex text-dark-muted tracking-widest uppercase">Skills move you forward</span>
+        <div class="flex flex-col">
+          <span class="text-white font-bold text-xl leading-tight tracking-tight">SkillOrbit</span>
+          <span class="text-dark-muted text-[9px] font-semibold tracking-wider uppercase leading-tight mt-0.5" data-i18n="slogan">
+            SKILLS MOVE YOU FORWARD
+          </span>
         </div>
       </a>
 
-      <!-- Навигация без FAQ -->
-      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
-        <a href="#journey" class="hover:text-accent transition-colors">Траектория</a>
-        <a href="#roles" class="hover:text-accent transition-colors">Две роли</a>
-        <a href="#how-it-works" class="hover:text-accent transition-colors">Как устроен P2P</a>
+      <!-- Navigation (без FAQ, добавлен якорь на Проблему и решение) -->
+      <nav class="hidden md:flex items-center gap-10">
+        <a href="#problem-solution" class="text-[#c4c4d4] hover:text-accent text-sm font-medium transition-colors" data-i18n="nav_problem">Проблема и решение</a>
+        <a href="#roles" class="text-[#c4c4d4] hover:text-accent text-sm font-medium transition-colors" data-i18n="nav_roles">Две роли</a>
+        <a href="#process" class="text-[#c4c4d4] hover:text-accent text-sm font-medium transition-colors" data-i18n="nav_process">Как устроен P2P</a>
       </nav>
 
-      <!-- Переключатель языков и CTA -->
+      <!-- Actions -->
       <div class="flex items-center gap-4">
-        <div class="hidden sm:flex items-center bg-dark-surface border border-dark-border rounded-full p-1 text-xs font-lilex">
-          <button type="button" class="lang-btn px-2.5 py-1 rounded-full text-slate-400 hover:text-white transition" data-lang="uz">UZ</button>
-          <button type="button" class="lang-btn active px-2.5 py-1 rounded-full transition" data-lang="ru">RU</button>
-          <button type="button" class="lang-btn px-2.5 py-1 rounded-full text-slate-400 hover:text-white transition" data-lang="en">EN</button>
+        <!-- Языки -->
+        <div class="flex items-center bg-dark-surface border border-dark-border rounded-full p-1 text-xs" role="group">
+          <button type="button" class="lang-btn px-3 py-1.5 text-[#7f7e9c] hover:text-white transition-all font-medium rounded-full cursor-pointer" data-lang="uz" onclick="setLang('uz')">UZ</button>
+          <button type="button" class="lang-btn px-3 py-1.5 bg-accent text-dark-main shadow-[0_0_10px_rgba(61,255,156,0.3)] transition-all font-bold rounded-full cursor-pointer" data-lang="ru" onclick="setLang('ru')">RU</button>
+          <button type="button" class="lang-btn px-3 py-1.5 text-[#7f7e9c] hover:text-white transition-all font-medium rounded-full cursor-pointer" data-lang="en" onclick="setLang('en')">EN</button>
         </div>
-        <a href="#cta-section" class="bg-accent text-dark-main font-extrabold text-xs uppercase tracking-wider px-5 py-2.5 rounded-xl hover:brightness-110 transition shadow-[0_0_20px_rgba(61,255,156,0.3)]">
-          Начать обмен
+
+        <a href="#waitlist" class="hidden md:flex items-center justify-center bg-accent hover:bg-[#2ce08a] text-dark-main shadow-[0_0_15px_rgba(61,255,156,0.25)] text-xs tracking-wider uppercase font-extrabold px-6 py-3.5 rounded-full transition-colors duration-300 whitespace-nowrap" data-i18n="btn_start">
+          НАЧАТЬ ОБМЕН
         </a>
       </div>
+
     </div>
   </header>
 
-  <!-- HERO + ПЕРВЫЙ WAITLIST -->
-  <section class="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
-    <!-- Фоновое свечение орбит (сдвинуто влево, чтобы не мешать тексту справа) -->
-    <div class="absolute top-1/4 -left-24 w-[480px] h-[480px] bg-accent/15 rounded-full blur-[130px] pointer-events-none"></div>
-    <div class="absolute bottom-0 right-0 w-[420px] h-[420px] bg-indigo-600/15 rounded-full blur-[140px] pointer-events-none"></div>
-
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-      <div class="grid lg:grid-cols-12 gap-12 items-center">
-        
-        <!-- Левая часть: Анимация орбит -->
-        <div class="lg:col-span-5 flex justify-center relative">
-          <div class="relative w-72 h-72 sm:w-88 sm:h-88 flex items-center justify-center">
-            <div class="orbit-ring-outer absolute inset-0 rounded-full border border-dashed border-slate-700/80">
-              <div class="w-4 h-4 rounded-full bg-accent shadow-[0_0_15px_#3DFF9C] absolute -top-2 left-1/2 -translate-x-1/2"></div>
-              <div class="w-6 h-6 rounded-full bg-dark-surface border border-slate-600 absolute bottom-6 right-6"></div>
-            </div>
-            <div class="orbit-ring-inner absolute inset-10 rounded-full border border-slate-800">
-              <div class="w-3.5 h-3.5 rounded-full bg-emerald-400 shadow-[0_0_10px_#34d399] absolute top-1/2 -left-1.5 -translate-y-1/2"></div>
-            </div>
-            <div class="w-24 h-24 rounded-full bg-accent text-dark-main font-lilex font-bold text-4xl flex items-center justify-center shadow-[0_0_50px_rgba(61,255,156,0.45)] z-10">
-              S
-            </div>
+  <!-- ================= MAIN HERO SECTION ================= -->
+  <main class="w-full flex justify-center px-4 md:px-8 pt-12 pb-20 overflow-hidden relative z-10">
+    <div class="w-full max-w-[1200px] grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+      
+      <!-- ЛЕВАЯ КОЛОНКА: Орбиты с планетами -->
+      <div class="lg:col-span-6 flex justify-center items-center relative min-h-[380px] sm:min-h-[460px] select-none orbit-container" data-anim>
+        <div class="relative w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] flex items-center justify-center">
+          
+          <!-- СОЛНЦЕ В ЦЕНТРЕ -->
+          <div class="absolute z-10 w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[#3DFF9C] border-2 border-[#3DFF9C] flex items-center justify-center shadow-[0_0_45px_rgba(61,255,156,0.65)]">
+            <span class="text-[#0d0c16] font-black text-3xl sm:text-4xl drop-shadow-[0_0_15px_rgba(61,255,156,0.9)] select-none">S</span>
           </div>
+          
+          <!-- Внешняя орбита -->
+          <div class="orbit-ring-outer absolute inset-0 border border-dashed border-white/20 rounded-full">
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#3DFF9C] shadow-[0_0_20px_rgba(61,255,156,0.7)] border-2 border-white/40"></div>
+            <div class="absolute top-1/2 left-full -translate-x-1/2 -translate-y-1/2 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-tr from-[#e2e8f0] to-white shadow-[0_0_25px_rgba(255,255,255,0.7)] border-2 border-white/50"></div>
+            <div class="absolute top-[85.35%] left-[14.65%] -translate-x-1/2 -translate-y-1/2 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-[#6366f1] to-[#4338ca] shadow-[0_0_25px_rgba(99,102,241,0.6)] border-2 border-white/30"></div>
+          </div>
+
+          <!-- Внутренняя орбита -->
+          <div class="orbit-ring-inner absolute inset-12 sm:inset-16 border border-dashed border-white/15 rounded-full">
+            <div class="absolute top-[14.65%] left-[85.35%] -translate-x-1/2 -translate-y-1/2 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-gradient-to-tr from-[#8b5cf6] to-[#c084fc] shadow-[0_0_20px_rgba(139,92,246,0.6)] border border-white/30"></div>
+            <div class="absolute top-[85.35%] left-[14.65%] -translate-x-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#3DFF9C] shadow-[0_0_18px_rgba(61,255,156,0.8)] border border-white/40"></div>
+          </div>
+
         </div>
+      </div>
 
-        <!-- Правая часть: Четкий читаемый текст + Градиентная подложка + Waitlist -->
-        <div class="lg:col-span-7 relative">
-          <!-- Затемняющий градиент позади текста для 100% читаемости -->
-          <div class="absolute -inset-6 bg-gradient-to-r from-dark-main/95 via-dark-main/90 to-dark-main/70 rounded-3xl blur-xl -z-10 pointer-events-none"></div>
+      <!-- ПРАВАЯ КОЛОНКА: Текст и Форма -->
+      <div class="lg:col-span-6 flex flex-col items-start text-left gap-6 lg:pl-4">
+        
+        <h1 class="font-lilex font-extrabold text-3xl sm:text-5xl lg:text-6xl tracking-tight leading-[1.1] text-white uppercase break-words" data-i18n="hero_title">
+          Делись знаниями&nbsp;— <br class="hidden sm:inline"><span class="bg-gradient-to-r from-white via-[#e0e0ff] to-[#a5a3f0] bg-clip-text text-transparent">получай знания</span>
+        </h1>
 
-          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-dark-surface border border-dark-border text-accent text-xs font-lilex mb-6 shadow-md">
-            <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
-            Закрытый бета-запуск для студентов
-          </div>
+        <p class="text-sm sm:text-base text-dark-muted max-w-[560px] leading-relaxed" data-i18n="hero_desc">
+          Первая P2P-платформа, где студенты и старшеклассники помогают друг другу сдавать экзамены, разбираться в коде, дизайне или высшей математике. Без занудства и строгих профессоров.
+        </p>
 
-          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.12] text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)] mb-6">
-            ДЕЛИСЬ ЗНАНИЯМИ — <br>
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-emerald-100 to-accent drop-shadow-none">
-              ПОЛУЧАЙ ЗНАНИЯ
-            </span>
-          </h1>
-
-          <p class="text-base sm:text-lg text-slate-200 leading-relaxed max-w-2xl mb-8 drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]">
-            Первая P2P-платформа, где студенты и старшеклассники помогают друг другу сдавать экзамены, разбираться в коде, дизайне или высшей математике. Без занудства и строгих профессоров.
-          </p>
-
-          <!-- Форма Waitlist -->
-          <form id="hero-form" class="flex flex-col sm:flex-row gap-3 max-w-xl bg-dark-surface/90 p-2 rounded-2xl border border-dark-border shadow-[0_10px_40px_rgba(0,0,0,0.75)]">
+        <form id="hero-form" class="w-full max-w-[480px] mt-2">
+          <div class="flex flex-col sm:flex-row items-center gap-3 w-full">
+            <label for="hero-email-input" class="sr-only">Ваш email</label>
             <input 
+              id="hero-email-input"
               type="email" 
-              required 
+              name="email"
+              autocomplete="email"
+              inputmode="email"
+              data-i18n-placeholder="ph_email"
               placeholder="you@email.com" 
-              class="flex-1 bg-dark-main/90 text-white placeholder-slate-400 px-4 py-3.5 rounded-xl border border-transparent focus:border-accent focus:outline-none text-sm transition"
+              class="w-full sm:flex-1 bg-[#100f21] border border-dark-border focus:border-accent focus:shadow-[0_0_12px_rgba(61,255,156,0.2)] text-white placeholder-[#545375] text-base sm:text-sm rounded-xl px-5 py-3.5 outline-none transition-all"
+              required
             >
             <button 
               type="submit" 
-              class="w-full sm:w-auto bg-accent text-dark-main font-extrabold text-xs uppercase tracking-wider px-7 py-3.5 rounded-xl hover:brightness-110 transition-all duration-300 shadow-[0_0_20px_rgba(61,255,156,0.35)] cursor-pointer shrink-0"
+              class="w-full sm:w-auto bg-accent hover:bg-[#2ce08a] text-dark-main shadow-[0_0_20px_rgba(61,255,156,0.3)] text-xs font-extrabold uppercase tracking-wider px-7 py-4 rounded-xl transition-all duration-300 cursor-pointer disabled:opacity-50 whitespace-nowrap"
+              data-i18n="btn_waitlist"
             >
-              Join the Waitlist
+              JOIN THE WAITLIST
             </button>
-          </form>
-
-          <p class="text-xs text-slate-400 mt-3.5 font-lilex">
-            ⚡ Ранний доступ + стартовые орбит-баллы первым 200 участникам
-          </p>
-        </div>
+          </div>
+        </form>
 
       </div>
     </div>
-  </section>
+  </main>
 
-  <!-- НОВАЯ ВОВЛЕКАЮЩАЯ СЕКЦИЯ СРАЗУ ПОСЛЕ WAITLIST -->
-  <section id="journey" class="py-20 relative border-t border-dark-border bg-gradient-to-b from-dark-main via-[#0e0d1d] to-dark-main">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <!-- ================= PROBLEM & SOLUTION (СРАЗУ ПОСЛЕ WAITLIST) ================= -->
+  <section id="problem-solution" class="w-full flex justify-center px-[24px] py-16 relative z-10">
+    <div class="w-full max-w-[1152px] flex flex-col items-center gap-[48px]">
       
-      <div class="text-center max-w-3xl mx-auto mb-14">
-        <span class="text-accent font-lilex text-xs uppercase tracking-widest block mb-3">Почему это работает</span>
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-4 drop-shadow-[0_2px_16px_rgba(0,0,0,0.8)]">
-          Ты уже знаешь больше, чем думаешь
+      <div class="text-center max-w-[680px] flex flex-col gap-3">
+        <span class="text-xs font-bold tracking-widest uppercase text-accent" data-i18n="ps_badge">Зачем мы создали SkillOrbit</span>
+        <h2 class="font-lilex font-extrabold text-3xl md:text-5xl tracking-tight bg-gradient-to-r from-white via-[#e0e0ff] to-[#a5a3f0] bg-clip-text text-transparent" data-i18n="ps_title">
+          От тупика в учёбе — к реальному прогрессу
         </h2>
-        <p class="text-slate-300 text-base sm:text-lg leading-relaxed">
-          Не нужно быть профессором, чтобы помочь другому. Вчера ты сам разобрался в сложной теме — сегодня за 30 минут объяснишь её первокурснику и получишь помощь по своему предмету.
+        <p class="text-[#8e8ea8] text-sm md:text-base leading-relaxed" data-i18n="ps_desc">
+          Традиционное обучение часто не успевает за темпом студентов. Мы меняем сам подход к получению помощи.
         </p>
       </div>
 
-      <!-- 3 карточки реальных сценариев (Hook для пользователя) -->
-      <div class="grid md:grid-cols-3 gap-6">
+      <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
         
-        <!-- Карточка 1 -->
-        <div class="bg-dark-surface border border-dark-border hover:border-accent/50 rounded-2xl p-7 transition-all duration-300 shadow-lg flex flex-col justify-between group">
-          <div>
-            <div class="flex items-center justify-between mb-5">
-              <span class="text-xs font-lilex px-3 py-1 rounded-full bg-accent/10 text-accent border border-accent/20">Сценарий 01</span>
-              <span class="text-slate-400 text-xs font-lilex">~ 40 мин</span>
+        <!-- ПРОБЛЕМА -->
+        <article class="bg-[#0e0d1c] border border-[#211f3d] hover:border-rose-500/40 rounded-3xl p-7 sm:p-9 flex flex-col gap-6 transition-all duration-300 shadow-xl relative overflow-hidden">
+          <div class="flex items-center justify-between">
+            <div class="w-12 h-12 rounded-2xl bg-rose-500/10 border border-rose-500/25 flex items-center justify-center text-rose-400" aria-hidden="true">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"></path></svg>
             </div>
-            <h3 class="text-xl font-bold text-white mb-3 group-hover:text-accent transition-colors">
-              «Горят дедлайны по C++ и ООП»
-            </h3>
-            <p class="text-slate-300 text-sm leading-relaxed mb-6">
-              Находишь студента старшего курса, который за один созвон на твоём коде объясняет указатели и классы человеческим языком без воды из учебников.
-            </p>
+            <span class="text-xs font-bold uppercase tracking-wider text-rose-400 bg-rose-500/10 border border-rose-500/25 px-3 py-1 rounded-full" data-i18n="prob_tag">Проблема</span>
           </div>
-          <div class="pt-4 border-t border-dark-border/80 flex items-center justify-between text-xs text-slate-400">
-            <span>Результат:</span>
-            <span class="text-emerald-400 font-medium">Лаба сдана на максимум</span>
-          </div>
-        </div>
 
-        <!-- Карточка 2 -->
-        <div class="bg-dark-surface border border-dark-border hover:border-accent/50 rounded-2xl p-7 transition-all duration-300 shadow-lg flex flex-col justify-between group">
-          <div>
-            <div class="flex items-center justify-between mb-5">
-              <span class="text-xs font-lilex px-3 py-1 rounded-full bg-indigo-500/15 text-indigo-300 border border-indigo-500/30">Сценарий 02</span>
-              <span class="text-slate-400 text-xs font-lilex">~ 45 мин</span>
-            </div>
-            <h3 class="text-xl font-bold text-white mb-3 group-hover:text-accent transition-colors">
-              «Шаришь в матане или IELTS?»
-            </h3>
-            <p class="text-slate-300 text-sm leading-relaxed mb-6">
-              Помогаешь другим с интегралами, физикой или разбором Speaking-секции — копишь внутреннюю валюту платформы и обмениваешь её на уроки по дизайну или Python.
-            </p>
-          </div>
-          <div class="pt-4 border-t border-dark-border/80 flex items-center justify-between text-xs text-slate-400">
-            <span>Результат:</span>
-            <span class="text-accent font-medium">Бесплатное обучение навыкам</span>
-          </div>
-        </div>
+          <h3 class="font-lilex font-extrabold text-2xl sm:text-3xl text-white" data-i18n="prob_title">
+            Почему учиться в одиночку тяжело
+          </h3>
 
-        <!-- Карточка 3 -->
-        <div class="bg-dark-surface border border-dark-border hover:border-accent/50 rounded-2xl p-7 transition-all duration-300 shadow-lg flex flex-col justify-between group">
-          <div>
-            <div class="flex items-center justify-between mb-5">
-              <span class="text-xs font-lilex px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">Сценарий 03</span>
-              <span class="text-slate-400 text-xs font-lilex">1 на 1</span>
+          <ul class="flex flex-col gap-4 text-sm">
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-rose-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+              <span class="text-[#9e9dbd] leading-relaxed"><strong class="text-white font-semibold" data-i18n="prob_i1_title">Дорогие репетиторы и курсы:</strong> <span data-i18n="prob_i1_desc">Занятия с преподавателями стоят дорого и заставляют покупать целые месяцы ради одного вопроса.</span></span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-rose-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+              <span class="text-[#9e9dbd] leading-relaxed"><strong class="text-white font-semibold" data-i18n="prob_i2_title">Сложный академический язык:</strong> <span data-i18n="prob_i2_desc">Учебники и лекции перегружены теорией, из-за чего непонятно, как решить конкретную лабу или билет.</span></span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-rose-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+              <span class="text-[#9e9dbd] leading-relaxed"><strong class="text-white font-semibold" data-i18n="prob_i3_title">Знания пылятся без дела:</strong> <span data-i18n="prob_i3_desc">Сильные студенты отлично разбираются в предметах, но не имеют удобной площадки, чтобы монетизировать свой опыт.</span></span>
+            </li>
+          </ul>
+        </article>
+
+        <!-- РЕШЕНИЕ -->
+        <article class="bg-[#0e0d1c] border border-[#3DFF9C]/35 hover:border-[#3DFF9C]/70 rounded-3xl p-7 sm:p-9 flex flex-col gap-6 transition-all duration-300 shadow-[0_0_35px_rgba(61,255,156,0.08)] relative overflow-hidden">
+          <div class="flex items-center justify-between">
+            <div class="w-12 h-12 rounded-2xl bg-[#3DFF9C]/10 border border-[#3DFF9C]/30 flex items-center justify-center text-accent" aria-hidden="true">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"></path></svg>
             </div>
-            <h3 class="text-xl font-bold text-white mb-3 group-hover:text-accent transition-colors">
-              «Подготовка к мидтермам без паники»
-            </h3>
-            <p class="text-slate-300 text-sm leading-relaxed mb-6">
-              Никаких скучных лекций на 2 часа. Разбираешь именно те задачи и билеты, которые реально попадаются на экзаменах в твоём вузе.
-            </p>
+            <span class="text-xs font-bold uppercase tracking-wider text-accent bg-[#3DFF9C]/10 border border-[#3DFF9C]/30 px-3 py-1 rounded-full" data-i18n="sol_tag">Наше решение</span>
           </div>
-          <div class="pt-4 border-t border-dark-border/80 flex items-center justify-between text-xs text-slate-400">
-            <span>Результат:</span>
-            <span class="text-emerald-400 font-medium">Экономия 10+ часов зубрёжки</span>
-          </div>
-        </div>
+
+          <h3 class="font-lilex font-extrabold text-2xl sm:text-3xl text-white" data-i18n="sol_title">
+            Точечная P2P-помощь от равных
+          </h3>
+
+          <ul class="flex flex-col gap-4 text-sm">
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-accent shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg>
+              <span class="text-[#9e9dbd] leading-relaxed"><strong class="text-white font-semibold" data-i18n="sol_i1_title">Разбор за один созвон:</strong> <span data-i18n="sol_i1_desc">Плати только за конкретную задачу или подготовку к мидтерму — без переплат и навязанных абонементов.</span></span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-accent shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg>
+              <span class="text-[#9e9dbd] leading-relaxed"><strong class="text-white font-semibold" data-i18n="sol_i2_title">На одном языке с ментором:</strong> <span data-i18n="sol_i2_desc">Тебе помогает студент, который сам недавно сдал этот курс и знает все подводные камни преподавателей.</span></span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-accent shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg>
+              <span class="text-[#9e9dbd] leading-relaxed"><strong class="text-white font-semibold" data-i18n="sol_i3_title">Обмен и заработок на навыках:</strong> <span data-i18n="sol_i3_desc">Помогай другим в том, в чём силён ты, зарабатывай реальные деньги или обменивай баллы на новые навыки.</span></span>
+            </li>
+          </ul>
+        </article>
 
       </div>
     </div>
   </section>
 
-  <!-- СЕКЦИЯ: ДВЕ РОЛИ — ОДНА ПЛАТФОРМА -->
-  <section id="roles" class="py-20 relative border-t border-dark-border">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-2xl mx-auto mb-14">
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-4">
-          Две роли — одна платформа
+  <!-- ================= ROLES ================= -->
+  <section id="roles" class="w-full flex justify-center px-[24px] py-16 relative overflow-hidden">
+    <div class="w-full max-w-[1152px] flex flex-col items-center gap-[48px] relative z-10">
+      
+      <div class="text-center max-w-[600px] flex flex-col gap-3">
+        <h2 class="font-lilex font-extrabold text-3xl md:text-6xl tracking-tight bg-gradient-to-r from-white via-[#e0e0ff] to-[#a5a3f0] bg-clip-text text-transparent" data-i18n="roles_title">
+          Две роли - одна платформа
         </h2>
-        <p class="text-slate-300 text-base">
+        <p class="text-[#8e8ea8] text-sm md:text-base leading-relaxed" data-i18n="roles_desc">
           На SkillOrbit каждый и учит, и учится. Выбирай свой путь или совмещай обе роли.
         </p>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-8">
-        <!-- Роль: Ученик -->
-        <div class="bg-dark-surface border border-dark-border rounded-3xl p-8 sm:p-10 relative overflow-hidden">
-          <div class="w-12 h-12 rounded-2xl bg-indigo-500/15 border border-indigo-500/30 text-indigo-400 flex items-center justify-center font-lilex font-bold text-xl mb-6">
-            01
+      <div class="w-full relative grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        
+        <!-- Карточка 1 -->
+        <article class="lg:col-span-5 bg-[#0e0d1c] border border-[#211f3d] rounded-3xl p-7 sm:p-8 flex flex-col gap-6 hover:border-[#3DFF9C]/50 transition-all duration-300 relative group shadow-xl">
+          <div class="flex items-center justify-between">
+            <div class="w-12 h-12 rounded-2xl bg-[#1b1936] border border-[#2e2a56] flex items-center justify-center text-accent" aria-hidden="true">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+            </div>
+
+            <div class="relative w-14 h-14 flex items-center justify-center select-none" aria-hidden="true" data-anim>
+              <div class="absolute inset-0 border border-dashed border-white/20 rounded-full micro-orbit-cw">
+                <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3.5 h-3.5 rounded-full bg-[#3DFF9C] shadow-[0_0_8px_#3DFF9C]"></div>
+                <div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-3 h-3 rounded-full bg-indigo-400"></div>
+              </div>
+              <div class="w-6 h-6 rounded-full bg-[#131224] border border-[#3DFF9C]/60 flex items-center justify-center">
+                <span class="text-[10px] font-bold text-[#3DFF9C]">S</span>
+              </div>
+            </div>
           </div>
-          <h3 class="text-2xl font-bold text-white mb-3">Когда нужна помощь</h3>
-          <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
-            Застрял на баге, не понимаешь тему перед коллоквиумом или хочешь быстро освоить новый инструмент. Находишь того, кто прошёл этот путь пару месяцев назад.
-          </p>
-          <ul class="space-y-3 text-sm text-slate-200">
-            <li class="flex items-center gap-3">
-              <span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>
-              Объяснение на твоём языке без академического снобизма
+
+          <h3 class="font-lilex font-extrabold text-2xl sm:text-3xl text-white flex flex-wrap items-center gap-x-3 gap-y-2">
+            <span data-i18n="role1_title">Хочу научиться</span>
+            <span class="text-sm font-normal text-[#3DFF9C] bg-[#3DFF9C]/10 border border-[#3DFF9C]/30 px-2 py-0.5 rounded-full">Learner</span>
+          </h3>
+
+          <ul class="flex flex-col gap-4 text-sm">
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-accent shrink-0 mt-0.5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg>
+              <span class="text-[#9e9dbd] leading-relaxed"><strong class="text-white font-semibold" data-i18n="role1_i1_title">Объяснение на пальцах:</strong> <span data-i18n="role1_i1_desc">Сложные темы, высшая математика или код объясняются понятным языком ровесников.</span></span>
             </li>
-            <li class="flex items-center gap-3">
-              <span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>
-              Точечный разбор конкретной задачи за 30–60 минут
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-accent shrink-0 mt-0.5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg>
+              <span class="text-[#9e9dbd] leading-relaxed"><strong class="text-white font-semibold" data-i18n="role1_i2_title">Честный рейтинг:</strong> <span data-i18n="role1_i2_desc">Находи напарника по реальным отзывам и оценкам других студентов.</span></span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-accent shrink-0 mt-0.5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg>
+              <span class="text-[#9e9dbd] leading-relaxed"><strong class="text-white font-semibold" data-i18n="role1_i3_title">Быстрый буст:</strong> <span data-i18n="role1_i3_desc">Экстренная подготовка к контрольным, лабораторным и сессии за 1-2 созвона.</span></span>
             </li>
           </ul>
+        </article>
+
+        <div class="lg:col-span-2 flex flex-col items-center justify-center py-2 lg:py-0 select-none">
+          <div class="hidden lg:flex flex-col items-center gap-3 w-full" data-anim>
+            <svg class="w-full h-24 overflow-visible" viewBox="0 0 160 80" fill="none">
+              <path d="M 10 25 C 60 5, 100 5, 150 25" stroke="#3DFF9C" stroke-width="2.5" stroke-linecap="round" class="flow-green" />
+              <polygon points="148,18 158,27 146,31" fill="#3DFF9C" />
+              <path d="M 150 55 C 100 75, 60 75, 10 55" stroke="#6366f1" stroke-width="2.5" stroke-linecap="round" class="flow-blue" />
+              <polygon points="12,49 2,54 14,62" fill="#6366f1" />
+            </svg>
+            <div class="bg-[#100f24] border border-[#3DFF9C]/30 px-3 py-1 rounded-full shadow-[0_0_15px_rgba(61,255,156,0.2)]">
+              <span class="text-[10px] font-black tracking-widest text-[#3DFF9C] uppercase">P2P EXCHANGE</span>
+            </div>
+          </div>
+
+          <div class="flex lg:hidden items-center justify-center gap-2 py-2">
+            <div class="w-8 h-0.5 bg-gradient-to-r from-transparent to-[#3DFF9C]"></div>
+            <div class="w-8 h-0.5 bg-gradient-to-l from-transparent to-[#3DFF9C]"></div>
+          </div>
         </div>
 
-        <!-- Роль: Ментор -->
-        <div class="bg-dark-surface border border-accent/30 rounded-3xl p-8 sm:p-10 relative overflow-hidden">
-          <div class="w-12 h-12 rounded-2xl bg-accent/15 border border-accent/30 text-accent flex items-center justify-center font-lilex font-bold text-xl mb-6">
-            02
+        <!-- Карточка 2 -->
+        <article class="lg:col-span-5 bg-[#0e0d1c] border border-[#211f3d] rounded-3xl p-7 sm:p-8 flex flex-col gap-6 hover:border-indigo-500/50 transition-all duration-300 relative group shadow-xl">
+          <div class="flex items-center justify-between">
+            <div class="w-12 h-12 rounded-2xl bg-[#1b1936] border border-[#2e2a56] flex items-center justify-center text-accent" aria-hidden="true">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z"></path></svg>
+            </div>
+            <div class="relative w-14 h-14 flex items-center justify-center select-none" aria-hidden="true" data-anim>
+              <div class="absolute inset-0 border border-dashed border-white/20 rounded-full micro-orbit-ccw">
+                <div class="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-3.5 h-3.5 rounded-full bg-indigo-400 shadow-[0_0_8px_#6366f1]"></div>
+                <div class="absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-[#3DFF9C]"></div>
+              </div>
+              <div class="w-6 h-6 rounded-full bg-[#131224] border border-indigo-500/60 flex items-center justify-center">
+                <span class="text-[10px] font-bold text-indigo-300">S</span>
+              </div>
+            </div>
           </div>
-          <h3 class="text-2xl font-bold text-white mb-3">Когда готов делиться</h3>
-          <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
-            Хорошо разбираешься в программировании, математике, языках или монтаже? Помогай другим студентам, прокачивай своё портфолио и зарабатывай баллы.
-          </p>
-          <ul class="space-y-3 text-sm text-slate-200">
-            <li class="flex items-center gap-3">
-              <span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
-              Гибкий график — проводи сессии только когда удобно тебе
+
+          <h3 class="font-lilex font-extrabold text-2xl sm:text-3xl text-white flex flex-wrap items-center gap-x-3 gap-y-2">
+            <span data-i18n="role2_title">Хочу делиться знаниями</span>
+            <span class="text-sm font-normal text-indigo-300 bg-indigo-500/10 border border-indigo-500/30 px-2 py-0.5 rounded-full">Mentor</span>
+          </h3>
+
+          <ul class="flex flex-col gap-4 text-sm">
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-accent shrink-0 mt-0.5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg>
+              <span class="text-[#9e9dbd] leading-relaxed"><strong class="text-white font-semibold" data-i18n="role2_i1_title">Укрепление материала:</strong> <span data-i18n="role2_i1_desc">Объясняя тему другим, ты сам усваиваешь материал на 100%.</span></span>
             </li>
-            <li class="flex items-center gap-3">
-              <span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
-              Рейтинг и отзывы, которые выделят тебя среди других
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-accent shrink-0 mt-0.5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg>
+              <span class="text-[#9e9dbd] leading-relaxed"><strong class="text-white font-semibold" data-i18n="role2_i2_title">Софт-скиллы:</strong> <span data-i18n="role2_i2_desc">Прокачивай навыки коммуникации и наставничества для будущей работы.</span></span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-accent shrink-0 mt-0.5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg>
+              <span class="text-[#9e9dbd] leading-relaxed"><strong class="text-white font-semibold" data-i18n="role2_i3_title">Монетизация:</strong> <span data-i18n="role2_i3_desc">Зарабатывай на своих знаниях или копи внутренний рейтинг платформы.</span></span>
             </li>
           </ul>
-        </div>
+        </article>
+
       </div>
     </div>
   </section>
 
-  <!-- СЕКЦИЯ: КАК УСТРОЕН P2P -->
-  <section id="how-it-works" class="py-20 border-t border-dark-border bg-[#0d0c19]">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-2xl mx-auto mb-14">
-        <span class="text-accent font-lilex text-xs uppercase tracking-widest block mb-2">Механика</span>
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Как устроен P2P-обмен</h2>
+  <!-- ================= PROCESS ================= -->
+  <section id="process" class="w-full flex justify-center px-[24px] py-12 relative z-10">
+    <div class="w-full max-w-[1024px] flex flex-col items-center gap-[64px]">
+      
+      <div class="text-center max-w-[600px] flex flex-col gap-3">
+        <h2 class="font-lilex font-extrabold text-3xl md:text-6xl tracking-tight bg-gradient-to-r from-white via-[#e0e0ff] to-[#a5a3f0] bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(140,138,220,0.3)]" data-i18n="proc_title">
+          Как устроен P2P-процесс
+        </h2>
+        <p class="text-[#8e8ea8] text-sm md:text-base leading-relaxed" data-i18n="proc_desc">
+          4 простых и безопасных шага от вопроса к решению
+        </p>
       </div>
 
-      <div class="grid sm:grid-cols-3 gap-8">
-        <div class="bg-dark-surface/90 border border-dark-border p-7 rounded-2xl">
-          <div class="text-accent font-lilex font-bold text-2xl mb-3">01. Создай запрос</div>
-          <p class="text-slate-300 text-sm leading-relaxed">
-            Опиши задачу или тему, с которой нужно разобраться, и выбери удобное время для созвона.
-          </p>
-        </div>
-        <div class="bg-dark-surface/90 border border-dark-border p-7 rounded-2xl">
-          <div class="text-accent font-lilex font-bold text-2xl mb-3">02. Выбери пира</div>
-          <p class="text-slate-300 text-sm leading-relaxed">
-            Алгоритм подберёт студентов с подтверждёнными навыками и высоким рейтингом по твоей теме.
-          </p>
-        </div>
-        <div class="bg-dark-surface/90 border border-dark-border p-7 rounded-2xl">
-          <div class="text-accent font-lilex font-bold text-2xl mb-3">03. Закрой пробел</div>
-          <p class="text-slate-300 text-sm leading-relaxed">
-            Разбери материал 1-на-1, оцени сессию и используй накопленные баллы для новых навыков.
-          </p>
-        </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
+        <!-- Шаг 1 -->
+        <article class="bg-[#0e0d1c] border border-[#211f3d] rounded-3xl p-6 flex flex-col gap-5 hover:border-[#3b376d] transition-colors duration-300">
+          <div class="flex items-center justify-between">
+            <div class="w-10 h-10 rounded-xl bg-[#1b1936] border border-[#2e2a56] flex items-center justify-center text-accent" aria-hidden="true">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"></path></svg>
+            </div>
+            <span class="text-3xl font-extrabold text-[#2a2754]">01</span>
+          </div>
+          <div class="flex flex-col gap-2">
+            <h3 class="text-base font-bold text-white" data-i18n="proc_s1_title">Поиск темы</h3>
+            <p class="text-xs text-[#8e8ea8] leading-relaxed" data-i18n="proc_s1_desc">Вбиваешь нужный предмет или задачу и выбираешь подходящего напарника.</p>
+          </div>
+        </article>
+
+        <!-- Шаг 2 -->
+        <article class="bg-[#0e0d1c] border border-[#211f3d] rounded-3xl p-6 flex flex-col gap-5 hover:border-[#3b376d] transition-colors duration-300">
+          <div class="flex items-center justify-between">
+            <div class="w-10 h-10 rounded-xl bg-[#1b1936] border border-[#2e2a56] flex items-center justify-center text-accent" aria-hidden="true">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"></path></svg>
+            </div>
+            <span class="text-3xl font-extrabold text-[#2a2754]">02</span>
+          </div>
+          <div class="flex flex-col gap-2">
+            <h3 class="text-base font-bold text-white" data-i18n="proc_s2_title">Безопасная сделка</h3>
+            <p class="text-xs text-[#8e8ea8] leading-relaxed" data-i18n="proc_s2_desc">Платформа замораживает средства на время сессии, защищая обе стороны.</p>
+          </div>
+        </article>
+
+        <!-- Шаг 3 -->
+        <article class="bg-[#0e0d1c] border border-[#211f3d] rounded-3xl p-6 flex flex-col gap-5 hover:border-[#3b376d] transition-colors duration-300">
+          <div class="flex items-center justify-between">
+            <div class="w-10 h-10 rounded-xl bg-[#1b1936] border border-[#2e2a56] flex items-center justify-center text-accent" aria-hidden="true">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z"></path></svg>
+            </div>
+            <span class="text-3xl font-extrabold text-[#2a2754]">03</span>
+          </div>
+          <div class="flex flex-col gap-2">
+            <h3 class="text-base font-bold text-white" data-i18n="proc_s3_title">Созвон и практика</h3>
+            <p class="text-xs text-[#8e8ea8] leading-relaxed" data-i18n="proc_s3_desc">Общение во встроенном пространстве с интерактивной доской и код-шерингом.</p>
+          </div>
+        </article>
+
+        <!-- Шаг 4 -->
+        <article class="bg-[#0e0d1c] border border-[#211f3d] rounded-3xl p-6 flex flex-col gap-5 hover:border-[#3b376d] transition-colors duration-300">
+          <div class="flex items-center justify-between">
+            <div class="w-10 h-10 rounded-xl bg-[#1b1936] border border-[#2e2a56] flex items-center justify-center text-accent" aria-hidden="true">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385c.116.488-.42.88-.844.628l-4.725-2.81a.563.563 0 00-.58 0l-4.725 2.81c-.424.252-.96-.14-.844-.628l1.285-5.385a.563.563 0 00-.182-.557l-4.204-3.602c-.38-.325-.178-.948.32-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"></path></svg>
+            </div>
+            <span class="text-3xl font-extrabold text-[#2a2754]">04</span>
+          </div>
+          <div class="flex flex-col gap-2">
+            <h3 class="text-base font-bold text-white" data-i18n="proc_s4_title">Подтверждение</h3>
+            <p class="text-xs text-[#8e8ea8] leading-relaxed" data-i18n="proc_s4_desc">После успешного занятия ментор получает оплату и балл к рейтингу.</p>
+          </div>
+        </article>
+
       </div>
     </div>
   </section>
 
-  <!-- ФИНАЛЬНЫЙ CTA WAITLIST -->
-  <section id="cta-section" class="py-24 border-t border-dark-border relative overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-t from-accent/10 via-transparent to-transparent pointer-events-none"></div>
-    <div class="max-w-3xl mx-auto px-4 sm:px-6 text-center relative z-10">
-      <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-4">
-        Готов выйти на новую орбиту?
-      </h2>
-      <p class="text-slate-300 text-base sm:text-lg mb-8">
-        Оставь почту, чтобы попасть в первую волну участников SkillOrbit и получить бонусные баллы на старт.
-      </p>
+  <!-- ================= WAITLIST CTA ================= -->
+  <section id="waitlist" class="w-full flex justify-center px-[24px] pt-12 pb-20 relative z-10">
+    <div class="w-full max-w-[1024px] bg-[#0e0d1c] border border-[#211f3d] rounded-3xl p-8 sm:p-12 flex flex-col items-center text-center gap-[64px] relative overflow-hidden">
+      
+      <div class="absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-[radial-gradient(circle,rgba(61,255,156,0.15),rgba(89,22,139,0.08)_40%,transparent_70%)] pointer-events-none" aria-hidden="true"></div>
 
-      <form id="cta-form" class="flex flex-col sm:flex-row gap-3 max-w-xl mx-auto bg-dark-surface p-2 rounded-2xl border border-dark-border shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
-        <input 
-          type="email" 
-          required 
-          placeholder="you@email.com" 
-          class="flex-1 bg-dark-main text-white placeholder-slate-400 px-4 py-3.5 rounded-xl border border-transparent focus:border-accent focus:outline-none text-sm transition"
-        >
-        <button 
-          type="submit" 
-          class="w-full sm:w-auto bg-accent text-dark-main font-extrabold text-xs uppercase tracking-wider px-7 py-3.5 rounded-xl hover:brightness-110 transition-all duration-300 shadow-[0_0_20px_rgba(61,255,156,0.35)] cursor-pointer shrink-0"
-        >
-          Join the Waitlist
-        </button>
+      <div class="flex flex-col gap-3 max-w-[650px] z-10">
+        <h2 class="font-lilex font-extrabold text-2xl md:text-5xl tracking-tight bg-gradient-to-r from-white via-[#e0e0ff] to-[#a5a3f0] bg-clip-text text-transparent" data-i18n="cta_title">
+          Займи место в waitlist до официального запуска
+        </h2>
+        <p class="text-[#8e8ea8] text-xs sm:text-sm leading-relaxed" data-i18n="cta_desc">
+          Первые зарегистрированные пользователи получат бонусные баллы на бесплатные сессии с менторами.
+        </p>
+      </div>
+
+      <form id="cta-form" class="w-full max-w-[460px] z-10">
+        <div class="flex flex-col sm:flex-row items-center gap-3 w-full">
+          <input 
+            id="cta-email-input"
+            type="email" 
+            name="email"
+            autocomplete="email"
+            inputmode="email"
+            data-i18n-placeholder="ph_email"
+            placeholder="you@email.com" 
+            class="w-full sm:flex-1 bg-[#100f21] border border-dark-border focus:border-accent focus:shadow-[0_0_12px_rgba(61,255,156,0.2)] text-white placeholder-[#545375] text-base sm:text-sm rounded-xl px-5 py-3.5 outline-none transition-all"
+            required
+          >
+          <button 
+            type="submit" 
+            class="w-full sm:w-auto bg-accent hover:bg-[#2ce08a] text-dark-main shadow-[0_0_15px_rgba(61,255,156,0.25)] text-xs font-extrabold uppercase tracking-wider px-6 py-3.5 rounded-xl transition-all duration-300 cursor-pointer disabled:opacity-50 whitespace-nowrap"
+            data-i18n="btn_waitlist"
+          >
+            JOIN THE WAITLIST
+          </button>
+        </div>
       </form>
+
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer class="border-t border-dark-border py-8 text-center text-xs text-slate-400 font-lilex">
-    <div class="max-w-7xl mx-auto px-4">
-      © 2026 SkillOrbit. All rights reserved.
+  <!-- ================= FOOTER ================= -->
+  <footer class="w-full border-t border-white/5 flex justify-center px-4 sm:px-6 py-6 relative z-10" style="padding-bottom: max(1.5rem, env(safe-area-inset-bottom));">
+    <div class="w-full max-w-[1024px] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#545375]">
+      
+      <div class="text-center sm:text-left">
+        <span class="font-semibold text-[#8e8ea8]">SkillOrbit</span> <span data-i18n="footer_rights">© 2026. SKILLS MOVE YOU FORWARD</span>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+        <a href="#" class="hover:text-accent transition-colors" data-i18n="footer_l1">Privacy Policy</a>
+        <a href="#" class="hover:text-accent transition-colors" data-i18n="footer_l2">Terms of Service</a>
+        <a href="#" class="hover:text-accent transition-colors" data-i18n="footer_l3">Поддержка</a>
+      </div>
+
     </div>
   </footer>
 
+  <!-- ================= CURSOR GLOW ================= -->
+  <div id="cursor-glow" class="pointer-events-none fixed top-0 left-0 w-64 h-64 rounded-full bg-accent/10 blur-3xl transition-transform duration-75 ease-out z-50 hidden md:block" style="will-change: transform;"></div>
+
+  <!-- ================= JAVASCRIPT ================= -->
   <script src="script.js"></script>
+
 </body>
 </html>

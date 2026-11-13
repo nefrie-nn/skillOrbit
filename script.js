@@ -20,17 +20,18 @@ async function handleWaitlistSubmit(event) {
     }, 3000);
   };
 
-  // Быстрая проверка на стороне браузера
+  // Проверка повторной отправки в браузере
   const submittedEmails = JSON.parse(localStorage.getItem("so_waitlist") || "[]");
   if (submittedEmails.includes(email)) {
     submitBtn.disabled = true;
     submitBtn.innerText = "ALREADY IN! ✓";
     submitBtn.className =
-      "w-full sm:w-auto bg-indigo-500 text-white font-extrabold text-xs uppercase tracking-wider px-6 py-3.5 rounded-xl transition-all duration-300 shadow-[0_0_15px_rgba(99,102,241,0.4)] cursor-default";
+      "w-full sm:w-auto bg-indigo-500 text-white font-extrabold text-xs uppercase tracking-wider px-7 py-4 rounded-xl transition-all duration-300 shadow-[0_0_15px_rgba(99,102,241,0.4)] cursor-default whitespace-nowrap";
     resetButton();
     return;
   }
 
+  // Состояние: Отправка
   submitBtn.disabled = true;
   submitBtn.innerText = "SENDING...";
   submitBtn.style.opacity = "0.7";
@@ -47,24 +48,22 @@ async function handleWaitlistSubmit(event) {
     const data = await response.json();
 
     if (response.ok) {
-      // Запоминаем почту локально
       localStorage.setItem("so_waitlist", JSON.stringify([...submittedEmails, email]));
 
       submitBtn.innerText = "ADDED! ✨";
       submitBtn.style.opacity = "1";
       submitBtn.className =
-        "w-full sm:w-auto bg-[#3DFF9C] text-dark-main font-extrabold text-xs uppercase tracking-wider px-6 py-3.5 rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(61,255,156,0.6)] cursor-default";
+        "w-full sm:w-auto bg-[#3DFF9C] text-dark-main font-extrabold text-xs uppercase tracking-wider px-7 py-4 rounded-xl transition-all duration-300 shadow-[0_0_25px_rgba(61,255,156,0.7)] cursor-default whitespace-nowrap";
 
       form.reset();
       resetButton();
     } else if (response.status === 409) {
-      // Сервер подтвердил, что почта уже в базе Resend
       localStorage.setItem("so_waitlist", JSON.stringify([...submittedEmails, email]));
 
       submitBtn.innerText = "ALREADY IN! ✓";
       submitBtn.style.opacity = "1";
       submitBtn.className =
-        "w-full sm:w-auto bg-indigo-500 text-white font-extrabold text-xs uppercase tracking-wider px-6 py-3.5 rounded-xl transition-all duration-300 shadow-[0_0_15px_rgba(99,102,241,0.4)] cursor-default";
+        "w-full sm:w-auto bg-indigo-500 text-white font-extrabold text-xs uppercase tracking-wider px-7 py-4 rounded-xl transition-all duration-300 shadow-[0_0_15px_rgba(99,102,241,0.4)] cursor-default whitespace-nowrap";
 
       resetButton();
     } else {
@@ -76,7 +75,7 @@ async function handleWaitlistSubmit(event) {
     submitBtn.innerText = "TRY AGAIN";
     submitBtn.style.opacity = "1";
     submitBtn.className =
-      "w-full sm:w-auto bg-rose-500 text-white font-extrabold text-xs uppercase tracking-wider px-6 py-3.5 rounded-xl transition-all duration-300 shadow-[0_0_15px_rgba(244,63,94,0.4)] cursor-pointer";
+      "w-full sm:w-auto bg-rose-500 text-white font-extrabold text-xs uppercase tracking-wider px-7 py-4 rounded-xl transition-all duration-300 shadow-[0_0_15px_rgba(244,63,94,0.4)] cursor-pointer whitespace-nowrap";
 
     resetButton();
   }
