@@ -112,7 +112,7 @@
           НАЧАТЬ ОБМЕН
         </a>
 
-        <!-- Кнопка Instagram справа от "Начать обмен" -->
+        <!-- Кнопка Instagram -->
         <a 
           href="https://instagram.com/" 
           target="_blank" 
@@ -133,26 +133,31 @@
   <main class="w-full flex justify-center px-4 md:px-8 pt-12 pb-20 overflow-hidden relative z-10">
     <div class="w-full max-w-[1200px] grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
       
-      <!-- ЛЕВАЯ КОЛОНКА: Орбиты с планетами -->
+      <!-- ЛЕВАЯ КОЛОНКА: Выровненные орбиты с планетами -->
       <div class="lg:col-span-6 flex justify-center items-center relative min-h-[360px] sm:min-h-[460px] select-none orbit-container" data-anim>
-        <div class="relative w-[300px] h-[300px] sm:w-[420px] sm:h-[420px] flex items-center justify-center">
+        <div class="relative w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] flex items-center justify-center">
           
           <!-- СОЛНЦЕ В ЦЕНТРЕ -->
-          <div class="relative z-10 w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[#3DFF9C] border-2 border-[#3DFF9C] flex items-center justify-center shadow-[0_0_45px_rgba(61,255,156,0.65)]">
-            <span class="text-[#0d0c16] font-black text-3xl sm:text-4xl drop-shadow-[0_0_15px_rgba(61,255,156,0.9)] select-none">S</span>
+          <div class="relative z-10 w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[#3DFF9C] flex items-center justify-center shadow-[0_0_45px_rgba(61,255,156,0.65)]">
+            <span class="text-[#0b0a14] font-black text-3xl sm:text-4xl select-none">S</span>
           </div>
           
           <!-- Внешняя орбита -->
           <div class="orbit-ring-outer absolute inset-0 border border-dashed border-white/20 rounded-full pointer-events-none">
-            <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#3DFF9C] shadow-[0_0_20px_rgba(61,255,156,0.7)] border-2 border-white/40"></div>
-            <div class="absolute top-1/2 left-full -translate-x-1/2 -translate-y-1/2 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-tr from-[#e2e8f0] to-white shadow-[0_0_25px_rgba(255,255,255,0.7)] border-2 border-white/50"></div>
-            <div class="absolute top-[85.35%] left-[14.65%] -translate-x-1/2 -translate-y-1/2 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-[#6366f1] to-[#4338ca] shadow-[0_0_25px_rgba(99,102,241,0.6)] border-2 border-white/30"></div>
+            <!-- Планета сверху (12 часов) -->
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#0e0d1c] border-2 border-white/50 shadow-[0_0_20px_rgba(255,255,255,0.35)]"></div>
+            <!-- Планета слева (9 часов) -->
+            <div class="absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-[#3DFF9C] border-2 border-[#a7f3d0] shadow-[0_0_22px_rgba(61,255,156,0.75)]"></div>
+            <!-- Планета снизу (6 часов) -->
+            <div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#0e0d1c] border-2 border-indigo-400/60 shadow-[0_0_22px_rgba(99,102,241,0.5)]"></div>
           </div>
 
           <!-- Внутренняя орбита -->
-          <div class="orbit-ring-inner absolute inset-12 sm:inset-16 border border-dashed border-white/15 rounded-full pointer-events-none">
-            <div class="absolute top-[14.65%] left-[85.35%] -translate-x-1/2 -translate-y-1/2 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-gradient-to-tr from-[#8b5cf6] to-[#c084fc] shadow-[0_0_20px_rgba(139,92,246,0.6)] border border-white/30"></div>
-            <div class="absolute top-[85.35%] left-[14.65%] -translate-x-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#3DFF9C] shadow-[0_0_18px_rgba(61,255,156,0.8)] border border-white/40"></div>
+          <div class="orbit-ring-inner absolute inset-12 sm:inset-14 border border-dashed border-white/15 rounded-full pointer-events-none">
+            <!-- Планета слева (9 часов) -->
+            <div class="absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#0e0d1c] border border-purple-400/60 shadow-[0_0_18px_rgba(168,85,247,0.45)]"></div>
+            <!-- Планета справа (3 часа) -->
+            <div class="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#3DFF9C] border border-[#a7f3d0] shadow-[0_0_20px_rgba(61,255,156,0.75)]"></div>
           </div>
 
         </div>
@@ -197,16 +202,31 @@
     </div>
   </main>
 
-<!-- ================= PROBLEM & SOLUTION ================= -->
+  <!-- ================= PROBLEM & SOLUTION (ЗАГОЛОВОК В ФОРМАТЕ ДИАЛОГА) ================= -->
   <section id="problem-solution" class="w-full flex justify-center px-[24px] py-16 relative z-10">
     <div class="w-full max-w-[1152px] flex flex-col items-center gap-[48px]">
       
-      <div class="text-center max-w-[680px] flex flex-col gap-3">
-        <span class="text-xs font-bold tracking-widest uppercase text-accent" data-i18n="ps_badge">Знакомая ситуация?</span>
-        <h2 class="font-lilex font-extrabold text-3xl md:text-5xl tracking-tight text-white" data-i18n="ps_title">
-          Застрял на теме перед дедлайном? Мы знаем, как помочь
-        </h2>
-        <p class="text-[#8e8ea8] text-sm md:text-base leading-relaxed" data-i18n="ps_desc">
+      <!-- Диалоговый заголовок -->
+      <div class="w-full max-w-[820px] flex flex-col gap-4">
+        <div class="text-center">
+          <span class="text-xs font-bold tracking-widest uppercase text-accent" data-i18n="ps_badge">Знакомая ситуация?</span>
+        </div>
+
+        <!-- Реплика 1 (слева) -->
+        <div class="self-start max-w-[92%] sm:max-w-[80%] bg-[#0e0d1c] border border-[#211f3d] rounded-2xl rounded-bl-sm px-5 py-4 sm:px-7 sm:py-5 shadow-lg">
+          <p class="font-lilex font-extrabold text-xl sm:text-3xl text-white leading-snug" data-i18n="ps_dialog_q">
+            — Застрял на теме перед дедлайном?
+          </p>
+        </div>
+
+        <!-- Реплика 2 (справа) -->
+        <div class="self-end max-w-[92%] sm:max-w-[80%] bg-[#0e0d1c] border border-[#3DFF9C]/40 rounded-2xl rounded-br-sm px-5 py-4 sm:px-7 sm:py-5 shadow-[0_0_25px_rgba(61,255,156,0.12)] text-right">
+          <p class="font-lilex font-extrabold text-xl sm:text-3xl text-accent leading-snug" data-i18n="ps_dialog_a">
+            Мы знаем, как помочь! —
+          </p>
+        </div>
+
+        <p class="text-center text-[#8e8ea8] text-sm md:text-base leading-relaxed max-w-[600px] mx-auto mt-1" data-i18n="ps_desc">
           Традиционная учёба часто загоняет в тупик. Посмотри, как мы меняем правила игры.
         </p>
       </div>
@@ -309,7 +329,7 @@
           </div>
 
           <h3 class="font-lilex font-extrabold text-2xl sm:text-3xl text-white flex flex-wrap items-center gap-x-3 gap-y-2">
-            <span data-i18n="role1_title">Хочу научиться</span>
+            <span data-i18n="role1_title">Ты можешь научиться</span>
             <span class="text-sm font-normal text-[#3DFF9C] bg-[#3DFF9C]/10 border border-[#3DFF9C]/30 px-2 py-0.5 rounded-full">Learner</span>
           </h3>
 
@@ -366,7 +386,7 @@
           </div>
 
           <h3 class="font-lilex font-extrabold text-2xl sm:text-3xl text-white flex flex-wrap items-center gap-x-3 gap-y-2">
-            <span data-i18n="role2_title">Хочу делиться знаниями</span>
+            <span data-i18n="role2_title">Ты можешь делиться знаниями</span>
             <span class="text-sm font-normal text-indigo-300 bg-indigo-500/10 border border-indigo-500/30 px-2 py-0.5 rounded-full">Mentor</span>
           </h3>
 
@@ -505,7 +525,7 @@
     </div>
   </section>
 
-  <!-- ================= FOOTER (без Terms, Privacy Policy и Поддержки) ================= -->
+  <!-- ================= FOOTER ================= -->
   <footer class="w-full border-t border-white/5 flex justify-center px-4 sm:px-6 py-6 relative z-10" style="padding-bottom: max(1.5rem, env(safe-area-inset-bottom));">
     <div class="w-full max-w-[1024px] flex items-center justify-center text-xs text-[#545375]">
       <div class="text-center">
@@ -514,8 +534,8 @@
     </div>
   </footer>
 
-  <!-- ================= CURSOR GLOW ================= -->
-  <div id="cursor-glow" class="pointer-events-none fixed top-0 left-0 w-64 h-64 rounded-full bg-accent/10 blur-3xl transition-transform duration-75 ease-out z-50 hidden md:block" style="will-change: transform;"></div>
+  <!-- ================= CURSOR GLOW (уменьшенный) ================= -->
+  <div id="cursor-glow" class="pointer-events-none fixed top-0 left-0 w-28 h-28 rounded-full bg-accent/[0.07] blur-2xl transition-transform duration-75 ease-out z-50 hidden md:block" style="will-change: transform;"></div>
 
   <!-- ================= JAVASCRIPT ================= -->
   <script src="script.js"></script>

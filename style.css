@@ -1,32 +1,34 @@
-@layer utilities {
-  /* Кастомные анимации орбит */
-  .orbit-ring-outer {
-    animation: spin 35s linear infinite;
-  }
-  .orbit-ring-inner {
-    animation: spin-reverse 25s linear infinite;
-  }
-  .micro-orbit-cw {
-    animation: spin 8s linear infinite;
-  }
-  .micro-orbit-ccw {
-    animation: spin-reverse 8s linear infinite;
-  }
+/* Кастомные анимации орбит */
+.orbit-ring-outer {
+  animation: spin 35s linear infinite;
+}
 
-  @keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
+.orbit-ring-inner {
+  animation: spin-reverse 25s linear infinite;
+}
 
-  @keyframes spin-reverse {
-    from { transform: rotate(360deg); }
-    to { transform: rotate(0deg); }
-  }
+.micro-orbit-cw {
+  animation: spin 8s linear infinite;
+}
 
-  /* Смена языков */
-  .lang-btn.active {
-    background-color: #3DFF9C;
-    color: #0b0a14;
-    font-weight: 700;
+.micro-orbit-ccw {
+  animation: spin-reverse 8s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin-reverse {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
   }
 }

@@ -12,7 +12,8 @@ const translations = {
     btn_waitlist: "JOIN THE WAITLIST",
 
     ps_badge: "Знакомая ситуация?",
-    ps_title: "Застрял на теме перед дедлайном? Мы знаем, как помочь",
+    ps_dialog_q: "— Застрял на теме перед дедлайном?",
+    ps_dialog_a: "Мы знаем, как помочь! —",
     ps_desc: "Традиционная учёба часто загоняет в тупик. Посмотри, как мы меняем правила игры.",
     prob_tag: "Знакомо?",
     prob_title: "Тяжело тянуть учёбу в одиночку? Устал от скучных репетиторов?",
@@ -75,13 +76,14 @@ const translations = {
     btn_waitlist: "JOIN THE WAITLIST",
 
     ps_badge: "Tanish holatmi?",
-    ps_title: "Dedlayndan oldin mavzuda qotib qoldingizmi? Yordam beramiz",
+    ps_dialog_q: "— Dedlayndan oldin mavzuda qotib qoldingizmi?",
+    ps_dialog_a: "Qanday yordam berishni bilamiz! —",
     ps_desc: "An’anaviy o‘qish ko‘pincha boshi berk ko‘chaga olib kiradi. O‘yin qoidalarini qanday o‘zgartirishimizni ko‘ring.",
     prob_tag: "Tanishmi?",
     prob_title: "Yolg‘iz o‘qishga qiynalyapsizmi? Zerikarli repetitorlardan charchadingizmi?",
     prob_i1_title: "Bitta savol uchun katta pul to‘lash og‘ir botyaptimi?",
     prob_i1_desc: "Repetitor va kurslar qimmat, bitta masalani yechish kerak bo‘lsa ham bir oylik abonement sotib olishga majbur qiladi.",
-    prob_i2_title: "ZerikarlI ma’ruza va darsliklardan uxlab qolyapsizmi?",
+    prob_i2_title: "Zerikarli ma’ruza va darsliklardan uxlab qolyapsizmi?",
     prob_i2_desc: "Murakkab akademik til faqat chalg‘itadi, sizga esa shunchaki laboratoriya yoki imtihon biletini tushunish kerak.",
     prob_i3_title: "Fanni zo‘r bilasiz-u, bilimingiz foydasiz yotibdimi?",
     prob_i3_desc: "Murakkab masalalarni oson yechasiz, lekin tezda o‘quvchi topib, tajribangizni daromadga aylantirishni bilmaysiz.",
@@ -138,7 +140,8 @@ const translations = {
     btn_waitlist: "JOIN THE WAITLIST",
 
     ps_badge: "Sound familiar?",
-    ps_title: "Stuck on a topic right before a deadline? We've got you",
+    ps_dialog_q: "— Stuck on a topic right before a deadline?",
+    ps_dialog_a: "We know how to help! —",
     ps_desc: "Traditional studying often hits a dead end. Here is how we change the game.",
     prob_tag: "Relatable?",
     prob_title: "Struggling to study alone? Tired of boring, pricey tutors?",
@@ -358,7 +361,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const cursorGlow = document.getElementById("cursor-glow");
   if (cursorGlow) {
     document.addEventListener("mousemove", (e) => {
-      cursorGlow.style.transform = `translate(${e.clientX - 128}px, ${e.clientY - 128}px)`;
+      cursorGlow.style.transform = `translate(${e.clientX - 56}px, ${e.clientY - 56}px)`;
     });
   }
 });
