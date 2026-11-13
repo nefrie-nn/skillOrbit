@@ -1,20 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Lilex:wght@700;800&display=swap');
 @import "tailwindcss";
 
 @theme {
   --font-lilex: 'Lilex', monospace;
 
-  --color-dark-main: #08080e;
-  --color-dark-header: #0d0d16;
-  --color-dark-surface: #131224;
-  --color-dark-border: #262447;
-  --color-dark-muted: #8e8ea8;
-
-  --color-accent: #3DFF9C;
+  --color-dark-main: var(--bg-main);
+  --color-dark-header: var(--bg-header);
+  --color-dark-surface: var(--bg-surface);
+  --color-dark-card: var(--bg-card);
+  --color-dark-input: var(--bg-input);
+  --color-dark-border: var(--border-color);
+  --color-dark-muted: var(--text-muted);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-accent: rgb(var(--accent-rgb));
+  --color-accent-fg: var(--accent-fg);
 }
 
-/* Ваши кастомные стили и анимации */
+/* ================= THEME VARIABLES ================= */
+:root {
+  --bg-main: #0b0a14;
+  --bg-header: rgba(15, 14, 28, 0.9);
+  --bg-surface: #151428;
+  --bg-card: #0e0d1c;
+  --bg-input: #100f21;
+  --border-color: #211f3d;
+  --text-primary: #ffffff;
+  --text-secondary: #b4b3cf;
+  --text-muted: #8e8ea8;
+  --accent-rgb: 61 255 156;
+  --accent-fg: #0b0a14;
+  --orbit-outer-border: rgba(255, 255, 255, 0.12);
+  --orbit-inner-border: rgba(255, 255, 255, 0.08);
+  --orbit-backdrop: radial-gradient(circle, rgba(61, 255, 156, 0.07) 0%, rgba(11, 10, 20, 0.4) 55%, transparent 75%);
+  --step-num-color: #2a2754;
+}
+
+html.light {
+  --bg-main: #f4f6fb;
+  --bg-header: rgba(255, 255, 255, 0.88);
+  --bg-surface: #eef2f7;
+  --bg-card: #ffffff;
+  --bg-input: #f8fafc;
+  --border-color: #e2e8f0;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  --accent-rgb: 5 150 105;
+  --accent-fg: #ffffff;
+  --orbit-outer-border: rgba(15, 23, 42, 0.09);
+  --orbit-inner-border: rgba(15, 23, 42, 0.06);
+  --orbit-backdrop: radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.03) 55%, transparent 75%);
+  --step-num-color: #cbd5e1;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ================= BASE & EFFECTS ================= */
 [data-i18n], [data-i18n-placeholder] {
   transition: opacity 0.3s ease-in-out;
+}
+
+header, main, section, footer {
+  position: relative;
+  z-index: 10;
 }
 
 .star-effect {
@@ -35,24 +86,134 @@
   100% { opacity: 0; transform: scale(0.3); }
 }
 
-header, main, section, footer {
-  position: relative;
-  z-index: 10;
+/* ================= AMBIENT BACKGROUND BLOBS ================= */
+.bg-blob-green {
+  background-color: rgba(61, 255, 156, 0.13);
+}
+html.light .bg-blob-green {
+  background-color: rgba(16, 185, 129, 0.22);
 }
 
-@keyframes orbit-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-@keyframes orbit-spin-reverse { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
+.bg-blob-indigo {
+  background-color: rgba(79, 70, 229, 0.17);
+}
+html.light .bg-blob-indigo {
+  background-color: rgba(99, 102, 241, 0.16);
+}
 
-.orbit-ring-outer { animation: orbit-spin 35s linear infinite; }
-.orbit-ring-inner { animation: orbit-spin-reverse 25s linear infinite; }
+.cta-glow-orb {
+  background: radial-gradient(circle, rgba(61, 255, 156, 0.16), rgba(89, 22, 139, 0.08) 40%, transparent 70%);
+}
+html.light .cta-glow-orb {
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.2), rgba(99, 102, 241, 0.1) 45%, transparent 70%);
+}
 
-@keyframes micro-spin-cw { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-@keyframes micro-spin-ccw { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
-.micro-orbit-cw { animation: micro-spin-cw 20s linear infinite; }
-.micro-orbit-ccw { animation: micro-spin-ccw 15s linear infinite; }
+/* ================= ORBIT RINGS & PLANET POSITIONS ================= */
+.orbit-backdrop {
+  background: var(--orbit-backdrop);
+}
 
-@keyframes flow-forward { from { stroke-dashoffset: 16; } to { stroke-dashoffset: 0; } }
-.flow-green, .flow-blue {
+.orbit-dashed-outer {
+  border-color: var(--orbit-outer-border);
+}
+
+.orbit-dashed-inner {
+  border-color: var(--orbit-inner-border);
+}
+
+.step-num {
+  color: var(--step-num-color);
+}
+
+.planet-pos-1 {
+  top: -22px;
+  left: calc(50% - 22px);
+}
+.planet-pos-2 {
+  top: calc(75% - 22px);
+  left: calc(93.3% - 22px);
+}
+.planet-pos-3 {
+  top: calc(75% - 22px);
+  left: calc(6.7% - 22px);
+}
+.planet-inner-1 {
+  top: calc(25% - 18px);
+  left: calc(93.3% - 18px);
+}
+.planet-inner-2 {
+  top: calc(75% - 18px);
+  left: calc(6.7% - 18px);
+}
+
+.micro-planet-top {
+  top: -7px;
+  left: calc(50% - 7px);
+}
+.micro-planet-bottom {
+  bottom: -6px;
+  left: calc(50% - 6px);
+}
+.micro-planet-right {
+  top: calc(50% - 7px);
+  right: -7px;
+}
+.micro-planet-left {
+  top: calc(50% - 6px);
+  left: -6px;
+}
+
+@keyframes orbit-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes orbit-spin-reverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+.orbit-ring-outer {
+  animation: orbit-spin 35s linear infinite;
+}
+
+.orbit-ring-inner {
+  animation: orbit-spin-reverse 25s linear infinite;
+}
+
+.micro-orbit-cw {
+  animation: orbit-spin 20s linear infinite;
+}
+
+.micro-orbit-ccw {
+  animation: orbit-spin-reverse 15s linear infinite;
+}
+
+/* ================= P2P EXCHANGE FLOW ARROWS ================= */
+@keyframes flow-forward {
+  from { stroke-dashoffset: 16; }
+  to { stroke-dashoffset: 0; }
+}
+
+.flow-green,
+.flow-blue {
   stroke-dasharray: 8 8;
   animation: flow-forward 1.2s linear infinite;
+}
+
+.flow-green {
+  filter: drop-shadow(0 0 6px rgba(var(--accent-rgb), 0.5));
+}
+
+.flow-blue {
+  filter: drop-shadow(0 0 6px rgba(99, 102, 241, 0.5));
+}
+
+/* ================= UTILITIES ================= */
+.footer-safe {
+  padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+}
+
+.cursor-glow {
+  will-change: transform;
 }
