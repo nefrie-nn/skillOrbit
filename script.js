@@ -1,18 +1,36 @@
 async function handleWaitlistSubmit(event) {
   event.preventDefault();
-  
+
   const form = event.target;
   const emailInput = form.querySelector('input[type="email"]');
   const submitBtn = form.querySelector('button[type="submit"]');
-  const email = emailInput ? emailInput.value.trim() : "";
+  const email = emailInput ? emailInput.value.trim().toLowerCase() : "";
 
   if (!email) return;
 
-  // Сохраняем исходные стили и текст кнопки
   const originalText = submitBtn.innerText;
   const originalClasses = submitBtn.className;
 
-  // Состояние: Отправка
+  const resetButton = () => {
+    setTimeout(() => {
+      submitBtn.disabled = false;
+      submitBtn.innerText = originalText;
+      submitBtn.className = originalClasses;
+      submitBtn.style.opacity = "1";
+    }, 3000);
+  };
+
+  // Быстрая проверка на стороне браузера
+  const submittedEmails = JSON.parse(localStorage.getItem("so_waitlist") || "[]");
+  if (submittedEmails.includes(email)) {
+    submitBtn.disabled = true;
+    submitBtn.innerText = "ALREADY IN! ✓";
+    submitBtn.className =
+      "w-full sm:w-auto bg-indigo-500 text-white font-extrabold text-xs uppercase tracking-wider px-6 py-3.5 rounded-xl transition-all duration-300 shadow-[0_0_15px_rgba(99,102,241,0.4)] cursor-default";
+    resetButton();
+    return;
+  }
+
   submitBtn.disabled = true;
   submitBtn.innerText = "SENDING...";
   submitBtn.style.opacity = "0.7";
@@ -21,47 +39,46 @@ async function handleWaitlistSubmit(event) {
     const response = await fetch("/api/send-receipt", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email })
+      body: JSON.stringify({ email }),
     });
 
     const data = await response.json();
 
     if (response.ok) {
-      // Состояние: Успех
+      // Запоминаем почту локально
+      localStorage.setItem("so_waitlist", JSON.stringify([...submittedEmails, email]));
+
       submitBtn.innerText = "ADDED! ✨";
       submitBtn.style.opacity = "1";
-      submitBtn.className = "w-full sm:w-auto bg-[#3DFF9C] text-dark-main font-extrabold text-xs uppercase tracking-wider px-6 py-3.5 rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(61,255,156,0.6)] cursor-default";
-      
+      submitBtn.className =
+        "w-full sm:w-auto bg-[#3DFF9C] text-dark-main font-extrabold text-xs uppercase tracking-wider px-6 py-3.5 rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(61,255,156,0.6)] cursor-default";
+
       form.reset();
+      resetButton();
+    } else if (response.status === 409) {
+      // Сервер подтвердил, что почта уже в базе Resend
+      localStorage.setItem("so_waitlist", JSON.stringify([...submittedEmails, email]));
 
-      // Через 3 секунды возвращаем кнопку в исходное состояние
-      setTimeout(() => {
-        submitBtn.disabled = false;
-        submitBtn.innerText = originalText;
-        submitBtn.className = originalClasses;
-        submitBtn.style.opacity = "1";
-      }, 3000);
+      submitBtn.innerText = "ALREADY IN! ✓";
+      submitBtn.style.opacity = "1";
+      submitBtn.className =
+        "w-full sm:w-auto bg-indigo-500 text-white font-extrabold text-xs uppercase tracking-wider px-6 py-3.5 rounded-xl transition-all duration-300 shadow-[0_0_15px_rgba(99,102,241,0.4)] cursor-default";
 
+      resetButton();
     } else {
       throw new Error(data.error || "Something went wrong");
     }
   } catch (err) {
     console.error("Submit error:", err);
-    
-    // Состояние: Ошибка
+
     submitBtn.innerText = "TRY AGAIN";
     submitBtn.style.opacity = "1";
-    submitBtn.className = "w-full sm:w-auto bg-rose-500 text-white font-extrabold text-xs uppercase tracking-wider px-6 py-3.5 rounded-xl transition-all duration-300 shadow-[0_0_15px_rgba(244,63,94,0.4)] cursor-pointer";
+    submitBtn.className =
+      "w-full sm:w-auto bg-rose-500 text-white font-extrabold text-xs uppercase tracking-wider px-6 py-3.5 rounded-xl transition-all duration-300 shadow-[0_0_15px_rgba(244,63,94,0.4)] cursor-pointer";
 
-    // Через 3 секунды даём попробовать снова
-    setTimeout(() => {
-      submitBtn.disabled = false;
-      submitBtn.innerText = originalText;
-      submitBtn.className = originalClasses;
-      submitBtn.style.opacity = "1";
-    }, 3000);
+    resetButton();
   }
 }
 
