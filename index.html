@@ -42,7 +42,7 @@
   </div>
 
   <!-- ================= HEADER ================= -->
-  <header class="w-full bg-dark-header border-b border-white/5 flex justify-center items-center px-4 relative z-20">
+  <header class="w-full bg-dark-header border-b border-white/5 flex justify-center items-center px-4 relative z-30">
     <div class="w-full max-w-[1152px] h-20 flex items-center justify-between">
       
       <!-- Logo -->
@@ -66,16 +66,63 @@
       </nav>
 
       <!-- Actions -->
-      <div class="flex items-center gap-4">
-        <!-- Языки -->
-        <div class="flex items-center bg-dark-surface border border-dark-border rounded-full p-1 text-xs" role="group">
-          <button type="button" class="lang-btn px-3 py-1.5 text-[#7f7e9c] hover:text-white transition-all font-medium rounded-full cursor-pointer" data-lang="uz" onclick="setLang('uz')">UZ</button>
-          <button type="button" class="lang-btn px-3 py-1.5 bg-accent text-dark-main shadow-[0_0_10px_rgba(61,255,156,0.3)] transition-all font-bold rounded-full cursor-pointer" data-lang="ru" onclick="setLang('ru')">RU</button>
-          <button type="button" class="lang-btn px-3 py-1.5 text-[#7f7e9c] hover:text-white transition-all font-medium rounded-full cursor-pointer" data-lang="en" onclick="setLang('en')">EN</button>
+      <div class="flex items-center gap-3">
+        <!-- Выпадающий список языков -->
+        <div class="relative" id="lang-dropdown">
+          <button 
+            type="button" 
+            id="lang-dropdown-btn"
+            onclick="toggleLangDropdown(event)"
+            aria-haspopup="listbox"
+            aria-expanded="false"
+            class="flex items-center gap-2 bg-dark-surface hover:border-accent/50 border border-dark-border text-white text-xs font-bold uppercase px-3.5 py-2.5 rounded-full transition-all cursor-pointer"
+          >
+            <svg class="w-3.5 h-3.5 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"></path>
+            </svg>
+            <span id="current-lang-label">RU</span>
+            <svg id="lang-dropdown-arrow" class="w-3.5 h-3.5 text-[#8e8ea8] transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path>
+            </svg>
+          </button>
+
+          <!-- Выпадающее меню -->
+          <div 
+            id="lang-dropdown-menu" 
+            role="listbox"
+            class="hidden absolute right-0 mt-2 w-28 bg-[#131224] border border-dark-border rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.65)] py-1.5 z-50 overflow-hidden"
+          >
+            <button type="button" data-lang="ru" onclick="selectLang('ru')" class="lang-option w-full text-left px-4 py-2 text-xs font-bold text-accent bg-accent/10 hover:bg-accent/15 transition-colors flex items-center justify-between cursor-pointer">
+              <span>RU</span>
+              <span class="text-[10px] opacity-80">Рус</span>
+            </button>
+            <button type="button" data-lang="uz" onclick="selectLang('uz')" class="lang-option w-full text-left px-4 py-2 text-xs font-medium text-[#c4c4d4] hover:bg-white/5 hover:text-white transition-colors flex items-center justify-between cursor-pointer">
+              <span>UZ</span>
+              <span class="text-[10px] opacity-60">O‘zb</span>
+            </button>
+            <button type="button" data-lang="en" onclick="selectLang('en')" class="lang-option w-full text-left px-4 py-2 text-xs font-medium text-[#c4c4d4] hover:bg-white/5 hover:text-white transition-colors flex items-center justify-between cursor-pointer">
+              <span>EN</span>
+              <span class="text-[10px] opacity-60">Eng</span>
+            </button>
+          </div>
         </div>
 
+        <!-- Кнопка Начать обмен -->
         <a href="#waitlist" class="hidden md:flex items-center justify-center bg-accent hover:bg-[#2ce08a] text-dark-main shadow-[0_0_15px_rgba(61,255,156,0.25)] text-xs tracking-wider uppercase font-extrabold px-6 py-3.5 rounded-full transition-colors duration-300 whitespace-nowrap" data-i18n="btn_start">
           НАЧАТЬ ОБМЕН
+        </a>
+
+        <!-- Кнопка Instagram справа от "Начать обмен" -->
+        <a 
+          href="https://instagram.com/" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          aria-label="Instagram SkillOrbit"
+          class="w-10 h-10 rounded-full bg-dark-surface border border-dark-border hover:border-accent hover:text-accent text-[#c4c4d4] flex items-center justify-center transition-all duration-300 shadow-sm shrink-0"
+        >
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
         </a>
       </div>
 
@@ -87,23 +134,23 @@
     <div class="w-full max-w-[1200px] grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
       
       <!-- ЛЕВАЯ КОЛОНКА: Орбиты с планетами -->
-      <div class="lg:col-span-6 flex justify-center items-center relative min-h-[380px] sm:min-h-[460px] select-none orbit-container" data-anim>
-        <div class="relative w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] flex items-center justify-center">
+      <div class="lg:col-span-6 flex justify-center items-center relative min-h-[360px] sm:min-h-[460px] select-none orbit-container" data-anim>
+        <div class="relative w-[300px] h-[300px] sm:w-[420px] sm:h-[420px] flex items-center justify-center">
           
           <!-- СОЛНЦЕ В ЦЕНТРЕ -->
-          <div class="absolute z-10 w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[#3DFF9C] border-2 border-[#3DFF9C] flex items-center justify-center shadow-[0_0_45px_rgba(61,255,156,0.65)]">
+          <div class="relative z-10 w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[#3DFF9C] border-2 border-[#3DFF9C] flex items-center justify-center shadow-[0_0_45px_rgba(61,255,156,0.65)]">
             <span class="text-[#0d0c16] font-black text-3xl sm:text-4xl drop-shadow-[0_0_15px_rgba(61,255,156,0.9)] select-none">S</span>
           </div>
           
           <!-- Внешняя орбита -->
-          <div class="orbit-ring-outer absolute inset-0 border border-dashed border-white/20 rounded-full">
+          <div class="orbit-ring-outer absolute inset-0 border border-dashed border-white/20 rounded-full pointer-events-none">
             <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#3DFF9C] shadow-[0_0_20px_rgba(61,255,156,0.7)] border-2 border-white/40"></div>
             <div class="absolute top-1/2 left-full -translate-x-1/2 -translate-y-1/2 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-tr from-[#e2e8f0] to-white shadow-[0_0_25px_rgba(255,255,255,0.7)] border-2 border-white/50"></div>
             <div class="absolute top-[85.35%] left-[14.65%] -translate-x-1/2 -translate-y-1/2 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-[#6366f1] to-[#4338ca] shadow-[0_0_25px_rgba(99,102,241,0.6)] border-2 border-white/30"></div>
           </div>
 
           <!-- Внутренняя орбита -->
-          <div class="orbit-ring-inner absolute inset-12 sm:inset-16 border border-dashed border-white/15 rounded-full">
+          <div class="orbit-ring-inner absolute inset-12 sm:inset-16 border border-dashed border-white/15 rounded-full pointer-events-none">
             <div class="absolute top-[14.65%] left-[85.35%] -translate-x-1/2 -translate-y-1/2 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-gradient-to-tr from-[#8b5cf6] to-[#c084fc] shadow-[0_0_20px_rgba(139,92,246,0.6)] border border-white/30"></div>
             <div class="absolute top-[85.35%] left-[14.65%] -translate-x-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#3DFF9C] shadow-[0_0_18px_rgba(61,255,156,0.8)] border border-white/40"></div>
           </div>
@@ -115,7 +162,7 @@
       <div class="lg:col-span-6 flex flex-col items-start text-left gap-6 lg:pl-4">
         
         <h1 class="font-lilex font-extrabold text-3xl sm:text-5xl lg:text-6xl tracking-tight leading-[1.1] text-white uppercase break-words" data-i18n="hero_title">
-          Делись знаниями&nbsp;— <br class="hidden sm:inline">получай знания
+          Делись знаниями — получай знания
         </h1>
 
         <p class="text-sm sm:text-base text-dark-muted max-w-[560px] leading-relaxed" data-i18n="hero_desc">
@@ -150,17 +197,17 @@
     </div>
   </main>
 
-  <!-- ================= PROBLEM & SOLUTION ================= -->
+<!-- ================= PROBLEM & SOLUTION ================= -->
   <section id="problem-solution" class="w-full flex justify-center px-[24px] py-16 relative z-10">
     <div class="w-full max-w-[1152px] flex flex-col items-center gap-[48px]">
       
       <div class="text-center max-w-[680px] flex flex-col gap-3">
-        <span class="text-xs font-bold tracking-widest uppercase text-accent" data-i18n="ps_badge">Зачем мы создали SkillOrbit</span>
+        <span class="text-xs font-bold tracking-widest uppercase text-accent" data-i18n="ps_badge">Знакомая ситуация?</span>
         <h2 class="font-lilex font-extrabold text-3xl md:text-5xl tracking-tight text-white" data-i18n="ps_title">
-          От тупика в учёбе — к реальному прогрессу
+          Застрял на теме перед дедлайном? Мы знаем, как помочь
         </h2>
         <p class="text-[#8e8ea8] text-sm md:text-base leading-relaxed" data-i18n="ps_desc">
-          Традиционное обучение часто не успевает за темпом студентов. Мы меняем сам подход к получению помощи.
+          Традиционная учёба часто загоняет в тупик. Посмотри, как мы меняем правила игры.
         </p>
       </div>
 
@@ -172,25 +219,25 @@
             <div class="w-12 h-12 rounded-2xl bg-rose-500/10 border border-rose-500/25 flex items-center justify-center text-rose-400" aria-hidden="true">
               <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"></path></svg>
             </div>
-            <span class="text-xs font-bold uppercase tracking-wider text-rose-400 bg-rose-500/10 border border-rose-500/25 px-3 py-1 rounded-full" data-i18n="prob_tag">Проблема</span>
+            <span class="text-xs font-bold uppercase tracking-wider text-rose-400 bg-rose-500/10 border border-rose-500/25 px-3 py-1 rounded-full" data-i18n="prob_tag">Знакомо?</span>
           </div>
 
           <h3 class="font-lilex font-extrabold text-2xl sm:text-3xl text-white" data-i18n="prob_title">
-            Почему учиться в одиночку тяжело
+            Тяжело тянуть учёбу в одиночку? Устал от скучных репетиторов?
           </h3>
 
           <ul class="flex flex-col gap-4 text-sm">
             <li class="flex items-start gap-3">
               <svg class="w-5 h-5 text-rose-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
-              <span class="text-[#9e9dbd] leading-relaxed"><strong class="text-white font-semibold" data-i18n="prob_i1_title">Дорогие репетиторы и курсы:</strong> <span data-i18n="prob_i1_desc">Занятия с преподавателями стоят дорого и заставляют покупать целые месяцы ради одного вопроса.</span></span>
+              <span class="text-[#9e9dbd] leading-relaxed"><strong class="text-white font-semibold" data-i18n="prob_i1_title">Жалко отдавать кучу денег за один вопрос?</strong> <span data-i18n="prob_i1_desc">Репетиторы и курсы стоят дорого и заставляют покупать месячные абонементы, даже если нужно разобрать всего одну задачу.</span></span>
             </li>
             <li class="flex items-start gap-3">
               <svg class="w-5 h-5 text-rose-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
-              <span class="text-[#9e9dbd] leading-relaxed"><strong class="text-white font-semibold" data-i18n="prob_i2_title">Сложный академический язык:</strong> <span data-i18n="prob_i2_desc">Учебники и лекции перегружены теорией, из-за чего непонятно, как решить конкретную лабу или билет.</span></span>
+              <span class="text-[#9e9dbd] leading-relaxed"><strong class="text-white font-semibold" data-i18n="prob_i2_title">Засыпаешь от скучных лекций и учебников?</strong> <span data-i18n="prob_i2_desc">Сложный академический язык только запутывает, когда тебе нужно просто понять, как закрыть лабу или сдать билет.</span></span>
             </li>
             <li class="flex items-start gap-3">
               <svg class="w-5 h-5 text-rose-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
-              <span class="text-[#9e9dbd] leading-relaxed"><strong class="text-white font-semibold" data-i18n="prob_i3_title">Знания пылятся без дела:</strong> <span data-i18n="prob_i3_desc">Сильные студенты отлично разбираются в предметах, но не имеют удобной площадки, чтобы монетизировать свой опыт.</span></span>
+              <span class="text-[#9e9dbd] leading-relaxed"><strong class="text-white font-semibold" data-i18n="prob_i3_title">Шаришь в предмете, но знания пылятся без дела?</strong> <span data-i18n="prob_i3_desc">Ты легко решаешь сложные задачи, но не знаешь, где быстро найти учеников и превратить свой опыт в реальный доход.</span></span>
             </li>
           </ul>
         </article>
@@ -201,25 +248,25 @@
             <div class="w-12 h-12 rounded-2xl bg-[#3DFF9C]/10 border border-[#3DFF9C]/30 flex items-center justify-center text-accent" aria-hidden="true">
               <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"></path></svg>
             </div>
-            <span class="text-xs font-bold uppercase tracking-wider text-accent bg-[#3DFF9C]/10 border border-[#3DFF9C]/30 px-3 py-1 rounded-full" data-i18n="sol_tag">Наше решение</span>
+            <span class="text-xs font-bold uppercase tracking-wider text-accent bg-[#3DFF9C]/10 border border-[#3DFF9C]/30 px-3 py-1 rounded-full" data-i18n="sol_tag">Выход есть</span>
           </div>
 
           <h3 class="font-lilex font-extrabold text-2xl sm:text-3xl text-white" data-i18n="sol_title">
-            Точечная P2P-помощь от равных
+            Разберись в теме за один созвон с тем, кто уже прошёл это
           </h3>
 
           <ul class="flex flex-col gap-4 text-sm">
             <li class="flex items-start gap-3">
               <svg class="w-5 h-5 text-accent shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg>
-              <span class="text-[#9e9dbd] leading-relaxed"><strong class="text-white font-semibold" data-i18n="sol_i1_title">Разбор за один созвон:</strong> <span data-i18n="sol_i1_desc">Плати только за конкретную задачу или подготовку к мидтерму — без переплат и навязанных абонементов.</span></span>
+              <span class="text-[#9e9dbd] leading-relaxed"><strong class="text-white font-semibold" data-i18n="sol_i1_title">Точечная помощь без переплат:</strong> <span data-i18n="sol_i1_desc">Решай конкретную задачу, код или билет к экзамену за 30–60 минут — плати только за реальный результат, а не за месяц вперёд.</span></span>
             </li>
             <li class="flex items-start gap-3">
               <svg class="w-5 h-5 text-accent shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg>
-              <span class="text-[#9e9dbd] leading-relaxed"><strong class="text-white font-semibold" data-i18n="sol_i2_title">На одном языке с ментором:</strong> <span data-i18n="sol_i2_desc">Тебе помогает студент, который сам недавно сдал этот курс и знает все подводные камни преподавателей.</span></span>
+              <span class="text-[#9e9dbd] leading-relaxed"><strong class="text-white font-semibold" data-i18n="sol_i2_title">Объяснение на твоём языке:</strong> <span data-i18n="sol_i2_desc">Тебе помогает такой же студент, который сам недавно сдал этот предмет и покажет все лайфхаки без воды.</span></span>
             </li>
             <li class="flex items-start gap-3">
               <svg class="w-5 h-5 text-accent shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg>
-              <span class="text-[#9e9dbd] leading-relaxed"><strong class="text-white font-semibold" data-i18n="sol_i3_title">Обмен и заработок на навыках:</strong> <span data-i18n="sol_i3_desc">Помогай другим в том, в чём силён ты, зарабатывай реальные деньги или обменивай баллы на новые навыки.</span></span>
+              <span class="text-[#9e9dbd] leading-relaxed"><strong class="text-white font-semibold" data-i18n="sol_i3_title">Прокачивайся и зарабатывай сам:</strong> <span data-i18n="sol_i3_desc">Помогай другим в том, в чём разбираешься ты, получай деньги за сессии или меняй баллы на новые навыки.</span></span>
             </li>
           </ul>
         </article>
@@ -458,20 +505,12 @@
     </div>
   </section>
 
-  <!-- ================= FOOTER ================= -->
+  <!-- ================= FOOTER (без Terms, Privacy Policy и Поддержки) ================= -->
   <footer class="w-full border-t border-white/5 flex justify-center px-4 sm:px-6 py-6 relative z-10" style="padding-bottom: max(1.5rem, env(safe-area-inset-bottom));">
-    <div class="w-full max-w-[1024px] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#545375]">
-      
-      <div class="text-center sm:text-left">
+    <div class="w-full max-w-[1024px] flex items-center justify-center text-xs text-[#545375]">
+      <div class="text-center">
         <span class="font-semibold text-[#8e8ea8]">SkillOrbit</span> <span data-i18n="footer_rights">© 2026. SKILLS MOVE YOU FORWARD</span>
       </div>
-
-      <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
-        <a href="#" class="hover:text-accent transition-colors" data-i18n="footer_l1">Privacy Policy</a>
-        <a href="#" class="hover:text-accent transition-colors" data-i18n="footer_l2">Terms of Service</a>
-        <a href="#" class="hover:text-accent transition-colors" data-i18n="footer_l3">Поддержка</a>
-      </div>
-
     </div>
   </footer>
 
