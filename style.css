@@ -13,9 +13,9 @@
   --text-muted: #8e8ea8;
   --accent-rgb: 61 255 156;
   --accent-fg: #0b0a14;
-  --flow-green: #3DFF9C;
-  --orbit-outer-border: rgba(255, 255, 255, 0.2);
-  --orbit-inner-border: rgba(255, 255, 255, 0.15);
+  --orbit-outer-border: rgba(255, 255, 255, 0.12);
+  --orbit-inner-border: rgba(255, 255, 255, 0.08);
+  --orbit-backdrop: radial-gradient(circle, rgba(61, 255, 156, 0.07) 0%, rgba(11, 10, 20, 0.4) 55%, transparent 75%);
   --step-num-color: #2a2754;
 }
 
@@ -31,9 +31,9 @@ html.light {
   --text-muted: #64748b;
   --accent-rgb: 5 150 105;
   --accent-fg: #ffffff;
-  --flow-green: #059669;
-  --orbit-outer-border: rgba(15, 23, 42, 0.18);
-  --orbit-inner-border: rgba(15, 23, 42, 0.13);
+  --orbit-outer-border: rgba(15, 23, 42, 0.09);
+  --orbit-inner-border: rgba(15, 23, 42, 0.06);
+  --orbit-backdrop: radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.03) 55%, transparent 75%);
   --step-num-color: #cbd5e1;
 }
 
@@ -43,27 +43,31 @@ body {
 
 /* ================= AMBIENT BACKGROUND BLOBS ================= */
 .bg-blob-green {
-  background-color: rgba(61, 255, 156, 0.1);
+  background-color: rgba(61, 255, 156, 0.13);
 }
 html.light .bg-blob-green {
-  background-color: rgba(16, 185, 129, 0.12);
+  background-color: rgba(16, 185, 129, 0.22);
 }
 
 .bg-blob-indigo {
-  background-color: rgba(79, 70, 229, 0.15);
+  background-color: rgba(79, 70, 229, 0.17);
 }
 html.light .bg-blob-indigo {
-  background-color: rgba(99, 102, 241, 0.1);
+  background-color: rgba(99, 102, 241, 0.16);
 }
 
 .cta-glow-orb {
-  background: radial-gradient(circle, rgba(61, 255, 156, 0.15), rgba(89, 22, 139, 0.08) 40%, transparent 70%);
+  background: radial-gradient(circle, rgba(61, 255, 156, 0.16), rgba(89, 22, 139, 0.08) 40%, transparent 70%);
 }
 html.light .cta-glow-orb {
-  background: radial-gradient(circle, rgba(16, 185, 129, 0.16), rgba(99, 102, 241, 0.08) 45%, transparent 70%);
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.2), rgba(99, 102, 241, 0.1) 45%, transparent 70%);
 }
 
-/* ================= ORBIT RINGS & STEP NUMBERS ================= */
+/* ================= ORBIT RINGS & PLANET POSITIONS ================= */
+.orbit-backdrop {
+  background: var(--orbit-backdrop);
+}
+
 .orbit-dashed-outer {
   border-color: var(--orbit-outer-border);
 }
@@ -76,52 +80,75 @@ html.light .cta-glow-orb {
   color: var(--step-num-color);
 }
 
+.planet-pos-1 {
+  top: -22px;
+  left: calc(50% - 22px);
+}
+.planet-pos-2 {
+  top: calc(75% - 22px);
+  left: calc(93.3% - 22px);
+}
+.planet-pos-3 {
+  top: calc(75% - 22px);
+  left: calc(6.7% - 22px);
+}
+.planet-inner-1 {
+  top: calc(25% - 18px);
+  left: calc(93.3% - 18px);
+}
+.planet-inner-2 {
+  top: calc(75% - 18px);
+  left: calc(6.7% - 18px);
+}
+
+.micro-planet-top {
+  top: -7px;
+  left: calc(50% - 7px);
+}
+.micro-planet-bottom {
+  bottom: -6px;
+  left: calc(50% - 6px);
+}
+.micro-planet-right {
+  top: calc(50% - 7px);
+  right: -7px;
+}
+.micro-planet-left {
+  top: calc(50% - 6px);
+  left: -6px;
+}
+
 @keyframes orbitSpinCw {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 @keyframes orbitSpinCcw {
-  from {
-    transform: rotate(360deg);
-  }
-  to {
-    transform: rotate(0deg);
-  }
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
 }
 
-.orbit-ring-outer,
-.micro-orbit-cw {
+.orbit-ring-outer {
   animation: orbitSpinCw 32s linear infinite;
 }
 
-.orbit-ring-inner,
-.micro-orbit-ccw {
+.orbit-ring-inner {
   animation: orbitSpinCcw 22s linear infinite;
 }
 
 .micro-orbit-cw {
-  animation-duration: 14s;
+  animation: orbitSpinCw 14s linear infinite;
 }
 
 .micro-orbit-ccw {
-  animation-duration: 14s;
+  animation: orbitSpinCcw 14s linear infinite;
 }
 
 /* ================= P2P EXCHANGE FLOW ARROWS ================= */
 .flow-green {
-  stroke: var(--flow-green);
   stroke-dasharray: 8 6;
   animation: p2pFlow 1.1s linear infinite;
   filter: drop-shadow(0 0 6px rgba(var(--accent-rgb), 0.5));
-}
-
-.flow-green-head {
-  fill: var(--flow-green);
 }
 
 .flow-blue {
@@ -131,10 +158,15 @@ html.light .cta-glow-orb {
 }
 
 @keyframes p2pFlow {
-  from {
-    stroke-dashoffset: 28;
-  }
-  to {
-    stroke-dashoffset: 0;
-  }
+  from { stroke-dashoffset: 28; }
+  to { stroke-dashoffset: 0; }
+}
+
+/* ================= UTILITIES ================= */
+.footer-safe {
+  padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+}
+
+.cursor-glow {
+  will-change: transform;
 }
