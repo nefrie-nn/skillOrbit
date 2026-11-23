@@ -1,5 +1,5 @@
 {
-  "name": "skillorb",
+  "name": "skillorbit",
   "version": "1.0.0",
   "description": "",
   "main": "script.js",
@@ -8,7 +8,10 @@
   "build": "npx @tailwindcss/cli -i ./src/input.css -o ./style.css --minify"
   },
   "keywords": [],
-  "type": "commonjs",
+  "type": "module",
+  "dependencies": {
+    "resend": "^4.0.0"
+  },
   "devDependencies": {
     "@tailwindcss/cli": "^4.3.5",
     "autoprefixer": "^10.6.2",
